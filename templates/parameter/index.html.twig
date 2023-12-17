@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ActParams index{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <h3 class="card-header">Liste des paramètres</h3>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Param</th>
+                    <th>Groupe</th>
+                    <th>Ordre</th>
+                    <th>Type</th>
+                    <th>Valeur</th>
+                    <th>Libelle</th>
+                    <th>Aide</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for parameter in parameters %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('geneacte_parameter_show', {'param': parameter.param}) }}">{{ parameter.param }}</a>
+                        </td>
+                        <td>{{ parameter.groupe }}</td>
+                        <td>{{ parameter.ordre }}</td>
+                        <td>{{ parameter.type }}</td>
+                        <td>{{ parameter.valeur }}</td>
+                        <td>{{ parameter.libelle }}</td>
+                        <td class="text-muted">{{ parameter.aide }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+{% endblock %}

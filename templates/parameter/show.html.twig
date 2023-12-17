@@ -1,0 +1,14 @@
+{% extends '@ExpoActe/base.html.twig' %}
+
+{% block body %}
+    <div class="card">
+        <h3 class="card-header">{{ parameter.name }}</h3>
+
+        <div class="card-body">
+
+            {% include '@ExpoActe/parameter/_actions.html.twig' %}
+
+        </div>
+    </div>
+    {{ include('@ExpoActe/parameter/_delete_form.html.twig') }}
+{% endblock %}

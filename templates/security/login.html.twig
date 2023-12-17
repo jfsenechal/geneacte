@@ -1,31 +1,80 @@
-{% extends 'base.html.twig' %}
+{% extends '@AfmLibrePathfinder/base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Me connecter{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .form-signin {
+            width: 100%;
+            max-width: 330px;
+            padding: 15px;
+            margin: auto;
+        }
+
+        .form-signin .checkbox {
+            font-weight: 400;
+        }
+
+        .form-signin .form-control {
+            position: relative;
+            box-sizing: border-box;
+            height: auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .form-signin .form-control:focus {
+            z-index: 2;
+        }
+
+        .form-signin input[type="email"] {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .form-signin input[type="password"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
+    <div class="text-center">
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+        <main class="form-signin">
+            <form method="post" action="{{ path('app_login') }}">
+                <img class="mb-4" src="{{ asset('bundles/afmlibrepathfinder/images/logo_Pathfinder.png') }}" alt="Adl"
+                     width="200">
+                <h1 class="h3 mb-3 fw-normal">Authentifiez-vous</h1>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+                {% if app.user %}
+                    <div class="mb-3">
+                        You are logged in as {{ app.user.userIdentifier }}, <a
+                                href="{{ path('app_logout') }}">Logout</a>
+                    </div>
+                {% endif %}
+
+                <div class="form-floating">
+                    <input type="email" value="{{ last_username }}" name="email" class="form-control"
+                           id="floatingInput" placeholder="jf@libre.be" required autofocus>
+                    <label for="floatingInput">Email</label>
+                </div>
+                <div class="form-floating mt-3">
+                    <input type="password" name="password" class="form-control" id="floatingPassword"
+                           placeholder="Mot de passe" required>
+                    <label for="floatingPassword">Mot de passe</label>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Me connecter</button>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            </form>
+        </main>
+    </div>
 {% endblock %}
