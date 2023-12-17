@@ -1,0 +1,42 @@
+{{ form_start(form) }}
+{{ form_errors(form) }}
+<h4 class="text-success">Acte de naissance</h4>
+{{ form_row(form.codcom) }}
+{{ form_row(form.commune) }}
+{{ form_row(form.coddep) }}
+{{ form_row(form.depart) }}
+{{ form_row(form.datetxt) }}
+{{ form_row(form.drepub) }}
+<h4 class="text-success">Nouveau-né</h4>
+{{ form_row(form.nom) }}
+{{ form_row(form.pre) }}
+{{ form_row(form.sexe) }}
+{{ form_row(form.com) }}
+<h4 class="text-success">Parents</h4>
+{{ form_row(form.pNom) }}
+{{ form_row(form.pPre) }}
+{{ form_row(form.pCom) }}
+{{ form_row(form.pPro) }}
+{{ form_row(form.mNom) }}
+{{ form_row(form.mPre) }}
+{{ form_row(form.mCom) }}
+{{ form_row(form.mPro) }}
+<h4 class="text-success">Témoins</h4>
+{{ form_row(form.t1Nom) }}
+{{ form_row(form.t1Pre) }}
+{{ form_row(form.t1Com) }}
+{{ form_row(form.t2Nom) }}
+{{ form_row(form.t2Pre) }}
+{{ form_row(form.t2Com) }}
+<h4 class="text-success">Références</h4>
+{{ form_row(form.cote) }}
+{{ form_row(form.libre) }}
+{{ form_row(form.comgen) }}
+{{ form_row(form.photos) }}
+<h4 class="text-success">Crédits</h4>
+{{ form_row(form.deposant) }}
+{{ form_row(form.photogra) }}
+{{ form_row(form.releveur) }}
+{{ form_row(form.verifieu) }}
+<button class="btn btn-primary"><i class="fa fa-save"></i> Sauvegarder</button>
+{{ form_end(form) }}

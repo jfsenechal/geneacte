@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\UuidTrait;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
 class ActParams
 {
-    use IdTrait, UuidTrait;
+    use UuidTrait;
 
     #[ORM\Column(name: 'param', type: Types::STRING, length: 25, nullable: false)]
     #[ORM\Id]

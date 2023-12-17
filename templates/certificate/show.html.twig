@@ -1,0 +1,14 @@
+{% extends '@ExpoActe/base.html.twig' %}
+
+{% block body %}
+    <div class="card">
+        <h3 class="card-header">{{ certificate.name }}</h3>
+
+        <div class="card-body">
+
+            {% include '@ExpoActe/certificate/_actions.html.twig' %}
+
+        </div>
+    </div>
+    {{ include('@ExpoActe/certificate/_delete_form.html.twig') }}
+{% endblock %}

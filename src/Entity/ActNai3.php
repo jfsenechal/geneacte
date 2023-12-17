@@ -149,5 +149,8 @@ class ActNai3
     #[ORM\Column(name: 'DTMODIF', type: Types::DATE_MUTABLE, nullable: true, options: ['default' => '1001-01-01'])]
     public string $dtmodif = '1001-01-01';
 
-
+    public function getName():string
+    {
+        return $this->t1Nom;
+    }
 }

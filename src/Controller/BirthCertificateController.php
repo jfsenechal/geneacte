@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Certificate\CertificateEnum;
 use App\Entity\ActNai3;
 use App\Form\BirthCertificateType;
 use App\Repository\BirthRepository;
@@ -13,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/certificate/birth')]
 #[AsController]
-class CertificateBirthController extends AbstractController
+class BirthCertificateController extends AbstractController
 {
     public function __construct(private readonly BirthRepository $birthRepository)
     {
@@ -33,19 +34,20 @@ class CertificateBirthController extends AbstractController
     public function new(Request $request): Response
     {
         $certificate = new ActNai3();
+        $certificate->typact = CertificateEnum::BIRTH->value;
         $form = $this->createForm(BirthCertificateType::class, $certificate);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->birthRepository->persist($certificate);
             $this->birthRepository->flush();
-            $this->addFlash('success', 'Le certificat a été ajouté');
+            $this->addFlash('success', 'L\'acte a été ajouté');
 
             return $this->redirectToRoute('geneacte_certificate_birth_show', ['uuid' => $certificate->uuid]);
         }
 
         return $this->render('@ExpoActe/certificate/new.html.twig', [
-            'act_param' => $certificate,
+            'certificate' => $certificate,
             'form' => $form,
         ]);
     }
@@ -54,7 +56,7 @@ class CertificateBirthController extends AbstractController
     public function show(ActNai3 $certificate): Response
     {
         return $this->render('@ExpoActe/certificate/show.html.twig', [
-            'act_param' => $certificate,
+            'certificate' => $certificate,
         ]);
     }
 
@@ -67,13 +69,13 @@ class CertificateBirthController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->birthRepository->flush();
 
-            $this->addFlash('success', 'Le certificat a été modifié');
+            $this->addFlash('success', 'L\'acte a été modifié');
 
             return $this->redirectToRoute('geneacte_certificate_birth_show', ['uuid' => $certificate->uuid]);
         }
 
         return $this->render('@ExpoActe/certificate/edit.html.twig', [
-            'act_param' => $certificate,
+            'certificate' => $certificate,
             'form' => $form,
         ]);
     }
@@ -84,7 +86,7 @@ class CertificateBirthController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$certificate->uuid, $request->request->get('_token'))) {
             $this->birthRepository->remove($certificate);
             $this->birthRepository->flush();
-            $this->addFlash('success', 'Le certificat a été supprimé');
+            $this->addFlash('success', 'L\acte a été supprimé');
         }
 
         return $this->redirectToRoute('geneacte_certificate_birth_index', []);

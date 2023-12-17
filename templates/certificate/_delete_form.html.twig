@@ -4,19 +4,19 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Supprimer le paramètre</h5>
+                <h5 class="modal-title" id="deleteModalLabel">Supprimer l'acte de naissance</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Supprimer {{ parameter.name }} ?
+                Supprimer {{ certificate.name }} ?
             </div>
             <div class="modal-footer">
-                <form method="post" action="{{ path('geneacte_parameter_delete', {'uuid': parameter.uuid}) }}">
-                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ parameter.uuid) }}">
+                <form method="post" action="{{ path('geneacte_certificate_birth_delete', {'uuid': certificate.uuid}) }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ certificate.uuid) }}">
                     <button type="button" class="btn btn-secondary"
                             data-bs-dismiss="modal">Annuler
                     </button>
-                    <button type="submit" class="btn btn-danger">Supprimer le paramètre</button>
+                    <button type="submit" class="btn btn-danger">Supprimer l'acte</button>
                 </form>
             </div>
         </div>

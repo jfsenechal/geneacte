@@ -29,7 +29,7 @@ class BirthRepository extends ServiceEntityRepository
     public function findAllOrdered(): array
     {
         return $this->createQb()
-            ->orderBy('birth.nom', 'DESC')
+            ->orderBy('birth.t1Nom', 'DESC')
             ->getQuery()
             ->getResult();
     }
@@ -44,9 +44,7 @@ class BirthRepository extends ServiceEntityRepository
 
     private function createQb(): QueryBuilder
     {
-        return $this->createQueryBuilder('birth')
-            ->leftJoin('birth.country', 'country', 'WITH')
-            ->addSelect('country');
+        return $this->createQueryBuilder('birth');
     }
 
 }
