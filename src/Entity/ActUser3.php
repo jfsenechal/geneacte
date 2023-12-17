@@ -5,13 +5,14 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * ActUser3
  */
 #[ORM\Table(name: 'act_user3')]
 #[ORM\Entity]
-class ActUser3
+class ActUser3 implements UserInterface
 {
     #[ORM\Column(name: 'login', type: Types::STRING, length: 15, nullable: false)]
     public string $login = '';
@@ -76,4 +77,18 @@ class ActUser3
     public int $id;
 
 
+    public function getRoles(): array
+    {
+        return [];
+    }
+
+    public function eraseCredentials(): void
+    {
+
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->login;
+    }
 }

@@ -1,0 +1,25 @@
+{% set action = app.request.attributes.get("_route") %}
+
+<li>
+    <a href="{{ path('geneacte_home') }}" class="nav-link px-2 link-dark">
+        X
+    </a>
+</li>
+<li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+        <i class="fas fa-ellipsis-v"></i> <b class="caret"></b></a>
+    <ul class="dropdown-menu">
+        <li>
+            <a href="{{ path('geneacte_home') }}" class="dropdown-item">
+                {{ 'menu.feats'|trans }}
+            </a>
+        </li>
+        <li>
+            <a href="https://www.pathfinder-fr.org/wiki/GetFile.aspx?File=%2fADJ%2fPathfinder-RPG%2fPFSheet.pdf"
+               class="dropdown-item">
+                {{ 'menu.pdf'|trans }}
+            </a>
+        </li>
+
+    </ul>
+</li>
