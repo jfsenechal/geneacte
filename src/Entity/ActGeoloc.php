@@ -2,87 +2,48 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * ActGeoloc
- *
- * @ORM\Table(name="act_geoloc", uniqueConstraints={@ORM\UniqueConstraint(name="COMMUNE", columns={"COMMUNE", "DEPART"})})
- * @ORM\Entity
  */
+#[ORM\Table(name: 'act_geoloc')]
+#[ORM\UniqueConstraint(name: 'COMMUNE', columns: ['COMMUNE', 'DEPART'])]
+#[ORM\Entity]
 class ActGeoloc
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="ID", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Column(name: 'ID', type: Types::INTEGER, nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    public int $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="COMMUNE", type="string", length=40, nullable=false)
-     */
-    private $commune = '';
+    #[ORM\Column(name: 'COMMUNE', type: Types::STRING, length: 40, nullable: false)]
+    public string $commune = '';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="DEPART", type="string", length=40, nullable=false)
-     */
-    private $depart = '';
+    #[ORM\Column(name: 'DEPART', type: Types::STRING, length: 40, nullable: false)]
+    public string $depart = '';
 
-    /**
-     * @var float|null
-     *
-     * @ORM\Column(name="LON", type="float", precision=10, scale=0, nullable=true)
-     */
-    private $lon;
+    #[ORM\Column(name: 'LON', type: Types::FLOAT, precision: 10, scale: 0, nullable: true)]
+    public ?float $lon = null;
 
-    /**
-     * @var float|null
-     *
-     * @ORM\Column(name="LAT", type="float", precision=10, scale=0, nullable=true)
-     */
-    private $lat;
+    #[ORM\Column(name: 'LAT', type: Types::FLOAT, precision: 10, scale: 0, nullable: true)]
+    public ?float $lat = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="STATUT", type="string", length=1, nullable=false, options={"default"="N"})
-     */
-    private $statut = 'N';
+    #[ORM\Column(name: 'STATUT', type: Types::STRING, length: 1, nullable: false, options: ['default' => 'N'])]
+    public string $statut = 'N';
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="NOTE_N", type="text", length=65535, nullable=true)
-     */
-    private $noteN;
+    #[ORM\Column(name: 'NOTE_N', type: Types::TEXT, length: 65535, nullable: true)]
+    public ?string $noteN = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="NOTE_M", type="text", length=65535, nullable=true)
-     */
-    private $noteM;
+    #[ORM\Column(name: 'NOTE_M', type: Types::TEXT, length: 65535, nullable: true)]
+    public ?string $noteM = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="NOTE_D", type="text", length=65535, nullable=true)
-     */
-    private $noteD;
+    #[ORM\Column(name: 'NOTE_D', type: Types::TEXT, length: 65535, nullable: true)]
+    public ?string $noteD = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="NOTE_V", type="text", length=65535, nullable=true)
-     */
-    private $noteV;
+    #[ORM\Column(name: 'NOTE_V', type: Types::TEXT, length: 65535, nullable: true)]
+    public ?string $noteV = null;
 
 
 }

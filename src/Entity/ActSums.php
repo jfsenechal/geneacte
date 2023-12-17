@@ -2,108 +2,58 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * ActSums
- *
- * @ORM\Table(name="act_sums", indexes={@ORM\Index(name="typ_lib_com_dep", columns={"TYPACT", "LIBELLE", "COMMUNE", "DEPART"})})
- * @ORM\Entity
  */
+#[ORM\Table(name: 'act_sums')]
+#[ORM\Index(name: 'typ_lib_com_dep', columns: ['TYPACT', 'LIBELLE', 'COMMUNE', 'DEPART'])]
+#[ORM\Entity]
 class ActSums
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Column(name: 'id', type: Types::INTEGER, nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    public int $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="COMMUNE", type="string", length=40, nullable=false)
-     */
-    private $commune = '';
+    #[ORM\Column(name: 'COMMUNE', type: Types::STRING, length: 40, nullable: false)]
+    public string $commune = '';
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="DEPART", type="string", length=40, nullable=true)
-     */
-    private $depart;
+    #[ORM\Column(name: 'DEPART', type: Types::STRING, length: 40, nullable: true)]
+    public ?string $depart = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="TYPACT", type="string", length=1, nullable=false, options={"fixed"=true})
-     */
-    private $typact = '';
+    #[ORM\Column(name: 'TYPACT', type: Types::STRING, length: 1, nullable: false, options: ['fixed' => true])]
+    public string $typact = '';
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="LIBELLE", type="string", length=50, nullable=true)
-     */
-    private $libelle;
+    #[ORM\Column(name: 'LIBELLE', type: Types::STRING, length: 50, nullable: true)]
+    public ?string $libelle = null;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="DEPOSANT", type="integer", nullable=true)
-     */
-    private $deposant;
+    #[ORM\Column(name: 'DEPOSANT', type: Types::INTEGER, nullable: true)]
+    public ?int $deposant = null;
 
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="DTDEPOT", type="date", nullable=true)
-     */
-    private $dtdepot;
+    #[ORM\Column(name: 'DTDEPOT', type: Types::DATE_MUTABLE, nullable: true)]
+    public ?DateTimeInterface $dtdepot = null;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="AN_MIN", type="integer", nullable=true)
-     */
-    private $anMin;
+    #[ORM\Column(name: 'AN_MIN', type: Types::INTEGER, nullable: true)]
+    public ?int $anMin = null;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="AN_MAX", type="integer", nullable=true)
-     */
-    private $anMax;
+    #[ORM\Column(name: 'AN_MAX', type: Types::INTEGER, nullable: true)]
+    public ?int $anMax = null;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="NB_TOT", type="integer", nullable=true)
-     */
-    private $nbTot;
+    #[ORM\Column(name: 'NB_TOT', type: Types::INTEGER, nullable: true)]
+    public ?int $nbTot = null;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="NB_N_NUL", type="integer", nullable=true)
-     */
-    private $nbNNul;
+    #[ORM\Column(name: 'NB_N_NUL', type: Types::INTEGER, nullable: true)]
+    public ?int $nbNNul = null;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="NB_FIL", type="integer", nullable=true)
-     */
-    private $nbFil;
+    #[ORM\Column(name: 'NB_FIL', type: Types::INTEGER, nullable: true)]
+    public ?int $nbFil = null;
 
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="DER_MAJ", type="datetime", nullable=true)
-     */
-    private $derMaj;
+    #[ORM\Column(name: 'DER_MAJ', type: Types::DATETIME_MUTABLE, nullable: true)]
+    public ?DateTimeInterface $derMaj = null;
 
 
 }

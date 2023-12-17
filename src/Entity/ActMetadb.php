@@ -2,101 +2,54 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * ActMetadb
- *
- * @ORM\Table(name="act_metadb", uniqueConstraints={@ORM\UniqueConstraint(name="ZID", columns={"ZID"})})
- * @ORM\Entity
  */
+#[ORM\Table(name: 'act_metadb')]
+#[ORM\UniqueConstraint(name: 'ZID', columns: ['ZID'])]
+#[ORM\Entity]
 class ActMetadb
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Column(name: 'id', type: Types::INTEGER, nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    public int $id;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="ZID", type="integer", nullable=false)
-     */
-    private $zid;
+    #[ORM\Column(name: 'ZID', type: Types::INTEGER, nullable: false)]
+    public int $zid;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="dtable", type="string", length=1, nullable=false)
-     */
-    private $dtable;
+    #[ORM\Column(name: 'dtable', type: Types::STRING, length: 1, nullable: false)]
+    public string $dtable;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="zone", type="string", length=15, nullable=false)
-     */
-    private $zone;
+    #[ORM\Column(name: 'zone', type: Types::STRING, length: 15, nullable: false)]
+    public string $zone;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="groupe", type="string", length=3, nullable=false)
-     */
-    private $groupe;
+    #[ORM\Column(name: 'groupe', type: Types::STRING, length: 3, nullable: false)]
+    public string $groupe;
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="bloc", type="boolean", nullable=false)
-     */
-    private $bloc = '0';
+    #[ORM\Column(name: 'bloc', type: Types::BOOLEAN, nullable: false)]
+    public string $bloc = '0';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="typ", type="string", length=3, nullable=false)
-     */
-    private $typ;
+    #[ORM\Column(name: 'typ', type: Types::STRING, length: 3, nullable: false)]
+    public string $typ;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="taille", type="integer", nullable=false)
-     */
-    private $taille;
+    #[ORM\Column(name: 'taille', type: Types::INTEGER, nullable: false)]
+    public int $taille;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="OV2", type="integer", nullable=false)
-     */
-    private $ov2;
+    #[ORM\Column(name: 'OV2', type: Types::INTEGER, nullable: false)]
+    public int $ov2;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="OV3", type="integer", nullable=false)
-     */
-    private $ov3;
+    #[ORM\Column(name: 'OV3', type: Types::INTEGER, nullable: false)]
+    public int $ov3;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="oblig", type="string", length=1, nullable=false, options={"default"="Y","fixed"=true})
-     */
-    private $oblig = 'Y';
+    #[ORM\Column(name: 'oblig', type: Types::STRING, length: 1, nullable: false, options: ['default' => 'Y', 'fixed' => true])]
+    public string $oblig = 'Y';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="affich", type="string", length=1, nullable=false, options={"default"="F","fixed"=true})
-     */
-    private $affich = 'F';
+    #[ORM\Column(name: 'affich', type: Types::STRING, length: 1, nullable: false, options: ['default' => 'F', 'fixed' => true])]
+    public string $affich = 'F';
 
 
 }

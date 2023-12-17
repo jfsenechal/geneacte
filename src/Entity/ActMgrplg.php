@@ -2,59 +2,35 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * ActMgrplg
- *
- * @ORM\Table(name="act_mgrplg")
- * @ORM\Entity
  */
+#[ORM\Table(name: 'act_mgrplg')]
+#[ORM\Entity]
 class ActMgrplg
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Column(name: 'id', type: Types::INTEGER, nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    public int $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="grp", type="string", length=2, nullable=false, options={"fixed"=true})
-     */
-    private $grp;
+    #[ORM\Column(name: 'grp', type: Types::STRING, length: 2, nullable: false, options: ['fixed' => true])]
+    public string $grp;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="dtable", type="string", length=1, nullable=false, options={"fixed"=true})
-     */
-    private $dtable;
+    #[ORM\Column(name: 'dtable', type: Types::STRING, length: 1, nullable: false, options: ['fixed' => true])]
+    public string $dtable;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="lg", type="string", length=2, nullable=false, options={"fixed"=true})
-     */
-    private $lg;
+    #[ORM\Column(name: 'lg', type: Types::STRING, length: 2, nullable: false, options: ['fixed' => true])]
+    public string $lg;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="sigle", type="string", length=5, nullable=true)
-     */
-    private $sigle;
+    #[ORM\Column(name: 'sigle', type: Types::STRING, length: 5, nullable: true)]
+    public ?string $sigle = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="getiq", type="string", length=30, nullable=false)
-     */
-    private $getiq;
+    #[ORM\Column(name: 'getiq', type: Types::STRING, length: 30, nullable: false)]
+    public string $getiq;
 
 
 }

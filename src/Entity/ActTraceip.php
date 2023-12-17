@@ -2,66 +2,39 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * ActTraceip
- *
- * @ORM\Table(name="act_traceip", indexes={@ORM\Index(name="ip", columns={"ip"})})
- * @ORM\Entity
  */
+#[ORM\Table(name: 'act_traceip')]
+#[ORM\Index(name: 'ip', columns: ['ip'])]
+#[ORM\Entity]
 class ActTraceip
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Column(name: 'id', type: Types::INTEGER, nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    public int $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="ua", type="string", length=255, nullable=false)
-     */
-    private $ua = '';
+    #[ORM\Column(name: 'ua', type: Types::STRING, length: 255, nullable: false)]
+    public string $ua = '';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="ip", type="string", length=50, nullable=false)
-     */
-    private $ip = '';
+    #[ORM\Column(name: 'ip', type: Types::STRING, length: 50, nullable: false)]
+    public string $ip = '';
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="login", type="string", length=15, nullable=true)
-     */
-    private $login;
+    #[ORM\Column(name: 'login', type: Types::STRING, length: 15, nullable: true)]
+    public ?string $login = null;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="datetime", type="integer", nullable=false)
-     */
-    private $datetime;
+    #[ORM\Column(name: 'datetime', type: Types::INTEGER, nullable: false)]
+    public int $datetime;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="cpt", type="integer", nullable=false)
-     */
-    private $cpt = '0';
+    #[ORM\Column(name: 'cpt', type: Types::INTEGER, nullable: false)]
+    public string $cpt = '0';
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="locked", type="smallint", nullable=false)
-     */
-    private $locked = '0';
+    #[ORM\Column(name: 'locked', type: Types::SMALLINT, nullable: false)]
+    public string $locked = '0';
 
 
 }

@@ -2,52 +2,33 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * ActMetalg
- *
- * @ORM\Table(name="act_metalg", uniqueConstraints={@ORM\UniqueConstraint(name="ZID", columns={"ZID", "lg"})})
- * @ORM\Entity
  */
+#[ORM\Table(name: 'act_metalg')]
+#[ORM\UniqueConstraint(name: 'ZID', columns: ['ZID', 'lg'])]
+#[ORM\Entity]
 class ActMetalg
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Column(name: 'id', type: Types::INTEGER, nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    public int $id;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="ZID", type="integer", nullable=false)
-     */
-    private $zid;
+    #[ORM\Column(name: 'ZID', type: Types::INTEGER, nullable: false)]
+    public int $zid;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="lg", type="string", length=3, nullable=false)
-     */
-    private $lg;
+    #[ORM\Column(name: 'lg', type: Types::STRING, length: 3, nullable: false)]
+    public string $lg;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="etiq", type="string", length=50, nullable=false)
-     */
-    private $etiq;
+    #[ORM\Column(name: 'etiq', type: Types::STRING, length: 50, nullable: false)]
+    public string $etiq;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="aide", type="string", length=500, nullable=true)
-     */
-    private $aide;
+    #[ORM\Column(name: 'aide', type: Types::STRING, length: 500, nullable: true)]
+    public ?string $aide = null;
 
 
 }

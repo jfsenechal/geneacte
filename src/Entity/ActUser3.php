@@ -2,129 +2,78 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * ActUser3
- *
- * @ORM\Table(name="act_user3")
- * @ORM\Entity
  */
+#[ORM\Table(name: 'act_user3')]
+#[ORM\Entity]
 class ActUser3
 {
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="login", type="string", length=15, nullable=false)
-     */
-    private $login = '';
+    #[ORM\Column(name: 'login', type: Types::STRING, length: 15, nullable: false)]
+    public string $login = '';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="hashpass", type="string", length=40, nullable=false)
-     */
-    private $hashpass = '';
+    #[ORM\Column(name: 'hashpass', type: Types::STRING, length: 40, nullable: false)]
+    public string $hashpass = '';
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="nom", type="string", length=30, nullable=true)
-     */
-    private $nom;
+    #[ORM\Column(name: 'nom', type: Types::STRING, length: 30, nullable: true)]
+    public ?string $nom = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="prenom", type="string", length=30, nullable=true)
-     */
-    private $prenom;
+    #[ORM\Column(name: 'prenom', type: Types::STRING, length: 30, nullable: true)]
+    public ?string $prenom = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="email", type="string", length=50, nullable=true)
-     */
-    private $email;
+    #[ORM\Column(name: 'email', type: Types::STRING, length: 50, nullable: true)]
+    public ?string $email = null;
+
+    #[ORM\Column(name: 'level', type: Types::INTEGER, nullable: true, options: ['default' => '1'])]
+    public int $level = 1;
 
     /**
      * @var int|null
-     *
-     * @ORM\Column(name="level", type="integer", nullable=true, options={"default"="1"})
      */
-    private $level = 1;
+    #[ORM\Column(name: 'regime', type: Types::INTEGER, nullable: true)]
+    public string $regime = '0';
 
     /**
      * @var int|null
-     *
-     * @ORM\Column(name="regime", type="integer", nullable=true)
      */
-    private $regime = '0';
+    #[ORM\Column(name: 'solde', type: Types::INTEGER, nullable: true)]
+    public string $solde = '0';
 
     /**
-     * @var int|null
-     *
-     * @ORM\Column(name="solde", type="integer", nullable=true)
+     * @var DateTimeInterface|null
      */
-    private $solde = '0';
+    #[ORM\Column(name: 'maj_solde', type: Types::DATE_MUTABLE, nullable: true, options: ['default' => '1001-01-01'])]
+    public string $majSolde = '1001-01-01';
+
+    #[ORM\Column(name: 'statut', type: Types::STRING, length: 1, nullable: false, options: ['default' => 'N'])]
+    public string $statut = 'N';
+
+    #[ORM\Column(name: 'dtcreation', type: Types::DATE_MUTABLE, nullable: true)]
+    public ?DateTimeInterface $dtcreation = null;
 
     /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="maj_solde", type="date", nullable=true, options={"default"="1001-01-01"})
+     * @var DateTimeInterface|null
      */
-    private $majSolde = '1001-01-01';
+    #[ORM\Column(name: 'dtexpiration', type: Types::DATE_MUTABLE, nullable: true, options: ['default' => '2033-12-31'])]
+    public string $dtexpiration = '2033-12-31';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="statut", type="string", length=1, nullable=false, options={"default"="N"})
-     */
-    private $statut = 'N';
+    #[ORM\Column(name: 'pt_conso', type: Types::INTEGER, nullable: false)]
+    public string $ptConso = '0';
 
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="dtcreation", type="date", nullable=true)
-     */
-    private $dtcreation;
+    #[ORM\Column(name: 'REM', type: Types::STRING, length: 50, nullable: true)]
+    public ?string $rem = null;
 
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="dtexpiration", type="date", nullable=true, options={"default"="2033-12-31"})
-     */
-    private $dtexpiration = '2033-12-31';
+    #[ORM\Column(name: 'libre', type: Types::STRING, length: 100, nullable: true)]
+    public ?string $libre = null;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="pt_conso", type="integer", nullable=false)
-     */
-    private $ptConso = '0';
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="REM", type="string", length=50, nullable=true)
-     */
-    private $rem;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="libre", type="string", length=100, nullable=true)
-     */
-    private $libre;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="ID", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Column(name: 'ID', type: Types::INTEGER, nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    public int $id;
 
 
 }

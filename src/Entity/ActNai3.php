@@ -2,290 +2,153 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * ActNai3
- *
- * @ORM\Table(name="act_nai3", indexes={@ORM\Index(name="LADATE", columns={"LADATE"}), @ORM\Index(name="M_NOM", columns={"M_NOM"}), @ORM\Index(name="IDNIM", columns={"IDNIM"}), @ORM\Index(name="COM_DEP", columns={"COMMUNE", "DEPART"}), @ORM\Index(name="NOM", columns={"NOM"}), @ORM\Index(name="P_NOM", columns={"P_NOM"})})
- * @ORM\Entity
  */
+#[ORM\Table(name: 'act_nai3')]
+#[ORM\Index(name: 'LADATE', columns: ['LADATE'])]
+#[ORM\Index(name: 'M_NOM', columns: ['M_NOM'])]
+#[ORM\Index(name: 'IDNIM', columns: ['IDNIM'])]
+#[ORM\Index(name: 'COM_DEP', columns: ['COMMUNE', 'DEPART'])]
+#[ORM\Index(name: 'NOM', columns: ['NOM'])]
+#[ORM\Index(name: 'P_NOM', columns: ['P_NOM'])]
+#[ORM\Entity]
 class ActNai3
 {
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="BIDON", type="string", length=10, nullable=true)
-     */
-    private $bidon;
+    #[ORM\Column(name: 'BIDON', type: Types::STRING, length: 10, nullable: true)]
+    public ?string $bidon = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="CODCOM", type="string", length=12, nullable=true)
-     */
-    private $codcom;
+    #[ORM\Column(name: 'CODCOM', type: Types::STRING, length: 12, nullable: true)]
+    public ?string $codcom = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="COMMUNE", type="string", length=40, nullable=true)
-     */
-    private $commune;
+    #[ORM\Column(name: 'COMMUNE', type: Types::STRING, length: 40, nullable: true)]
+    public ?string $commune = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="CODDEP", type="string", length=10, nullable=true)
-     */
-    private $coddep;
+    #[ORM\Column(name: 'CODDEP', type: Types::STRING, length: 10, nullable: true)]
+    public ?string $coddep = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="DEPART", type="string", length=40, nullable=true)
-     */
-    private $depart;
+    #[ORM\Column(name: 'DEPART', type: Types::STRING, length: 40, nullable: true)]
+    public ?string $depart = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="TYPACT", type="string", length=1, nullable=true, options={"default"="N"})
-     */
-    private $typact = 'N';
+    #[ORM\Column(name: 'TYPACT', type: Types::STRING, length: 1, nullable: true, options: ['default' => 'N'])]
+    public string $typact = 'N';
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="DATETXT", type="string", length=10, nullable=true)
-     */
-    private $datetxt;
+    #[ORM\Column(name: 'DATETXT', type: Types::STRING, length: 10, nullable: true)]
+    public ?string $datetxt = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="DREPUB", type="string", length=25, nullable=true)
-     */
-    private $drepub;
+    #[ORM\Column(name: 'DREPUB', type: Types::STRING, length: 25, nullable: true)]
+    public ?string $drepub = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="COTE", type="string", length=40, nullable=true)
-     */
-    private $cote;
+    #[ORM\Column(name: 'COTE', type: Types::STRING, length: 40, nullable: true)]
+    public ?string $cote = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="LIBRE", type="string", length=50, nullable=true)
-     */
-    private $libre;
+    #[ORM\Column(name: 'LIBRE', type: Types::STRING, length: 50, nullable: true)]
+    public ?string $libre = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="NOM", type="string", length=30, nullable=true)
-     */
-    private $nom;
+    #[ORM\Column(name: 'NOM', type: Types::STRING, length: 30, nullable: true)]
+    public ?string $nom = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="PRE", type="string", length=35, nullable=true)
-     */
-    private $pre;
+    #[ORM\Column(name: 'PRE', type: Types::STRING, length: 35, nullable: true)]
+    public ?string $pre = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="SEXE", type="string", length=1, nullable=true, options={"fixed"=true})
-     */
-    private $sexe;
+    #[ORM\Column(name: 'SEXE', type: Types::STRING, length: 1, nullable: true, options: ['fixed' => true])]
+    public ?string $sexe = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="COM", type="string", length=70, nullable=true)
-     */
-    private $com;
+    #[ORM\Column(name: 'COM', type: Types::STRING, length: 70, nullable: true)]
+    public ?string $com = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="P_NOM", type="string", length=30, nullable=true)
-     */
-    private $pNom;
+    #[ORM\Column(name: 'P_NOM', type: Types::STRING, length: 30, nullable: true)]
+    public ?string $pNom = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="P_PRE", type="string", length=35, nullable=true)
-     */
-    private $pPre;
+    #[ORM\Column(name: 'P_PRE', type: Types::STRING, length: 35, nullable: true)]
+    public ?string $pPre = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="P_COM", type="string", length=70, nullable=true)
-     */
-    private $pCom;
+    #[ORM\Column(name: 'P_COM', type: Types::STRING, length: 70, nullable: true)]
+    public ?string $pCom = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="P_PRO", type="string", length=35, nullable=true)
-     */
-    private $pPro;
+    #[ORM\Column(name: 'P_PRO', type: Types::STRING, length: 35, nullable: true)]
+    public ?string $pPro = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="M_NOM", type="string", length=30, nullable=true)
-     */
-    private $mNom;
+    #[ORM\Column(name: 'M_NOM', type: Types::STRING, length: 30, nullable: true)]
+    public ?string $mNom = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="M_PRE", type="string", length=35, nullable=true)
-     */
-    private $mPre;
+    #[ORM\Column(name: 'M_PRE', type: Types::STRING, length: 35, nullable: true)]
+    public ?string $mPre = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="M_COM", type="string", length=70, nullable=true)
-     */
-    private $mCom;
+    #[ORM\Column(name: 'M_COM', type: Types::STRING, length: 70, nullable: true)]
+    public ?string $mCom = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="M_PRO", type="string", length=35, nullable=true)
-     */
-    private $mPro;
+    #[ORM\Column(name: 'M_PRO', type: Types::STRING, length: 35, nullable: true)]
+    public ?string $mPro = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="T1_NOM", type="string", length=30, nullable=true)
-     */
-    private $t1Nom;
+    #[ORM\Column(name: 'T1_NOM', type: Types::STRING, length: 30, nullable: true)]
+    public ?string $t1Nom = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="T1_PRE", type="string", length=35, nullable=true)
-     */
-    private $t1Pre;
+    #[ORM\Column(name: 'T1_PRE', type: Types::STRING, length: 35, nullable: true)]
+    public ?string $t1Pre = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="T1_COM", type="string", length=70, nullable=true)
-     */
-    private $t1Com;
+    #[ORM\Column(name: 'T1_COM', type: Types::STRING, length: 70, nullable: true)]
+    public ?string $t1Com = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="T2_NOM", type="string", length=30, nullable=true)
-     */
-    private $t2Nom;
+    #[ORM\Column(name: 'T2_NOM', type: Types::STRING, length: 30, nullable: true)]
+    public ?string $t2Nom = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="T2_PRE", type="string", length=35, nullable=true)
-     */
-    private $t2Pre;
+    #[ORM\Column(name: 'T2_PRE', type: Types::STRING, length: 35, nullable: true)]
+    public ?string $t2Pre = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="T2_COM", type="string", length=70, nullable=true)
-     */
-    private $t2Com;
+    #[ORM\Column(name: 'T2_COM', type: Types::STRING, length: 70, nullable: true)]
+    public ?string $t2Com = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="COMGEN", type="text", length=65535, nullable=true)
-     */
-    private $comgen;
+    #[ORM\Column(name: 'COMGEN', type: Types::TEXT, length: 65535, nullable: true)]
+    public ?string $comgen = null;
 
     /**
      * @var int|null
-     *
-     * @ORM\Column(name="IDNIM", type="integer", nullable=true)
      */
-    private $idnim = '0';
+    #[ORM\Column(name: 'IDNIM', type: Types::INTEGER, nullable: true)]
+    public string $idnim = '0';
+
+    #[ORM\Column(name: 'PHOTOS', type: Types::TEXT, length: 65535, nullable: true)]
+    public ?string $photos = null;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="PHOTOS", type="text", length=65535, nullable=true)
+     * @var DateTimeInterface|null
      */
-    private $photos;
+    #[ORM\Column(name: 'LADATE', type: Types::DATE_MUTABLE, nullable: true, options: ['default' => '1001-01-01'])]
+    public string $ladate = '1001-01-01';
+
+    #[ORM\Column(name: 'ID', type: Types::INTEGER, nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    public int $id;
+
+    #[ORM\Column(name: 'DEPOSANT', type: Types::INTEGER, nullable: true)]
+    public ?int $deposant = null;
+
+    #[ORM\Column(name: 'PHOTOGRA', type: Types::STRING, length: 40, nullable: true)]
+    public ?string $photogra = null;
+
+    #[ORM\Column(name: 'RELEVEUR', type: Types::STRING, length: 40, nullable: true)]
+    public ?string $releveur = null;
+
+    #[ORM\Column(name: 'VERIFIEU', type: Types::STRING, length: 40, nullable: true)]
+    public ?string $verifieu = null;
 
     /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="LADATE", type="date", nullable=true, options={"default"="1001-01-01"})
+     * @var DateTimeInterface|null
      */
-    private $ladate = '1001-01-01';
+    #[ORM\Column(name: 'DTDEPOT', type: Types::DATE_MUTABLE, nullable: true, options: ['default' => '1001-01-01'])]
+    public string $dtdepot = '1001-01-01';
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="ID", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @var DateTimeInterface|null
      */
-    private $id;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="DEPOSANT", type="integer", nullable=true)
-     */
-    private $deposant;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="PHOTOGRA", type="string", length=40, nullable=true)
-     */
-    private $photogra;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="RELEVEUR", type="string", length=40, nullable=true)
-     */
-    private $releveur;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="VERIFIEU", type="string", length=40, nullable=true)
-     */
-    private $verifieu;
-
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="DTDEPOT", type="date", nullable=true, options={"default"="1001-01-01"})
-     */
-    private $dtdepot = '1001-01-01';
-
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="DTMODIF", type="date", nullable=true, options={"default"="1001-01-01"})
-     */
-    private $dtmodif = '1001-01-01';
+    #[ORM\Column(name: 'DTMODIF', type: Types::DATE_MUTABLE, nullable: true, options: ['default' => '1001-01-01'])]
+    public string $dtmodif = '1001-01-01';
 
 
 }
