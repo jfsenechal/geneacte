@@ -29,24 +29,22 @@ class ParameterRepository extends ServiceEntityRepository
     public function findAllOrdered(): array
     {
         return $this->createQb()
-            ->orderBy('parameter.nom', 'DESC')
+            ->orderBy('parameter.ordre', 'DESC')
             ->getQuery()
             ->getResult();
     }
 
-    public function findByCommercant(ActParams $parameter): array
+    public function findByName(string $name): ?ActParams
     {
         return $this->createQb()
-            ->andWhere('parameter.email = :shop')
-            ->setParameter('shop', $parameter)
-            ->getQuery()->getResult();
+            ->andWhere('parameter.param = :name')
+            ->setParameter('name', $name)
+            ->getQuery()->getOneOrNullResult();
     }
 
     private function createQb(): QueryBuilder
     {
-        return $this->createQueryBuilder('parameter')
-            ->leftJoin('parameter.country', 'country', 'WITH')
-            ->addSelect('country');
+        return $this->createQueryBuilder('parameter');
     }
 
 }

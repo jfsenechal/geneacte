@@ -13,7 +13,7 @@ class DefaultController extends AbstractController
     public function index(): Response
     {
         return $this->render(
-            '@GeneActe/default/index.html.twig',
+            '@ExpoActe/default/index.html.twig',
             [
             ]
         );
@@ -32,7 +32,7 @@ class DefaultController extends AbstractController
         );
 
         return $this->render(
-            '@GeneActe/_search_form.html.twig',
+            '@ExpoActe/_search_form.html.twig',
             [
                 'form' => $form,
             ]

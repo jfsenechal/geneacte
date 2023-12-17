@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %}GeneActes{% endblock %}</title>
+    <title>{% block title %}ExpoActes{% endblock %}</title>
     {% block stylesheets %}
         {{ ux_controller_link_tags() }}
     {% endblock %}
@@ -23,7 +23,7 @@
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" id="topmenu">
                     {% block menu %}
-                        {% include '@GeneActe/_menu.html.twig' %}
+                        {% include '@ExpoActe/_menu.html.twig' %}
                     {% endblock %}
                 </ul>
 
@@ -59,7 +59,7 @@
 <!-- Begin page content -->
 <main class="flex-shrink-0">
     <div class="container pt-3">
-        {% include '@GeneActe/_flash_messages.html.twig' %}
+        {% include '@ExpoActe/_flash_messages.html.twig' %}
 
         {% block notifications %}
 
@@ -74,7 +74,7 @@
 {% block footer %}
     <footer class="footer mt-auto py-3 bg-body-tertiary d-print-none">
         <div class="container d-flex" style="align-items: center; justify-content: center;">
-            <a href="https://www.pathfinder-fr.org/Wiki/Pathfinder-RPG.MainPage.ashx" target="_blank">https://www.pathfinder-fr.org</a>
+            <a href="https://expoactes.monrezo.be/" target="_blank">ExpoActes</a>
         </div>
     </footer>
 {% endblock %}
