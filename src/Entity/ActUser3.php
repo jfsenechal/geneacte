@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\IdTrait;
+use App\Entity\Traits\UuidTrait;
 use Doctrine\DBAL\Types\Types;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,6 +16,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity]
 class ActUser3 implements UserInterface
 {
+    use IdTrait, UuidTrait;
+
     #[ORM\Column(name: 'login', type: Types::STRING, length: 15, nullable: false)]
     public string $login = '';
 
@@ -70,12 +74,6 @@ class ActUser3 implements UserInterface
 
     #[ORM\Column(name: 'libre', type: Types::STRING, length: 100, nullable: true)]
     public ?string $libre = null;
-
-    #[ORM\Column(name: 'ID', type: Types::INTEGER, nullable: false)]
-    #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    public int $id;
-
 
     public function getRoles(): array
     {

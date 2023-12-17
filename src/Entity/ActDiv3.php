@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\IdTrait;
+use App\Entity\Traits\UuidTrait;
 use Doctrine\DBAL\Types\Types;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -25,6 +27,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
 class ActDiv3
 {
+    use IdTrait, UuidTrait;
+
     #[ORM\Column(name: 'BIDON', type: Types::STRING, length: 10, nullable: true)]
     public ?string $bidon = null;
 
@@ -228,11 +232,6 @@ class ActDiv3
      */
     #[ORM\Column(name: 'LADATE', type: Types::DATE_MUTABLE, nullable: true, options: ['default' => '1001-01-01'])]
     public string $ladate = '1001-01-01';
-
-    #[ORM\Column(name: 'ID', type: Types::INTEGER, nullable: false)]
-    #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    public int $id;
 
     #[ORM\Column(name: 'DEPOSANT', type: Types::INTEGER, nullable: true)]
     public ?int $deposant = null;

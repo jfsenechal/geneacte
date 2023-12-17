@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\IdTrait;
+use App\Entity\Traits\UuidTrait;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -12,6 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
 class ActParams
 {
+    use IdTrait, UuidTrait;
+
     #[ORM\Column(name: 'param', type: Types::STRING, length: 25, nullable: false)]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
@@ -23,7 +27,10 @@ class ActParams
     #[ORM\Column(name: 'ordre', type: Types::INTEGER, nullable: false, options: ['default' => '100'])]
     public int $ordre = 100;
 
-    #[ORM\Column(name: 'type', type: Types::STRING, length: 1, nullable: false, options: ['default' => 'C', 'fixed' => true])]
+    #[ORM\Column(name: 'type', type: Types::STRING, length: 1, nullable: false, options: [
+        'default' => 'C',
+        'fixed' => true,
+    ])]
     public string $type = 'C';
 
     #[ORM\Column(name: 'valeur', type: Types::TEXT, length: 65535, nullable: true)]
