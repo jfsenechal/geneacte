@@ -20,7 +20,7 @@ class ActParams
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     public string $param = '';
 
-    #[ORM\Column(name: 'groupe', type: Types::STRING, length: 30, nullable: false)]
+    #[ORM\Column(name: 'groupe', type: Types::STRING, length: 140, nullable: false)]
     public string $groupe = '';
 
     #[ORM\Column(name: 'ordre', type: Types::INTEGER, nullable: false, options: ['default' => '100'])]

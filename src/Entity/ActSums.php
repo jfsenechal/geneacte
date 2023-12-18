@@ -28,7 +28,7 @@ class ActSums
     #[ORM\Column(name: 'TYPACT', type: Types::STRING, length: 1, nullable: false, options: ['fixed' => true])]
     public string $typact = '';
 
-    #[ORM\Column(name: 'LIBELLE', type: Types::STRING, length: 50, nullable: true)]
+    #[ORM\Column(name: 'LIBELLE', type: Types::STRING, length: 140, nullable: true)]
     public ?string $libelle = null;
 
     #[ORM\Column(name: 'DEPOSANT', type: Types::INTEGER, nullable: true)]

@@ -24,10 +24,10 @@ class ActMetalg
     #[ORM\Column(name: 'lg', type: Types::STRING, length: 3, nullable: false)]
     public string $lg;
 
-    #[ORM\Column(name: 'etiq', type: Types::STRING, length: 50, nullable: false)]
+    #[ORM\Column(name: 'etiq', type: Types::STRING, length: 140, nullable: false)]
     public string $etiq;
 
-    #[ORM\Column(name: 'aide', type: Types::STRING, length: 500, nullable: true)]
+    #[ORM\Column(name: 'aide', type: Types::STRING, length: 1400, nullable: true)]
     public ?string $aide = null;
 
 

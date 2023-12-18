@@ -31,7 +31,7 @@ class ActLog
     #[ORM\Column(name: 'action', type: Types::STRING, length: 40, nullable: false)]
     public string $action = '';
 
-    #[ORM\Column(name: 'commune', type: Types::STRING, length: 30, nullable: true)]
+    #[ORM\Column(name: 'commune', type: Types::STRING, length: 140, nullable: true)]
     public ?string $commune = null;
 
     #[ORM\Column(name: 'nb_actes', type: Types::INTEGER, nullable: true)]

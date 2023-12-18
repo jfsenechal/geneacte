@@ -21,7 +21,7 @@ class ActTraceip
     #[ORM\Column(name: 'ua', type: Types::STRING, length: 255, nullable: false)]
     public string $ua = '';
 
-    #[ORM\Column(name: 'ip', type: Types::STRING, length: 50, nullable: false)]
+    #[ORM\Column(name: 'ip', type: Types::STRING, length: 140, nullable: false)]
     public string $ip = '';
 
     #[ORM\Column(name: 'login', type: Types::STRING, length: 15, nullable: true)]

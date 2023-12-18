@@ -29,7 +29,7 @@ class ActMgrplg
     #[ORM\Column(name: 'sigle', type: Types::STRING, length: 5, nullable: true)]
     public ?string $sigle = null;
 
-    #[ORM\Column(name: 'getiq', type: Types::STRING, length: 30, nullable: false)]
+    #[ORM\Column(name: 'getiq', type: Types::STRING, length: 140, nullable: false)]
     public string $getiq;
 
 

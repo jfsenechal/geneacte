@@ -5,9 +5,6 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * ActMetadb
- */
 #[ORM\Table(name: 'act_metadb')]
 #[ORM\UniqueConstraint(name: 'ZID', columns: ['ZID'])]
 #[ORM\Entity]
@@ -30,7 +27,7 @@ class ActMetadb
     #[ORM\Column(name: 'groupe', type: Types::STRING, length: 3, nullable: false)]
     public string $groupe;
 
-    #[ORM\Column(name: 'bloc', type: Types::BOOLEAN, nullable: false)]
+    #[ORM\Column(name: 'bloc', type: Types::STRING, nullable: false)]
     public string $bloc = '0';
 
     #[ORM\Column(name: 'typ', type: Types::STRING, length: 3, nullable: false)]

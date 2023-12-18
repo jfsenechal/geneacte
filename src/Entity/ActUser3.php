@@ -24,13 +24,13 @@ class ActUser3 implements UserInterface
     #[ORM\Column(name: 'hashpass', type: Types::STRING, length: 40, nullable: false)]
     public string $hashpass = '';
 
-    #[ORM\Column(name: 'nom', type: Types::STRING, length: 30, nullable: true)]
+    #[ORM\Column(name: 'nom', type: Types::STRING, length: 140, nullable: true)]
     public ?string $nom = null;
 
-    #[ORM\Column(name: 'prenom', type: Types::STRING, length: 30, nullable: true)]
+    #[ORM\Column(name: 'prenom', type: Types::STRING, length: 140, nullable: true)]
     public ?string $prenom = null;
 
-    #[ORM\Column(name: 'email', type: Types::STRING, length: 50, nullable: true)]
+    #[ORM\Column(name: 'email', type: Types::STRING, length: 140, nullable: true)]
     public ?string $email = null;
 
     #[ORM\Column(name: 'level', type: Types::INTEGER, nullable: true, options: ['default' => '1'])]
@@ -69,7 +69,7 @@ class ActUser3 implements UserInterface
     #[ORM\Column(name: 'pt_conso', type: Types::INTEGER, nullable: false)]
     public string $ptConso = '0';
 
-    #[ORM\Column(name: 'REM', type: Types::STRING, length: 50, nullable: true)]
+    #[ORM\Column(name: 'REM', type: Types::STRING, length: 140, nullable: true)]
     public ?string $rem = null;
 
     #[ORM\Column(name: 'libre', type: Types::STRING, length: 100, nullable: true)]
