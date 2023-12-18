@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * ActGeoloc
  */
 #[ORM\Table(name: 'act_geoloc')]
-#[ORM\UniqueConstraint(name: 'COMMUNE', columns: ['COMMUNE', 'DEPART'])]
+//#[ORM\UniqueConstraint(name: 'COMMUNE', columns: ['COMMUNE', 'DEPART'])]
 #[ORM\Entity]
 class ActGeoloc
 {
