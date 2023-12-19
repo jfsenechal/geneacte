@@ -49,7 +49,7 @@ class MetaDbRepository extends ServiceEntityRepository
     /**
      * @return ActMetaDb[]
      */
-    public function findByTableAndGroup(string $table, string $groupe): array
+    public function findByTableAndGroup(string $table, string $groupe, array $except = ['T']): array
     {
         return $this->createQb()
             ->andWhere('metaDb.dtable = :table')
@@ -57,21 +57,21 @@ class MetaDbRepository extends ServiceEntityRepository
             ->andWhere('metaDb.groupe = :groupe')
             ->setParameter('groupe', $groupe)
             ->addOrderBy('metaDb.zone')
-            ->andWhere('metaDb.affich != :affich')
-            ->setParameter('affich', 'T')
+            ->andWhere('metaDb.affich NOT IN (:affich)')
+            ->setParameter('affich', $except)
             ->getQuery()->getResult();
     }
 
     /**
      * @return ActMetaDb[]
      */
-    public function findByTable(string $table): array
+    public function findByTable(string $table, array $except = ['T']): array
     {
         return $this->createQb()
             ->andWhere('metaDb.dtable = :table')
             ->setParameter('table', $table)
-            ->andWhere('metaDb.affich != :affich')
-            ->setParameter('affich', 'T')
+            ->andWhere('metaDb.affich NOT IN (:affich)')
+            ->setParameter('affich', $except)
             ->addOrderBy('metaDb.groupe')
             ->addOrderBy('metaDb.ov3')
             ->getQuery()->getResult();

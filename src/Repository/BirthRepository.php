@@ -34,14 +34,6 @@ class BirthRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findByCommercant(ActNai3 $birth): array
-    {
-        return $this->createQb()
-            ->andWhere('birth.email = :shop')
-            ->setParameter('shop', $birth)
-            ->getQuery()->getResult();
-    }
-
     private function createQb(): QueryBuilder
     {
         return $this->createQueryBuilder('birth');
