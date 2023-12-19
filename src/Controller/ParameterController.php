@@ -23,9 +23,15 @@ class ParameterController extends AbstractController
     public function index(): Response
     {
         $parameters = $this->parameterRepository->findAllOrdered();
+        $groupedParameters = [];
+        foreach ($parameters as $parameter) {
+            $groupedParameters[$parameter->groupe][] = $parameter;
+        }
+
+        ksort($groupedParameters);
 
         return $this->render('@ExpoActe/parameter/index.html.twig', [
-            'parameters' => $parameters,
+            'groupedParameters' => $groupedParameters,
         ]);
     }
 

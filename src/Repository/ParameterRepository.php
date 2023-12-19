@@ -26,10 +26,12 @@ class ParameterRepository extends ServiceEntityRepository
     /**
      * @return ActParams[]
      */
-    public function findAllOrdered(): array
+    public function findAllOrdered(array $except = ['Hidden', 'Deleted']): array
     {
         return $this->createQb()
-            ->orderBy('parameter.ordre', 'DESC')
+            ->orderBy('parameter.ordre', 'ASC')
+            ->andWhere('parameter.groupe NOT IN (:name)')
+            ->setParameter('name', $except)
             ->getQuery()
             ->getResult();
     }

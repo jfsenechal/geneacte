@@ -6,39 +6,28 @@
     <div class="card">
         <h3 class="card-header">Liste des paramètres</h3>
         <div class="card-body">
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>Param</th>
-                    <th>Groupe</th>
-                    <th>Ordre</th>
-                    <th>Type</th>
-                    <th>Valeur</th>
-                    <th>Libelle</th>
-                    <th>Aide</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for parameter in parameters %}
-                    <tr>
-                        <td>
-                            <a href="{{ path('geneacte_parameter_show', {'param': parameter.param}) }}">{{ parameter.param }}</a>
-                        </td>
-                        <td>{{ parameter.groupe }}</td>
-                        <td>{{ parameter.ordre }}</td>
-                        <td>{{ parameter.type }}</td>
-                        <td>{{ parameter.valeur }}</td>
-                        <td>{{ parameter.libelle }}</td>
-                        <td class="text-muted">{{ parameter.aide }}</td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="7">no records found</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
 
+            <ul class="list-group list-group-horizontal mb-3">
+                {% for groupName,parameters in groupedParameters %}
+                    <li class="list-group-item">
+                        <a href="#{{ groupName }}">{{ groupName }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            {% for groupName,parameters in groupedParameters %}
+                <h4 class="text-success my-3" id="{{ groupName }}">{{ groupName }}</h4>
+                <hr>
+                {% for parameter in parameters %}
+                    <h5 class="text-secondary">
+                       <strong>{{ parameter.libelle }}</strong> |
+                        <a href="{{ path('geneacte_parameter_show', {'uuid': parameter.param}) }}">
+                            {{ parameter.param }}</a> | {{ parameter.type }}
+                    </h5>
+                    <p class="text-muted">{{ parameter.aide|raw }}</p>
+                    <p class="text-warning">{{ parameter.valeur|raw }}</p>
+                {% endfor %}
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
