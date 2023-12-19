@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Doctrine\OrmCrudTrait;
-use App\Entity\ActMetaDb;
+use App\Entity\ActMetadb;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -29,24 +30,55 @@ class MetaDbRepository extends ServiceEntityRepository
     public function findAllOrdered(): array
     {
         return $this->createQb()
-            ->orderBy('meta_db.nom', 'DESC')
+            ->orderBy('metaDb.groupe', 'DESC')
             ->getQuery()
             ->getResult();
     }
 
-    public function findByCommercant(ActMetaDb $meta_db): array
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findOneByZid(int $zid): ?ActMetadb
     {
         return $this->createQb()
-            ->andWhere('meta_db.email = :shop')
-            ->setParameter('shop', $meta_db)
+            ->andWhere('metaDb.zid = :zid')
+            ->setParameter('zid', $zid)
+            ->getQuery()->getOneOrNullResult();
+    }
+
+    /**
+     * @return ActMetaDb[]
+     */
+    public function findByTableAndGroup(string $table, string $groupe): array
+    {
+        return $this->createQb()
+            ->andWhere('metaDb.dtable = :table')
+            ->setParameter('table', $table)
+            ->andWhere('metaDb.groupe = :groupe')
+            ->setParameter('groupe', $groupe)
+            ->addOrderBy('metaDb.zone')
+            ->andWhere('metaDb.affich != :affich')
+            ->setParameter('affich', 'T')
+            ->getQuery()->getResult();
+    }
+
+    /**
+     * @return ActMetaDb[]
+     */
+    public function findByTable(string $table): array
+    {
+        return $this->createQb()
+            ->andWhere('metaDb.dtable = :table')
+            ->setParameter('table', $table)
+            ->andWhere('metaDb.affich != :affich')
+            ->setParameter('affich', 'T')
+            ->addOrderBy('metaDb.groupe')
+            ->addOrderBy('metaDb.ov3')
             ->getQuery()->getResult();
     }
 
     private function createQb(): QueryBuilder
     {
-        return $this->createQueryBuilder('meta_db')
-            ->leftJoin('meta_db.country', 'country', 'WITH')
-            ->addSelect('country');
+        return $this->createQueryBuilder('metaDb');
     }
-
 }

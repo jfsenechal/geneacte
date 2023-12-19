@@ -44,9 +44,7 @@ class UserRepository extends ServiceEntityRepository
 
     private function createQb(): QueryBuilder
     {
-        return $this->createQueryBuilder('user')
-            ->leftJoin('user.country', 'country', 'WITH')
-            ->addSelect('country');
+        return $this->createQueryBuilder('user');
     }
 
 }

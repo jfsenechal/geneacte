@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ActParams index{% endblock %}
+
+{% block body %}
+
+    <div class="card">
+        <h3 class="card-header">Labels</h3>
+        <div class="card-body">
+            <h3 class="text-success">Metas</h3>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Label</th>
+                    <th>Meta</th>
+                </tr>
+                </thead>
+                {% for meta in metas %}
+                    <tr>
+                        <td>
+                            {{ meta.label.etiq }} <br/>
+                        </td>
+                        <td>
+                            {% include '@ExpoActe/label/_meta_db.html.twig' %}
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th style="width: 30%;">Label</th>
+                    <th>Meta</th>
+                </tr>
+                </thead>
+                {% for lg in metasLg %}
+                    <tr>
+                        <td style="width: 30%;">
+                            {{ lg.etiq }}<br/>
+                            <span class="text-muted">{{ lg.zid }}</span>
+                        </td>
+                        <td>
+                            {% include '@ExpoActe/label/_meta_db.html.twig' with {'meta': lg.meta} %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Groupe</th>
+                    <th>Lg</th>
+                    <th>getIq</th>
+                    <th>table</th>
+                    <th>sigle</th>
+                </tr>
+                </thead>
+                {% for meta in mgrplgs %}
+                    <tr>
+                        <td>{{ meta.grp }}</td>
+                        <td>{{ meta.lg }}</td>
+                        <td>{{ meta.getiq }}</td>
+                        <td>{{ meta.dtable }}</td>
+                        <td>{{ meta.sigle }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+
+        </div>
+    </div>
+
+{% endblock %}

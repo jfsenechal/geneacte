@@ -5,9 +5,6 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * ActMetalg
- */
 #[ORM\Table(name: 'act_metalg')]
 #[ORM\UniqueConstraint(name: 'ZID', columns: ['ZID', 'lg'])]
 #[ORM\Entity]
@@ -27,8 +24,9 @@ class ActMetalg
     #[ORM\Column(name: 'etiq', type: Types::STRING, length: 140, nullable: false)]
     public string $etiq;
 
-    #[ORM\Column(name: 'aide', type: Types::STRING, length: 1400, nullable: true)]
+    #[ORM\Column(name: 'aide', type: Types::STRING, length: 140, nullable: true)]
     public ?string $aide = null;
 
+    public ActMetadb|null $meta = null;
 
 }

@@ -42,11 +42,17 @@ class ActMetadb
     #[ORM\Column(name: 'OV3', type: Types::INTEGER, nullable: false)]
     public int $ov3;
 
-    #[ORM\Column(name: 'oblig', type: Types::STRING, length: 1, nullable: false, options: ['default' => 'Y', 'fixed' => true])]
+    #[ORM\Column(name: 'oblig', type: Types::STRING, length: 1, nullable: false, options: [
+        'default' => 'Y',
+        'fixed' => true,
+    ])]
     public string $oblig = 'Y';
 
-    #[ORM\Column(name: 'affich', type: Types::STRING, length: 1, nullable: false, options: ['default' => 'F', 'fixed' => true])]
+    #[ORM\Column(name: 'affich', type: Types::STRING, length: 1, nullable: false, options: [
+        'default' => 'F',
+        'fixed' => true,
+    ])]
     public string $affich = 'F';
 
-
+    public ?ActMetalg $label = null;
 }

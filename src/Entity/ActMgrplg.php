@@ -5,9 +5,6 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * ActMgrplg
- */
 #[ORM\Table(name: 'act_mgrplg')]
 #[ORM\Entity]
 class ActMgrplg
@@ -32,5 +29,9 @@ class ActMgrplg
     #[ORM\Column(name: 'getiq', type: Types::STRING, length: 140, nullable: false)]
     public string $getiq;
 
+    /**
+     * @var ActMetadb[]
+     */
+    public array $metas = [];
 
 }
