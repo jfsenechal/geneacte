@@ -1,0 +1,19 @@
+{% extends '@ExpoActe/base.html.twig' %}
+
+{% block body %}
+    <div class="card">
+        <h3 class="card-header">Liste des actes de naissances</h3>
+        <div class="card-body">
+            {% for type in types %}
+                {{ type.label }}<br/>
+            {% endfor %}
+            {% for type in others %}
+                {{ type.libelle }}<br/>
+            {% endfor %}
+            {% for municipality in municipalities %}
+                {{ municipality.commune }} [{{ municipality.depart }}]
+                <br>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

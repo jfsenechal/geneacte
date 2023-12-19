@@ -6,8 +6,8 @@ enum CertificateEnum: string
 {
     case BIRTH = 'N';
     case DEATH = 'D';
-    case DIVORCE = 'V';
     case MARRIAGE = 'M';
+    case OTHER = 'V';
 
     public function getLabel(): string
     {
@@ -15,7 +15,7 @@ enum CertificateEnum: string
             CertificateEnum::BIRTH => 'Naissance',
             CertificateEnum::MARRIAGE => 'Mariages',
             CertificateEnum::DEATH => 'Décès',
-            CertificateEnum::DIVORCE => 'Divorce',
+            CertificateEnum::OTHER => 'Divers',
         };
     }
 }
