@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\ActUser3;
+use App\Form\UserPasswordType;
 use App\Form\UserSearchType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -10,17 +11,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/user')]
 #[AsController]
 class UserController extends AbstractController
 {
-    public function __construct(private readonly UserRepository $userRepository)
-    {
+    public function __construct(
+        private readonly UserRepository $userRepository,
+        private readonly UserPasswordHasherInterface $userPasswordEncoder
+    ) {
     }
 
-    #[Route('/', name: 'geneacte_user_index', methods: ['GET','POST'])]
+    #[Route('/', name: 'geneacte_user_index', methods: ['GET', 'POST'])]
     public function index(Request $request): Response
     {
         $form = $this->createForm(UserSearchType::class);
@@ -97,5 +101,28 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('geneacte_user_index', []);
+    }
+
+    #[Route(path: '/{uuid}/password', name: 'geneacte_user_password', methods: ['GET', 'POST'])]
+    public function passord(Request $request, ActUser3 $user): Response
+    {
+        $form = $this->createForm(UserPasswordType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $password = $this->userPasswordEncoder->hashPassword($user, $form->getData()->getPlainPassword());
+            $user->hashpass = $password;
+            $this->userRepository->flush();
+            $this->addFlash('success', 'Le mot de passe a bien été modifié');
+
+            return $this->redirectToRoute('geneacte_user_show', ['uuid' => $user->uuid]);
+        }
+
+        return $this->render(
+            '@ExpoActe/user/password.html.twig',
+            [
+                'user' => $user,
+                'form' => $form->createView(),
+            ]
+        );
     }
 }

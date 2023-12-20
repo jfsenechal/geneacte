@@ -60,6 +60,8 @@ class ActUser3 implements UserInterface
     #[ORM\Column(name: 'libre', type: Types::STRING, length: 100, nullable: true)]
     public ?string $libre = null;
 
+    public ?string $plainPassword = null;
+
     public function __construct()
     {
     }

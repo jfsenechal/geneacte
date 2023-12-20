@@ -12,7 +12,7 @@ security:
         main:
             lazy: true
             provider: users_in_memory
-            custom_authenticator: App\Security\ExpoActeAuthenticator
+            custom_authenticator: App\Security\Authenticator\ExpoActeAuthenticator
             logout:
                 path: app_logout
                 # where to redirect after logout
