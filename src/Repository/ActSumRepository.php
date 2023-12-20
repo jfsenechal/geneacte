@@ -52,6 +52,23 @@ class ActSumRepository extends ServiceEntityRepository
     /**
      * @return ActSums[]
      */
+    public function findMunicipalitiesByTableAndName(string $table, string $name): array
+    {
+        return $this->createQb()
+            ->select('act_sum.commune', 'act_sum.depart')
+            ->distinct()
+            ->andWhere('act_sum.typact = :table')
+            ->setParameter('table', $table)
+            ->andWhere('act_sum.commune LIKE :name OR act_sum.depart LIKE :name')
+            ->setParameter('name', '%'.$name.'%')
+            ->addOrderBy('act_sum.commune')
+            ->addOrderBy('act_sum.depart')
+            ->getQuery()->getResult();
+    }
+
+    /**
+     * @return ActSums[]
+     */
     public function findLabelsForOtherCertificates(): array
     {
         return $this->createQb()

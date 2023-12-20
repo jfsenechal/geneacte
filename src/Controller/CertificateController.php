@@ -4,8 +4,6 @@ namespace App\Controller;
 
 use App\Certificate\CertificateEnum;
 use App\Certificate\CertificateFactory;
-use App\Entity\ActNai3;
-use App\Form\BirthCertificateType;
 use App\Form\CertificateNewType;
 use App\Repository\ActSumRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,16 +30,37 @@ class CertificateController extends AbstractController
             [
                 'certificates' => [],
                 'municipalities' => $municipalities,
-                'types'=>$typesCertficate,
-                'others'=>$otherCertificateLabels
+                'types' => $typesCertficate,
+                'others' => $otherCertificateLabels,
             ]
         );
     }
 
-    #[Route('/new', name: 'geneacte_certificate_certificate_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    #[Route('/select', name: 'geneacte_certificate_certificate_select_type', methods: ['GET', 'POST'])]
+    public function selectType(): Response
     {
-        $certificate = CertificateFactory::createBirth();
+        return $this->render('@ExpoActe/certificate/select_type.html.twig', [
+            'types' => CertificateEnum::getTypes(),
+        ]);
+    }
+
+    #[Route('/new/{type}', name: 'geneacte_certificate_certificate_select_municipality', methods: ['GET', 'POST'])]
+    public function selectMunicipality(string $type): Response
+    {
+        $municipalities = $this->actSumRepository->findMunicipalitiesByTable($type);
+        $form = $this->createForm(CertificateNewType::class, null);
+
+        return $this->render('@ExpoActe/certificate/select_municipality.html.twig', [
+            'municipalities' => $municipalities,
+            'certificateType' => CertificateEnum::from($type),
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/new/{type}', name: 'geneacte_certificate_certificate_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, string $type): Response
+    {
+        $certificate = CertificateFactory::createByType($type);
         $form = $this->createForm(CertificateNewType::class, null);
         $form->handleRequest($request);
 
@@ -54,7 +73,7 @@ class CertificateController extends AbstractController
         }
 
         return $this->render('@ExpoActe/certificate/new.html.twig', [
-            'certificate' => $certificate,
+            'types' => CertificateEnum::getTypes(),
             'form' => $form,
         ]);
     }

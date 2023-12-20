@@ -28,4 +28,13 @@ class CertificateFactory
     {
         return new ActDec3();
     }
+
+    public static function createByType(string $type)
+    {
+        return match ($type) {
+            CertificateEnum::BIRTH->value => self::createBirth(),
+            CertificateEnum::DEATH->value => self::createDeath(),
+            default => null
+        };
+    }
 }

@@ -33,8 +33,10 @@ class GenerateUuidCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
         $arg1 = $input->getArgument('arg1');
-        foreach ($this->userRepository->findAllOrdered() as $user) {
-            $user->uuid = $user->generateUuid();
+        foreach ($this->userRepository->findAllOrdered(5000) as $user) {
+            if (!$user->uuid) {
+                $user->uuid = $user->generateUuid();
+            }
         }
         $this->userRepository->flush();
 

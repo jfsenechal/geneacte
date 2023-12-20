@@ -37,4 +37,11 @@ return [
         'version' => '5.3.2',
         'type' => 'css',
     ],
+    'tom-select' => [
+        'version' => '2.3.1',
+    ],
+    'tom-select/dist/css/tom-select.default.css' => [
+        'version' => '2.3.1',
+        'type' => 'css',
+    ],
 ];
