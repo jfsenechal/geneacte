@@ -2,16 +2,17 @@
 
 namespace App\Entity;
 
+use App\Certificate\CertificateEnum;
 use App\Entity\Traits\BirthTrait;
 use App\Entity\Traits\CommentsTrait;
 use App\Entity\Traits\CreditTrait;
-use App\Entity\Traits\SpouseTrait;
 use App\Entity\Traits\IdentityTrait;
 use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\ParentsTrait;
 use App\Entity\Traits\PhotosTrait;
-use App\Entity\Traits\TimestampTrait;
+use App\Entity\Traits\SpouseTrait;
 use App\Entity\Traits\SurnameTrait;
+use App\Entity\Traits\TimestampTrait;
 use App\Entity\Traits\TypeTrait;
 use App\Entity\Traits\UuidTrait;
 use App\Entity\Traits\Witnesses2Trait;
@@ -63,4 +64,9 @@ class ActMar3
 
     #[ORM\Column(name: 'C_X_COM', type: Types::STRING, length: 140, nullable: true)]
     public ?string $cXCom = null;
+
+    public function __construct()
+    {
+        $this->typact = CertificateEnum::MARRIAGE->value;
+    }
 }

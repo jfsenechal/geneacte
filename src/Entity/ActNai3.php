@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Certificate\CertificateEnum;
 use App\Entity\Traits\CommentsTrait;
 use App\Entity\Traits\CreditTrait;
 use App\Entity\Traits\IdentityTrait;
@@ -27,6 +28,12 @@ class ActNai3
 {
     use IdTrait, UuidTrait, IdentityTrait, SexeTrait, ParentsTrait, WitnessesTrait, CreditTrait,
         TimestampTrait, CommentsTrait, PhotosTrait, TypeTrait;
+
+
+    public function __construct()
+    {
+        $this->typact = CertificateEnum::BIRTH->value;
+    }
 
     public function getName(): string
     {

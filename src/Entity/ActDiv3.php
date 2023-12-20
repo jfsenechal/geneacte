@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Certificate\CertificateEnum;
 use App\Entity\Traits\BirthTrait;
 use App\Entity\Traits\CommentsTrait;
 use App\Entity\Traits\CreditTrait;
@@ -75,5 +76,8 @@ class ActDiv3
     #[ORM\Column(name: 'C_X_COM', type: Types::STRING, length: 140, nullable: true)]
     public ?string $cXCom = null;
 
-
+    public function __construct()
+    {
+        $this->typact = CertificateEnum::OTHER->value;
+    }
 }

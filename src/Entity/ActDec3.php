@@ -2,15 +2,16 @@
 
 namespace App\Entity;
 
+use App\Certificate\CertificateEnum;
 use App\Entity\Traits\BirthTrait;
 use App\Entity\Traits\CommentsTrait;
 use App\Entity\Traits\CreditTrait;
-use App\Entity\Traits\SpouseTrait;
 use App\Entity\Traits\IdentityTrait;
 use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\ParentsTrait;
 use App\Entity\Traits\PhotosTrait;
 use App\Entity\Traits\SexeTrait;
+use App\Entity\Traits\SpouseTrait;
 use App\Entity\Traits\TimestampTrait;
 use App\Entity\Traits\TypeTrait;
 use App\Entity\Traits\UuidTrait;
@@ -31,4 +32,9 @@ class ActDec3
 {
     use IdTrait, UuidTrait, IdentityTrait, SexeTrait, ParentsTrait, WitnessesTrait,
         CreditTrait, TimestampTrait, CommentsTrait, PhotosTrait, TypeTrait, SpouseTrait, BirthTrait;
+
+    public function __construct()
+    {
+        $this->typact = CertificateEnum::DEATH->value;
+    }
 }
