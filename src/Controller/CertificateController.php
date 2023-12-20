@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Certificate\CertificateEnum;
+use App\Certificate\CertificateFactory;
 use App\Entity\ActNai3;
 use App\Form\BirthCertificateType;
+use App\Form\CertificateNewType;
 use App\Repository\ActSumRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,9 +41,8 @@ class CertificateController extends AbstractController
     #[Route('/new', name: 'geneacte_certificate_certificate_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
-        $certificate = new ActNai3();
-        $certificate->typact = CertificateEnum::BIRTH->value;
-        $form = $this->createForm(BirthCertificateType::class, $certificate);
+        $certificate = CertificateFactory::createBirth();
+        $form = $this->createForm(CertificateNewType::class, null);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

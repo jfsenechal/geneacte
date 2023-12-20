@@ -3,10 +3,10 @@
 {% block body %}
 
     <div class="card">
-        <h3 class="card-header">Nouvel acte de naissance</h3>
+        <h3 class="card-header">Ajout d'un acte</h3>
 
         <div class="card-body">
-            {% include '@ExpoActe/certificate/_form.html.twig' %}
+            {{ form(form) }}
         </div>
         <div class="card-footer text-end">
             <a href="{{ path('geneacte_certificate_birth_index') }}" class="btn btn-secondary">

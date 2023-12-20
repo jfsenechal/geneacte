@@ -18,4 +18,14 @@ enum CertificateEnum: string
             CertificateEnum::OTHER => 'Divers',
         };
     }
+
+    public static function getTypes(): array
+    {
+        $types = [];
+        foreach (self::cases() as $type) {
+            $types[$type->value] = $type->getLabel();
+        }
+
+        return $types;
+    }
 }
