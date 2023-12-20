@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Certificate\Form;
 
 use App\Entity\ActNai3;
 use Symfony\Component\Form\AbstractType;

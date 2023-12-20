@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Form;
+namespace App\Certificate\Form;
 
-use App\Entity\ActMar3;
+use App\Entity\ActDiv3;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MarriageCertificateType extends AbstractType
+class DivorceCertificateType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -22,8 +22,11 @@ class MarriageCertificateType extends AbstractType
             ->add('drepub')
             ->add('cote')
             ->add('libre')
+            ->add('sigle')
+            ->add('libelle')
             ->add('nom')
             ->add('pre')
+            ->add('sexe')
             ->add('ori')
             ->add('dnais')
             ->add('age')
@@ -42,6 +45,7 @@ class MarriageCertificateType extends AbstractType
             ->add('mPro')
             ->add('cNom')
             ->add('cPre')
+            ->add('cSexe')
             ->add('cOri')
             ->add('cDnais')
             ->add('cAge')
@@ -87,7 +91,7 @@ class MarriageCertificateType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => ActMar3::class,
+            'data_class' => ActDiv3::class,
         ]);
     }
 }

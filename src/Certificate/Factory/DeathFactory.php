@@ -3,8 +3,8 @@
 namespace App\Certificate\Factory;
 
 use App\Certificate\CertificateEnum;
+use App\Certificate\Form\DeathCertificateType;
 use App\Entity\ActDec3;
-use App\Form\DeathCertificateType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Twig\Environment;

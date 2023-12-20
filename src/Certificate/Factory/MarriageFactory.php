@@ -3,8 +3,8 @@
 namespace App\Certificate\Factory;
 
 use App\Certificate\CertificateEnum;
+use App\Certificate\Form\MarriageCertificateType;
 use App\Entity\ActMar3;
-use App\Form\MarriageCertificateType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Twig\Environment;

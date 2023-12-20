@@ -3,8 +3,8 @@
 namespace App\Certificate\Factory;
 
 use App\Certificate\CertificateEnum;
+use App\Certificate\Form\BirthCertificateType;
 use App\Entity\ActNai3;
-use App\Form\BirthCertificateType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Twig\Environment;

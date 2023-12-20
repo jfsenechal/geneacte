@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Certificate;
+namespace App\Certificate\Factory;
 
-use App\Certificate\Factory\CertificateFactoryInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Component\DependencyInjection\Attribute\TaggedLocator;
@@ -24,7 +23,7 @@ readonly class CertificateFactory
     public function getFactory(string $type): CertificateFactoryInterface
     {
         if (!$this->factories->has($type)) {
-            throw new NotFoundHttpException('Format not supported.');
+            throw new NotFoundHttpException('Type not supported.');
         }
 
         return $this->factories->get($type);

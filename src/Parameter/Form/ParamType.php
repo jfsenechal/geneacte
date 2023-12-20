@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Form;
+namespace App\Parameter\Form;
 
 use App\Entity\ActParams;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ActParamsType extends AbstractType
+class ParamType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

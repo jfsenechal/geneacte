@@ -3,19 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\ActUser3;
-use App\Form\UserPasswordType;
-use App\Form\UserSearchType;
-use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\User\Form\UserPasswordType;
+use App\User\Form\UserSearchType;
+use App\User\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/user')]
-#[AsController]
 class UserController extends AbstractController
 {
     public function __construct(

@@ -8,7 +8,7 @@ use App\Repository\MetaLgRepository;
 use App\Repository\MgrplgRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/label')]
 class LabelController extends AbstractController

@@ -3,22 +3,26 @@
 namespace App\Controller;
 
 use App\Certificate\CertificateEnum;
-use App\Certificate\CertificateFactory;
-use App\Form\CertificateNewType;
+use App\Certificate\Factory\CertificateFactory;
+use App\Certificate\Form\BirthCertificateType;
+use App\Certificate\Form\CertificateNewType;
+use App\Entity\ActNai3;
 use App\Repository\ActSumRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/certificates')]
 class CertificateController extends AbstractController
 {
     public function __construct(
         private readonly ActSumRepository $actSumRepository,
-        private readonly CertificateFactory $certificateFactory
+        private readonly CertificateFactory $certificateFactory,
+        private readonly EntityManagerInterface $entityManager
     ) {
     }
 
@@ -40,7 +44,7 @@ class CertificateController extends AbstractController
         );
     }
 
-    #[Route('/select/type', name: 'expoacte_certificate_certificate_select_type', methods: ['GET', 'POST'])]
+    #[Route('/select/type', name: 'expoacte_certificat_select_type', methods: ['GET', 'POST'])]
     public function selectType(): Response
     {
         return $this->render('@ExpoActe/certificate/select_type.html.twig', [
@@ -48,7 +52,7 @@ class CertificateController extends AbstractController
         ]);
     }
 
-    #[Route('/select/municipality/{type}', name: 'expoacte_certificate_certificate_select_municipality', methods: [
+    #[Route('/select/municipality/{type}', name: 'expoacte_certificate_select_municipality', methods: [
         'GET',
         'POST',
     ])]
@@ -81,11 +85,11 @@ class CertificateController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->birthRepository->persist($certificate);
-            $this->birthRepository->flush();
+            $this->entityManager->persist($certificate);
+            $this->entityManager->flush();
             $this->addFlash('success', 'L\'acte a été ajouté');
 
-            return $this->redirectToRoute('expoacte_certificate_birth_show', ['uuid' => $certificate->uuid]);
+            return $this->redirectToRoute('expoacte_certificate_show', ['uuid' => $certificate->uuid]);
         }
 
         return $this->render('@ExpoActe/certificate/new.html.twig', [
@@ -93,4 +97,41 @@ class CertificateController extends AbstractController
         ]);
     }
 
+    #[Route('/{uuid}/show', name: 'expoacte_certificate_show', methods: ['GET', 'POST'])]
+    public function show(Request $request, ActNai3 $certificate): Response
+    {
+
+    }
+
+    #[Route('/{uuid}/edit', name: 'expoacte_certificate_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, ActNai3 $certificate): Response
+    {
+        $form = $this->createForm(BirthCertificateType::class, $certificate);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->flush();
+
+            $this->addFlash('success', 'L\'acte a été modifié');
+
+            return $this->redirectToRoute('expoacte_certificate_show', ['uuid' => $certificate->uuid]);
+        }
+
+        return $this->render('@ExpoActe/certificate/edit.html.twig', [
+            'certificate' => $certificate,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{uuid}', name: 'expoacte_certificate_delete', methods: ['POST'])]
+    public function delete(Request $request, ActNai3 $certificate): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$certificate->uuid, $request->request->get('_token'))) {
+            $this->entityManager->remove($certificate);
+            $this->entityManager->flush();
+            $this->addFlash('success', 'L\acte a été supprimé');
+        }
+
+        return $this->redirectToRoute('expoacte_certificate_index', []);
+    }
 }
