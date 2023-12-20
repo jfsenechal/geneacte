@@ -6,6 +6,8 @@ use App\Certificate\CertificateEnum;
 use App\Certificate\CertificateFactory;
 use App\Form\CertificateNewType;
 use App\Repository\ActSumRepository;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +22,7 @@ class CertificateController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/', name: 'geneacte_certificate_home')]
+    #[Route(path: '/', name: 'geneacte_certificate_index')]
     public function index(string $table = 'N'): Response
     {
         $municipalities = $this->actSumRepository->findMunicipalitiesByTable($table);
@@ -65,9 +67,16 @@ class CertificateController extends AbstractController
     #[Route('/new/{type}', name: 'geneacte_certificate_certificate_new', methods: ['GET', 'POST'])]
     public function new(Request $request, string $type): Response
     {
-        $factory = $this->certificateFactory->getFactory($type);
+        try {
+            $factory = $this->certificateFactory->getFactory($type);
+        } catch (NotFoundExceptionInterface|ContainerExceptionInterface $e) {
+            $this->addFlash('danger', 'Ce type d\'acte n\'est pas supporté');
+
+            return $this->redirectToRoute('geneacte_home');
+        }
         $certificate = $factory->newInstance();
         $form = $factory->generateForm($certificate);
+        $formHtml = $factory->renderForm($form);
 
         $form->handleRequest($request);
 
@@ -80,10 +89,8 @@ class CertificateController extends AbstractController
         }
 
         return $this->render('@ExpoActe/certificate/new.html.twig', [
-            'types' => CertificateEnum::getTypes(),
-            'form' => $form,
+            'formHtml' => $formHtml,
         ]);
     }
-
 
 }

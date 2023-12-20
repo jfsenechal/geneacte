@@ -9,6 +9,10 @@ use Symfony\Component\Form\FormInterface;
 interface CertificateFactoryInterface
 {
     public static function getType(): string;
+
     public function newInstance();
+
     public function generateForm(object $data): FormInterface;
+
+    public function renderForm(FormInterface $form): string;
 }

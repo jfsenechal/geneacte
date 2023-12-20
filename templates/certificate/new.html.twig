@@ -6,10 +6,11 @@
         <h3 class="card-header">Ajout d'un acte</h3>
 
         <div class="card-body">
-            {{ form(form) }}
+            {{ formHtml|raw }}
         </div>
+
         <div class="card-footer text-end">
-            <a href="{{ path('geneacte_certificate_birth_index') }}" class="btn btn-secondary">
+            <a href="{{ path('geneacte_home') }}" class="btn btn-secondary">
                 <i class="fa fa-arrow-left"></i> Annuler
             </a>
         </div>
