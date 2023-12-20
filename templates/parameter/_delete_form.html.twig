@@ -11,7 +11,7 @@
                 Supprimer {{ parameter.name }} ?
             </div>
             <div class="modal-footer">
-                <form method="post" action="{{ path('geneacte_parameter_delete', {'uuid': parameter.uuid}) }}">
+                <form method="post" action="{{ path('expoacte_parameter_delete', {'uuid': parameter.uuid}) }}">
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ parameter.uuid) }}">
                     <button type="button" class="btn btn-secondary"
                             data-bs-dismiss="modal">Annuler

@@ -19,7 +19,7 @@
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
-                    <i class="fas fa-store icon-rose"></i> <span class="fs-4">Actes</span>
+                    <i class="ti ti-grave icon-rose"></i> <span class="fs-4">ExpoActes</span>
                 </a>
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" id="topmenu">
@@ -28,7 +28,7 @@
                     {% endblock %}
                 </ul>
 
-                {{ render(url('geneacte_search_form')) }}
+                {{ render(url('expoacte_search_form')) }}
 
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                     <div class="dropdown text-end">

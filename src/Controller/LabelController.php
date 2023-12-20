@@ -21,7 +21,7 @@ class LabelController extends AbstractController
 
     }
 
-    #[Route(path: '/{table}', name: 'geneacte_label_index')]
+    #[Route(path: '/{table}', name: 'expoacte_label_index')]
     public function index(string $table = 'N'): Response
     {
         $metas = $this->metaDbRepository->findByTable($table);
@@ -50,7 +50,7 @@ class LabelController extends AbstractController
         );
     }
 
-    #[Route(path: '/draft/{table}', name: 'geneacte_label_draft')]
+    #[Route(path: '/draft/{table}', name: 'expoacte_label_draft')]
     public function draft(string $table = 'N'): Response
     {
         $metas = $this->metaDbRepository->findByTable($table);

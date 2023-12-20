@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
 {
-    #[Route(path: '/', name: 'geneacte_home')]
+    #[Route(path: '/', name: 'expoacte_home')]
     public function index(): Response
     {
         return $this->render(
@@ -19,7 +19,7 @@ class DefaultController extends AbstractController
         );
     }
 
-    #[Route(path: '/search/form', name: 'geneacte_search_form')]
+    #[Route(path: '/search/form', name: 'expoacte_search_form')]
     public function searchForm(): Response
     {
         $form = $this->createForm(
@@ -27,7 +27,7 @@ class DefaultController extends AbstractController
             [],
             [
                 'method' => 'GET',
-                'action' => $this->generateUrl('geneacte_search_form'),
+                'action' => $this->generateUrl('expoacte_search_form'),
             ]
         );
 

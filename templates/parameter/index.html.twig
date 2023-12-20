@@ -21,7 +21,7 @@
                 {% for parameter in parameters %}
                     <h5 class="text-secondary">
                        <strong>{{ parameter.libelle }}</strong> |
-                        <a href="{{ path('geneacte_parameter_show', {'uuid': parameter.param}) }}">
+                        <a href="{{ path('expoacte_parameter_show', {'uuid': parameter.param}) }}">
                             {{ parameter.param }}</a> | {{ parameter.type }}
                     </h5>
                     <p class="text-muted">{{ parameter.aide|raw }}</p>

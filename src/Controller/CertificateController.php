@@ -22,7 +22,7 @@ class CertificateController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/', name: 'geneacte_certificate_index')]
+    #[Route(path: '/', name: 'expoacte_certificate_index')]
     public function index(string $table = 'N'): Response
     {
         $municipalities = $this->actSumRepository->findMunicipalitiesByTable($table);
@@ -40,7 +40,7 @@ class CertificateController extends AbstractController
         );
     }
 
-    #[Route('/select/type', name: 'geneacte_certificate_certificate_select_type', methods: ['GET', 'POST'])]
+    #[Route('/select/type', name: 'expoacte_certificate_certificate_select_type', methods: ['GET', 'POST'])]
     public function selectType(): Response
     {
         return $this->render('@ExpoActe/certificate/select_type.html.twig', [
@@ -48,7 +48,7 @@ class CertificateController extends AbstractController
         ]);
     }
 
-    #[Route('/select/municipality/{type}', name: 'geneacte_certificate_certificate_select_municipality', methods: [
+    #[Route('/select/municipality/{type}', name: 'expoacte_certificate_certificate_select_municipality', methods: [
         'GET',
         'POST',
     ])]
@@ -64,7 +64,7 @@ class CertificateController extends AbstractController
         ]);
     }
 
-    #[Route('/new/{type}', name: 'geneacte_certificate_certificate_new', methods: ['GET', 'POST'])]
+    #[Route('/new/{type}', name: 'expoacte_certificate_certificate_new', methods: ['GET', 'POST'])]
     public function new(Request $request, string $type): Response
     {
         try {
@@ -72,7 +72,7 @@ class CertificateController extends AbstractController
         } catch (NotFoundExceptionInterface|ContainerExceptionInterface $e) {
             $this->addFlash('danger', 'Ce type d\'acte n\'est pas supporté');
 
-            return $this->redirectToRoute('geneacte_home');
+            return $this->redirectToRoute('expoacte_home');
         }
         $certificate = $factory->newInstance();
         $form = $factory->generateForm($certificate);
@@ -85,7 +85,7 @@ class CertificateController extends AbstractController
             $this->birthRepository->flush();
             $this->addFlash('success', 'L\'acte a été ajouté');
 
-            return $this->redirectToRoute('geneacte_certificate_birth_show', ['uuid' => $certificate->uuid]);
+            return $this->redirectToRoute('expoacte_certificate_birth_show', ['uuid' => $certificate->uuid]);
         }
 
         return $this->render('@ExpoActe/certificate/new.html.twig', [

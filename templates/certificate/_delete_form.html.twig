@@ -11,7 +11,7 @@
                 Supprimer {{ certificate.name }} ?
             </div>
             <div class="modal-footer">
-                <form method="post" action="{{ path('geneacte_certificate_birth_delete', {'uuid': certificate.uuid}) }}">
+                <form method="post" action="{{ path('expoacte_certificate_birth_delete', {'uuid': certificate.uuid}) }}">
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ certificate.uuid) }}">
                     <button type="button" class="btn btn-secondary"
                             data-bs-dismiss="modal">Annuler

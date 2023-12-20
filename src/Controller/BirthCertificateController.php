@@ -20,7 +20,7 @@ class BirthCertificateController extends AbstractController
     {
     }
 
-    #[Route('/', name: 'geneacte_certificate_birth_index', methods: ['GET'])]
+    #[Route('/', name: 'expoacte_certificate_birth_index', methods: ['GET'])]
     public function index(): Response
     {
         $certificates = $this->birthRepository->findAllOrdered();
@@ -30,7 +30,7 @@ class BirthCertificateController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'geneacte_certificate_birth_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'expoacte_certificate_birth_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
         $certificate = new ActNai3();
@@ -43,7 +43,7 @@ class BirthCertificateController extends AbstractController
             $this->birthRepository->flush();
             $this->addFlash('success', 'L\'acte a été ajouté');
 
-            return $this->redirectToRoute('geneacte_certificate_birth_show', ['uuid' => $certificate->uuid]);
+            return $this->redirectToRoute('expoacte_certificate_birth_show', ['uuid' => $certificate->uuid]);
         }
 
         return $this->render('@ExpoActe/certificate/new.html.twig', [
@@ -52,7 +52,7 @@ class BirthCertificateController extends AbstractController
         ]);
     }
 
-    #[Route('/{uuid}', name: 'geneacte_certificate_birth_show', methods: ['GET'])]
+    #[Route('/{uuid}', name: 'expoacte_certificate_birth_show', methods: ['GET'])]
     public function show(ActNai3 $certificate): Response
     {
         return $this->render('@ExpoActe/certificate/show.html.twig', [
@@ -60,7 +60,7 @@ class BirthCertificateController extends AbstractController
         ]);
     }
 
-    #[Route('/{uuid}/edit', name: 'geneacte_certificate_birth_edit', methods: ['GET', 'POST'])]
+    #[Route('/{uuid}/edit', name: 'expoacte_certificate_birth_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ActNai3 $certificate): Response
     {
         $form = $this->createForm(BirthCertificateType::class, $certificate);
@@ -71,7 +71,7 @@ class BirthCertificateController extends AbstractController
 
             $this->addFlash('success', 'L\'acte a été modifié');
 
-            return $this->redirectToRoute('geneacte_certificate_birth_show', ['uuid' => $certificate->uuid]);
+            return $this->redirectToRoute('expoacte_certificate_birth_show', ['uuid' => $certificate->uuid]);
         }
 
         return $this->render('@ExpoActe/certificate/edit.html.twig', [
@@ -80,7 +80,7 @@ class BirthCertificateController extends AbstractController
         ]);
     }
 
-    #[Route('/{uuid}', name: 'geneacte_certificate_birth_delete', methods: ['POST'])]
+    #[Route('/{uuid}', name: 'expoacte_certificate_birth_delete', methods: ['POST'])]
     public function delete(Request $request, ActNai3 $certificate): Response
     {
         if ($this->isCsrfTokenValid('delete'.$certificate->uuid, $request->request->get('_token'))) {
@@ -89,6 +89,6 @@ class BirthCertificateController extends AbstractController
             $this->addFlash('success', 'L\acte a été supprimé');
         }
 
-        return $this->redirectToRoute('geneacte_certificate_birth_index', []);
+        return $this->redirectToRoute('expoacte_certificate_birth_index', []);
     }
 }

@@ -24,7 +24,7 @@ class UserController extends AbstractController
     ) {
     }
 
-    #[Route('/', name: 'geneacte_user_index', methods: ['GET', 'POST'])]
+    #[Route('/', name: 'expoacte_user_index', methods: ['GET', 'POST'])]
     public function index(Request $request): Response
     {
         $form = $this->createForm(UserSearchType::class);
@@ -42,7 +42,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'geneacte_user_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'expoacte_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
         $user = new ActUser3();
@@ -54,7 +54,7 @@ class UserController extends AbstractController
             $this->userRepository->flush();
             $this->addFlash('success', 'L\'utilisateur a été ajouté');
 
-            return $this->redirectToRoute('geneacte_user_show', ['uuid' => $user->uuid]);
+            return $this->redirectToRoute('expoacte_user_show', ['uuid' => $user->uuid]);
         }
 
         return $this->render('@ExpoActe/user/new.html.twig', [
@@ -63,7 +63,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{uuid}', name: 'geneacte_user_show', methods: ['GET'])]
+    #[Route('/{uuid}', name: 'expoacte_user_show', methods: ['GET'])]
     public function show(ActUser3 $user): Response
     {
         return $this->render('@ExpoActe/user/show.html.twig', [
@@ -71,7 +71,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{uuid}/edit', name: 'geneacte_user_edit', methods: ['GET', 'POST'])]
+    #[Route('/{uuid}/edit', name: 'expoacte_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ActUser3 $user): Response
     {
         $form = $this->createForm(UserType::class, $user);
@@ -82,7 +82,7 @@ class UserController extends AbstractController
 
             $this->addFlash('success', 'L\'utilisateur a été modifié');
 
-            return $this->redirectToRoute('geneacte_user_show', ['uuid' => $user->uuid]);
+            return $this->redirectToRoute('expoacte_user_show', ['uuid' => $user->uuid]);
         }
 
         return $this->render('@ExpoActe/user/edit.html.twig', [
@@ -91,7 +91,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{uuid}', name: 'geneacte_user_delete', methods: ['POST'])]
+    #[Route('/{uuid}', name: 'expoacte_user_delete', methods: ['POST'])]
     public function delete(Request $request, ActUser3 $user): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->uuid, $request->request->get('_token'))) {
@@ -100,10 +100,10 @@ class UserController extends AbstractController
             $this->addFlash('success', 'L\utilisateur a été supprimé');
         }
 
-        return $this->redirectToRoute('geneacte_user_index', []);
+        return $this->redirectToRoute('expoacte_user_index', []);
     }
 
-    #[Route(path: '/{uuid}/password', name: 'geneacte_user_password', methods: ['GET', 'POST'])]
+    #[Route(path: '/{uuid}/password', name: 'expoacte_user_password', methods: ['GET', 'POST'])]
     public function passord(Request $request, ActUser3 $user): Response
     {
         $form = $this->createForm(UserPasswordType::class, $user);
@@ -114,7 +114,7 @@ class UserController extends AbstractController
             $this->userRepository->flush();
             $this->addFlash('success', 'Le mot de passe a bien été modifié');
 
-            return $this->redirectToRoute('geneacte_user_show', ['uuid' => $user->uuid]);
+            return $this->redirectToRoute('expoacte_user_show', ['uuid' => $user->uuid]);
         }
 
         return $this->render(

@@ -12,7 +12,7 @@
             <ul class="list-group">
                 {% for municipality in computed.municipalities %}
                     <li class="list-group-item">
-                        <a href="{{ path('geneacte_certificate_certificate_new', {'type':'N','municipality': municipality.commune|url_encode}) }}">
+                        <a href="{{ path('expoacte_certificate_certificate_new', {'type':'N','municipality': municipality.commune|url_encode}) }}">
                             {{ municipality.commune }} [{{ municipality.depart }}]
                         </a>
                     </li>

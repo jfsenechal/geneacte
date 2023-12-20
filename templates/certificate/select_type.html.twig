@@ -9,13 +9,13 @@
             <ul class="list-group">
                 {% for key,type in types %}
                     <li class="list-group-item">
-                       <a href="{{ path('geneacte_certificate_certificate_new', {'type':key}) }}">{{ type }}</a>
+                       <a href="{{ path('expoacte_certificate_certificate_new', {'type':key}) }}">{{ type }}</a>
                     </li>
                 {% endfor %}
             </ul>
         </div>
         <div class="card-footer text-end">
-            <a href="{{ path('geneacte_home') }}" class="btn btn-secondary">
+            <a href="{{ path('expoacte_home') }}" class="btn btn-secondary">
                 <i class="fa fa-arrow-left"></i> Annuler
             </a>
         </div>

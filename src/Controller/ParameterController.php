@@ -19,7 +19,7 @@ class ParameterController extends AbstractController
     {
     }
 
-    #[Route('/', name: 'geneacte_parameter_index', methods: ['GET'])]
+    #[Route('/', name: 'expoacte_parameter_index', methods: ['GET'])]
     public function index(): Response
     {
         $parameters = $this->parameterRepository->findAllOrdered();
@@ -35,7 +35,7 @@ class ParameterController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'geneacte_parameter_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'expoacte_parameter_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
         $parameter = new ActParams();
@@ -47,7 +47,7 @@ class ParameterController extends AbstractController
             $this->parameterRepository->flush();
             $this->addFlash('success', 'Le paramètre a été ajouté');
 
-            return $this->redirectToRoute('geneacte_parameter_index', []);
+            return $this->redirectToRoute('expoacte_parameter_index', []);
         }
 
         return $this->render('@ExpoActe/parameter/new.html.twig', [
@@ -56,7 +56,7 @@ class ParameterController extends AbstractController
         ]);
     }
 
-    #[Route('/{uuid}', name: 'geneacte_parameter_show', methods: ['GET'])]
+    #[Route('/{uuid}', name: 'expoacte_parameter_show', methods: ['GET'])]
     public function show(ActParams $parameter): Response
     {
         return $this->render('@ExpoActe/parameter/show.html.twig', [
@@ -64,7 +64,7 @@ class ParameterController extends AbstractController
         ]);
     }
 
-    #[Route('/{uuid}/edit', name: 'geneacte_parameter_edit', methods: ['GET', 'POST'])]
+    #[Route('/{uuid}/edit', name: 'expoacte_parameter_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ActParams $parameter): Response
     {
         $form = $this->createForm(ActParamsType::class, $parameter);
@@ -75,7 +75,7 @@ class ParameterController extends AbstractController
 
             $this->addFlash('success', 'Le paramètre a été modifié');
 
-            return $this->redirectToRoute('geneacte_parameter_index', []);
+            return $this->redirectToRoute('expoacte_parameter_index', []);
         }
 
         return $this->render('@ExpoActe/parameter/edit.html.twig', [
@@ -84,7 +84,7 @@ class ParameterController extends AbstractController
         ]);
     }
 
-    #[Route('/{uuid}', name: 'geneacte_parameter_delete', methods: ['POST'])]
+    #[Route('/{uuid}', name: 'expoacte_parameter_delete', methods: ['POST'])]
     public function delete(Request $request, ActParams $parameter): Response
     {
         if ($this->isCsrfTokenValid('delete'.$parameter->uuid, $request->request->get('_token'))) {
@@ -93,6 +93,6 @@ class ParameterController extends AbstractController
             $this->addFlash('success', 'Le paramètre a été supprimé');
         }
 
-        return $this->redirectToRoute('geneacte_parameter_index', []);
+        return $this->redirectToRoute('expoacte_parameter_index', []);
     }
 }

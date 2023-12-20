@@ -11,7 +11,7 @@
                 Supprimer {{ user }} ?
             </div>
             <div class="modal-footer">
-                <form method="post" action="{{ path('geneacte_user_delete', {'uuid': user.uuid}) }}">
+                <form method="post" action="{{ path('expoacte_user_delete', {'uuid': user.uuid}) }}">
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.uuid) }}">
                     <button type="button" class="btn btn-secondary"
                             data-bs-dismiss="modal">Annuler
