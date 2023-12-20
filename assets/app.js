@@ -9,3 +9,4 @@ import 'bootstrap';
 import '@popperjs/core';
 import './styles/app.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+//import '@tabler/icons-webfont/tabler-icons.min.css';

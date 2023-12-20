@@ -44,4 +44,7 @@ return [
         'version' => '2.3.1',
         'type' => 'css',
     ],
+    '@tabler/icons-webfont/tabler-icons.min.css'=> [
+        'version' => '2.44.0',
+    ],
 ];

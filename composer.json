@@ -37,6 +37,8 @@
     "symfony/string": "7.0.*",
     "symfony/translation": "7.0.*",
     "symfony/twig-bundle": "7.0.*",
+    "twig/intl-extra": "^v3.8.0",
+    "twig/string-extra": "^v3.8.0",
     "symfony/uid": "7.0.*",
     "symfony/ux-turbo": "^2.13",
     "symfony/ux-autocomplete": "^v2.13.3",
