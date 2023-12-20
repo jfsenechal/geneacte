@@ -26,25 +26,29 @@ class UserRepository extends ServiceEntityRepository
     /**
      * @return ActUser3[]
      */
-    public function findAllOrdered(): array
+    public function findAllOrdered(int $max = 50): array
     {
         return $this->createQb()
-            ->orderBy('user.nom', 'DESC')
+            ->setMaxResults($max)
             ->getQuery()
             ->getResult();
     }
 
-    public function findByCommercant(ActUser3 $user): array
+    /**
+     * @return ActUser3[]
+     */
+    public function findByName(string $name): array
     {
         return $this->createQb()
-            ->andWhere('user.email = :shop')
-            ->setParameter('shop', $user)
+            ->andWhere('user.email LIKE :name OR user.nom LIKE :name OR user.prenom LIKE :name OR user.login LIKE :name')
+            ->setParameter('name', '%'.$name.'%')
             ->getQuery()->getResult();
     }
 
     private function createQb(): QueryBuilder
     {
-        return $this->createQueryBuilder('user');
+        return $this->createQueryBuilder('user')
+            ->addOrderBy('user.nom');
     }
 
 }

@@ -9,9 +9,6 @@ use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * ActUser3
- */
 #[ORM\Table(name: 'act_user3')]
 #[ORM\Entity]
 class ActUser3 implements UserInterface
@@ -36,23 +33,14 @@ class ActUser3 implements UserInterface
     #[ORM\Column(name: 'level', type: Types::INTEGER, nullable: true, options: ['default' => '1'])]
     public int $level = 1;
 
-    /**
-     * @var int|null
-     */
     #[ORM\Column(name: 'regime', type: Types::INTEGER, nullable: true)]
-    public string $regime = '0';
+    public int $regime = 0;
 
-    /**
-     * @var int|null
-     */
     #[ORM\Column(name: 'solde', type: Types::INTEGER, nullable: true)]
-    public string $solde = '0';
+    public int $solde = 0;
 
-    /**
-     * @var DateTimeInterface|null
-     */
     #[ORM\Column(name: 'maj_solde', type: Types::DATE_MUTABLE, nullable: true, options: ['default' => '1001-01-01'])]
-    public string $majSolde = '1001-01-01';
+    public DateTimeInterface|null $majSolde;
 
     #[ORM\Column(name: 'statut', type: Types::STRING, length: 1, nullable: false, options: ['default' => 'N'])]
     public string $statut = 'N';
@@ -60,20 +48,26 @@ class ActUser3 implements UserInterface
     #[ORM\Column(name: 'dtcreation', type: Types::DATE_MUTABLE, nullable: true)]
     public ?DateTimeInterface $dtcreation = null;
 
-    /**
-     * @var DateTimeInterface|null
-     */
     #[ORM\Column(name: 'dtexpiration', type: Types::DATE_MUTABLE, nullable: true, options: ['default' => '2033-12-31'])]
-    public string $dtexpiration = '2033-12-31';
+    public ?DateTimeInterface $dtexpiration;
 
     #[ORM\Column(name: 'pt_conso', type: Types::INTEGER, nullable: false)]
-    public string $ptConso = '0';
+    public int $ptConso = 0;
 
     #[ORM\Column(name: 'REM', type: Types::STRING, length: 140, nullable: true)]
     public ?string $rem = null;
 
     #[ORM\Column(name: 'libre', type: Types::STRING, length: 100, nullable: true)]
     public ?string $libre = null;
+
+    public function __construct()
+    {
+    }
+
+    public function __toString(): string
+    {
+        return $this->nom.' '.$this->prenom;
+    }
 
     public function getRoles(): array
     {

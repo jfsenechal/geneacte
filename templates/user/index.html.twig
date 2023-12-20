@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilisateurs{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <h3 class="card-header">Liste des utilisateurs</h3>
+        <div class="card-body">
+
+            {% include '@ExpoActe/user/_form_search.html.twig' %}
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Nom d'utilisateur</th>
+                    <th>Email</th>
+                    <th>Level</th>
+                    <th>Statut</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('geneacte_user_show', {'uuid': user.uuid}) }}">
+                                {{ user.nom }}
+                            </a>
+                        </td>
+                        <td>{{ user.prenom }}</td>
+                        <td>{{ user.login }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.level }}</td>
+                        <td>{{ user.statut }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
