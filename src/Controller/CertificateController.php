@@ -98,9 +98,11 @@ class CertificateController extends AbstractController
     }
 
     #[Route('/{uuid}/show', name: 'expoacte_certificate_show', methods: ['GET', 'POST'])]
-    public function show(Request $request, ActNai3 $certificate): Response
+    public function show(ActNai3 $certificate): Response
     {
-
+        return $this->render('@ExpoActe/certificate/show.html.twig', [
+            'certificate' => $certificate,
+        ]);
     }
 
     #[Route('/{uuid}/edit', name: 'expoacte_certificate_edit', methods: ['GET', 'POST'])]

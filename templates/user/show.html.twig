@@ -18,7 +18,7 @@
                     <td>{{ user.email }}</td>
                 </tr>
                 <tr>
-                    <th>level</th>
+                    <th>Niveau d'accès</th>
                     <td>{{ user.level }}</td>
                 </tr>
                 <tr>
@@ -34,7 +34,7 @@
                     <td>{{ user.solde }}</td>
                 </tr>
                 <tr>
-                    <th>ptConso</th>
+                    <th>Consommé</th>
                     <td>{{ user.ptConso }}</td>
                 </tr>
                 <tr>
@@ -48,7 +48,7 @@
             </table>
         </div>
         <div class="card-footer">
-            Ajouté le {{ user.dtcreation|format_date('full') }} - majSolde {{ user.majSolde|format_date('full') }}
+            Ajouté le {{ user.dtcreation|format_date('full') }} - Rechargé le {{ user.majSolde|format_date('full') }}
             - Expire le {{ user.dtexpiration|format_date('full') }}
         </div>
     </div>

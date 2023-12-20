@@ -40,9 +40,39 @@ class UserRepository extends ServiceEntityRepository
     public function findByName(string $name): array
     {
         return $this->createQb()
-            ->andWhere('user.email LIKE :name OR user.nom LIKE :name OR user.prenom LIKE :name OR user.login LIKE :name')
+            ->andWhere(
+                'user.email LIKE :name OR user.nom LIKE :name OR user.prenom LIKE :name OR user.login LIKE :name'
+            )
             ->setParameter('name', '%'.$name.'%')
             ->getQuery()->getResult();
+    }
+
+    /**
+     * @return ActUser3[]
+     */
+    public function search(?string $name, ?string $statut, ?int $role, ?string $scoring): array
+    {
+        $qb = $this->createQb();
+        if ($name) {
+            $qb
+                ->andWhere(
+                    'user.email LIKE :name OR user.nom LIKE :name OR user.prenom LIKE :name OR user.login LIKE :name'
+                )->setParameter('name', '%'.$name.'%');
+        }
+        if ($statut) {
+            $qb->andWhere('user.statut = :statut')
+                ->setParameter('statut', $statut);
+        }
+        if ($role) {
+            $qb->andWhere('user.level = :role')
+                ->setParameter('role', $role);
+        }
+        if ($scoring) {
+            $qb->andWhere('user.regime = :scoring')
+                ->setParameter('scoring', $scoring);
+        }
+
+        return $qb->getQuery()->getResult();
     }
 
     private function createQb(): QueryBuilder

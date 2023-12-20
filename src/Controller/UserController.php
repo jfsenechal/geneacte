@@ -29,14 +29,22 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $users = $this->userRepository->findByName($form->get('name')->getData());
+            $data = $form->getData();
+            $users = $this->userRepository->search(
+                $data['name'],
+                $data['statut']?->value,
+                $data['role']?->value,
+                $data['scoring']?->value
+            );
         } else {
-            $users = $this->userRepository->findAllOrdered();
+            //   $users = $this->userRepository->findAllOrdered();
+            $users = [];
         }
 
         return $this->render('@ExpoActe/user/index.html.twig', [
             'users' => $users,
             'form' => $form,
+            'isSearch' => $form->isSubmitted(),
         ]);
     }
 
