@@ -14,8 +14,10 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route(path: '/certificates')]
 class CertificateController extends AbstractController
 {
-    public function __construct(private readonly ActSumRepository $actSumRepository)
-    {
+    public function __construct(
+        private readonly ActSumRepository $actSumRepository,
+        private readonly CertificateFactory $certificateFactory
+    ) {
     }
 
     #[Route(path: '/', name: 'geneacte_certificate_home')]
@@ -36,7 +38,7 @@ class CertificateController extends AbstractController
         );
     }
 
-    #[Route('/select', name: 'geneacte_certificate_certificate_select_type', methods: ['GET', 'POST'])]
+    #[Route('/select/type', name: 'geneacte_certificate_certificate_select_type', methods: ['GET', 'POST'])]
     public function selectType(): Response
     {
         return $this->render('@ExpoActe/certificate/select_type.html.twig', [
@@ -44,7 +46,10 @@ class CertificateController extends AbstractController
         ]);
     }
 
-    #[Route('/new/{type}', name: 'geneacte_certificate_certificate_select_municipality', methods: ['GET', 'POST'])]
+    #[Route('/select/municipality/{type}', name: 'geneacte_certificate_certificate_select_municipality', methods: [
+        'GET',
+        'POST',
+    ])]
     public function selectMunicipality(string $type): Response
     {
         $municipalities = $this->actSumRepository->findMunicipalitiesByTable($type);
@@ -60,8 +65,10 @@ class CertificateController extends AbstractController
     #[Route('/new/{type}', name: 'geneacte_certificate_certificate_new', methods: ['GET', 'POST'])]
     public function new(Request $request, string $type): Response
     {
-        $certificate = CertificateFactory::createByType($type);
-        $form = $this->createForm(CertificateNewType::class, null);
+        $factory = $this->certificateFactory->getFactory($type);
+        $certificate = $factory->newInstance();
+        $form = $factory->generateForm($certificate);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

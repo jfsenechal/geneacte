@@ -2,39 +2,31 @@
 
 namespace App\Certificate;
 
-use App\Entity\ActDec3;
-use App\Entity\ActDiv3;
-use App\Entity\ActMar3;
-use App\Entity\ActNai3;
+use App\Certificate\Factory\CertificateFactoryInterface;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
+use Symfony\Component\DependencyInjection\Attribute\TaggedLocator;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Service\ServiceProviderInterface;
 
-class CertificateFactory
+readonly class CertificateFactory
 {
-    public static function createMarriage(): ActMar3
-    {
-        return new ActMar3();
+    public function __construct(
+        #[TaggedLocator(CertificateFactoryInterface::class, defaultIndexMethod: 'getType')]
+        private ServiceProviderInterface $factories,
+    ) {
     }
 
-    public static function createBirth(): ActNai3
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public function getFactory(string $type): CertificateFactoryInterface
     {
-        return new ActNai3();
-    }
+        if (!$this->factories->has($type)) {
+            throw new NotFoundHttpException('Format not supported.');
+        }
 
-    public static function createDivorce(): ActDiv3
-    {
-        return new ActDiv3();
-    }
-
-    public static function createDeath(): ActDec3
-    {
-        return new ActDec3();
-    }
-
-    public static function createByType(string $type)
-    {
-        return match ($type) {
-            CertificateEnum::BIRTH->value => self::createBirth(),
-            CertificateEnum::DEATH->value => self::createDeath(),
-            default => null
-        };
+        return $this->factories->get($type);
     }
 }
