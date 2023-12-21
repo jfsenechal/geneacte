@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Certificate\CertificateEnum;
 use App\Certificate\Factory\CertificateFactory;
 use App\Certificate\Form\CertificateNewType;
-use App\Repository\ActSumRepository;
+use App\Repository\SummaryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class CertificateController extends AbstractController
 {
     public function __construct(
-        private readonly ActSumRepository $actSumRepository,
+        private readonly SummaryRepository $summaryRepository,
         private readonly CertificateFactory $certificateFactory,
         private readonly EntityManagerInterface $entityManager
     ) {
@@ -27,9 +27,9 @@ class CertificateController extends AbstractController
     #[Route(path: '/', name: 'expoacte_certificate_index')]
     public function index(string $table = 'N'): Response
     {
-        $municipalities = $this->actSumRepository->findMunicipalitiesByTable($table);
+        $municipalities = $this->summaryRepository->findMunicipalitiesByTable($table);
         $typesCertficate = CertificateEnum::cases();
-        $otherCertificateLabels = $this->actSumRepository->findLabelsForOtherCertificates();
+        $otherCertificateLabels = $this->summaryRepository->findLabelsForOtherCertificates();
 
         return $this->render(
             '@ExpoActe/certificate/titi.html.twig',
@@ -56,7 +56,7 @@ class CertificateController extends AbstractController
     ])]
     public function selectMunicipality(string $type): Response
     {
-        $municipalities = $this->actSumRepository->findMunicipalitiesByTable($type);
+        $municipalities = $this->summaryRepository->findMunicipalitiesByTable($type);
         $form = $this->createForm(CertificateNewType::class, null);
 
         return $this->render('@ExpoActe/certificate/select_municipality.html.twig', [

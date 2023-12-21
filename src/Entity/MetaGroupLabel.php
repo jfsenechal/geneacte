@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'act_mgrplg')]
 #[ORM\Entity]
-class ActMgrplg
+class MetaGroupLabel
 {
     #[ORM\Column(name: 'id', type: Types::INTEGER, nullable: false)]
     #[ORM\Id]
@@ -30,7 +30,7 @@ class ActMgrplg
     public string $getiq;
 
     /**
-     * @var ActMetadb[]
+     * @var Metadb[]
      */
     public array $metas = [];
 

@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 #[ORM\Table(name: 'act_prenom')]
 #[ORM\Entity]
-class ActPrenom
+class Firstname
 {
     #[ORM\Column(name: 'prenom', type: Types::STRING, length: 140, nullable: false, options: ['fixed' => true])]
     #[ORM\Id]

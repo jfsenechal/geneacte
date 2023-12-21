@@ -3,16 +3,16 @@
 namespace App\Repository;
 
 use App\Doctrine\OrmCrudTrait;
-use App\Entity\ActLog;
+use App\Entity\Log;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method ActLog|null find($id, $lockMode = null, $lockVersion = null)
- * @method ActLog|null findOneBy(array $criteria, array $orderBy = null)
- * @method ActLog[]    findAll()
- * @method ActLog[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Log|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Log|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Log[]    findAll()
+ * @method Log[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class LogRepository extends ServiceEntityRepository
 {
@@ -20,11 +20,11 @@ class LogRepository extends ServiceEntityRepository
 
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ActLog::class);
+        parent::__construct($registry, Log::class);
     }
 
     /**
-     * @return ActLog[]
+     * @return Log[]
      */
     public function findAllOrdered(): array
     {
@@ -34,7 +34,7 @@ class LogRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findByCommercant(ActLog $log): array
+    public function findByCommercant(Log $log): array
     {
         return $this->createQb()
             ->andWhere('log.email = :shop')

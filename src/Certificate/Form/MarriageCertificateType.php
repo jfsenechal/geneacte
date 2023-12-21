@@ -2,7 +2,7 @@
 
 namespace App\Certificate\Form;
 
-use App\Entity\ActMar3;
+use App\Entity\MarriageCertificate;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -211,7 +211,7 @@ class MarriageCertificateType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => ActMar3::class,
+            'data_class' => MarriageCertificate::class,
         ]);
     }
 }

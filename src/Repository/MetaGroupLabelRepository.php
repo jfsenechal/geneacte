@@ -3,28 +3,28 @@
 namespace App\Repository;
 
 use App\Doctrine\OrmCrudTrait;
-use App\Entity\ActMgrplg;
+use App\Entity\MetaGroupLabel;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method ActMgrplg|null find($id, $lockMode = null, $lockVersion = null)
- * @method ActMgrplg|null findOneBy(array $criteria, array $orderBy = null)
- * @method ActMgrplg[]    findAll()
- * @method ActMgrplg[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method MetaGroupLabel|null find($id, $lockMode = null, $lockVersion = null)
+ * @method MetaGroupLabel|null findOneBy(array $criteria, array $orderBy = null)
+ * @method MetaGroupLabel[]    findAll()
+ * @method MetaGroupLabel[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class MgrplgRepository extends ServiceEntityRepository
+class MetaGroupLabelRepository extends ServiceEntityRepository
 {
     use OrmCrudTrait;
 
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ActMgrplg::class);
+        parent::__construct($registry, MetaGroupLabel::class);
     }
 
     /**
-     * @return ActMgrplg[]
+     * @return MetaGroupLabel[]
      */
     public function findAllOrdered(): array
     {
@@ -35,7 +35,7 @@ class MgrplgRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return ActMgrplg[]
+     * @return MetaGroupLabel[]
      */
     public function findByTable(string $table): array
     {
@@ -46,7 +46,7 @@ class MgrplgRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return ActMgrplg[]
+     * @return MetaGroupLabel[]
      */
     public function findByTableAndGrps(string $table, array $grps): array
     {

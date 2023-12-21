@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 #[ORM\Table(name: 'act_params')]
 #[ORM\Entity]
-class ActParams
+class Param
 {
     use UuidTrait;
 

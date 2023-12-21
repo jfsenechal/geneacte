@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'act_log')]
 #[ORM\Index(name: 'date', columns: ['date'])]
 #[ORM\Entity]
-class ActLog
+class Log
 {
     #[ORM\Column(name: 'id', type: Types::INTEGER, nullable: false)]
     #[ORM\Id]

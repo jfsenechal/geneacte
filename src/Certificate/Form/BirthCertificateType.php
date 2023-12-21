@@ -2,7 +2,7 @@
 
 namespace App\Certificate\Form;
 
-use App\Entity\ActNai3;
+use App\Entity\BirthCertificate;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -51,7 +51,7 @@ class BirthCertificateType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => ActNai3::class,
+            'data_class' => BirthCertificate::class,
         ]);
     }
 }

@@ -3,16 +3,16 @@
 namespace App\Repository;
 
 use App\Doctrine\OrmCrudTrait;
-use App\Entity\ActPrenom;
+use App\Entity\Firstname;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method ActPrenom|null find($id, $lockMode = null, $lockVersion = null)
- * @method ActPrenom|null findOneBy(array $criteria, array $orderBy = null)
- * @method ActPrenom[]    findAll()
- * @method ActPrenom[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Firstname|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Firstname|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Firstname[]    findAll()
+ * @method Firstname[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class FirstNameRepository extends ServiceEntityRepository
 {
@@ -20,11 +20,11 @@ class FirstNameRepository extends ServiceEntityRepository
 
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ActPrenom::class);
+        parent::__construct($registry, Firstname::class);
     }
 
     /**
-     * @return ActPrenom[]
+     * @return Firstname[]
      */
     public function findAllOrdered(): array
     {
@@ -34,7 +34,7 @@ class FirstNameRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findByCommercant(ActPrenom $firstname): array
+    public function findByCommercant(Firstname $firstname): array
     {
         return $this->createQb()
             ->andWhere('firstname.email = :shop')

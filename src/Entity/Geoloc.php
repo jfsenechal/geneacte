@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'act_geoloc')]
 //#[ORM\UniqueConstraint(name: 'COMMUNE', columns: ['COMMUNE', 'DEPART'])]
 #[ORM\Entity]
-class ActGeoloc
+class Geoloc
 {
     #[ORM\Column(name: 'ID', type: Types::INTEGER, nullable: false)]
     #[ORM\Id]

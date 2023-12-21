@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\ActSums;
+use App\Entity\Summary;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Count;
@@ -15,7 +15,7 @@ class MunicipalityAutocompleteField extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'class' => ActSums::class,
+            'class' => Summary::class,
             'searchable_fields' => ['commune', 'depart'],
             'label' => 'Quelle commune',
             'choice_label' => 'commune',

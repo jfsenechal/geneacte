@@ -2,7 +2,7 @@
 
 namespace App\Certificate\Form;
 
-use App\Entity\ActDec3;
+use App\Entity\DeathCertificate;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -71,7 +71,7 @@ class DeathCertificateType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => ActDec3::class,
+            'data_class' => DeathCertificate::class,
         ]);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\ActUser3;
+use App\Entity\User;
 use App\Repository\UserRepository;
 use App\User\Form\UserPasswordType;
 use App\User\Form\UserSearchType;
@@ -49,7 +49,7 @@ class UserController extends AbstractController
     #[Route('/new', name: 'expoacte_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
-        $user = new ActUser3();
+        $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -68,7 +68,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/{uuid}', name: 'expoacte_user_show', methods: ['GET'])]
-    public function show(ActUser3 $user): Response
+    public function show(User $user): Response
     {
         return $this->render('@ExpoActe/user/show.html.twig', [
             'user' => $user,
@@ -76,7 +76,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/{uuid}/edit', name: 'expoacte_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, ActUser3 $user): Response
+    public function edit(Request $request, User $user): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -96,7 +96,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/{uuid}', name: 'expoacte_user_delete', methods: ['POST'])]
-    public function delete(Request $request, ActUser3 $user): Response
+    public function delete(Request $request, User $user): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->uuid, $request->request->get('_token'))) {
             $this->userRepository->remove($user);
@@ -108,7 +108,7 @@ class UserController extends AbstractController
     }
 
     #[Route(path: '/{uuid}/password', name: 'expoacte_user_password', methods: ['GET', 'POST'])]
-    public function passord(Request $request, ActUser3 $user): Response
+    public function passord(Request $request, User $user): Response
     {
         $form = $this->createForm(UserPasswordType::class, $user);
         $form->handleRequest($request);

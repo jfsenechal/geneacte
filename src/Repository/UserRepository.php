@@ -3,16 +3,16 @@
 namespace App\Repository;
 
 use App\Doctrine\OrmCrudTrait;
-use App\Entity\ActUser3;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method ActUser3|null find($id, $lockMode = null, $lockVersion = null)
- * @method ActUser3|null findOneBy(array $criteria, array $orderBy = null)
- * @method ActUser3[]    findAll()
- * @method ActUser3[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method User|null find($id, $lockMode = null, $lockVersion = null)
+ * @method User|null findOneBy(array $criteria, array $orderBy = null)
+ * @method User[]    findAll()
+ * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class UserRepository extends ServiceEntityRepository
 {
@@ -20,11 +20,11 @@ class UserRepository extends ServiceEntityRepository
 
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ActUser3::class);
+        parent::__construct($registry, User::class);
     }
 
     /**
-     * @return ActUser3[]
+     * @return User[]
      */
     public function findAllOrdered(int $max = 50): array
     {
@@ -35,7 +35,7 @@ class UserRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return ActUser3[]
+     * @return User[]
      */
     public function findByName(string $name): array
     {
@@ -48,7 +48,7 @@ class UserRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return ActUser3[]
+     * @return User[]
      */
     public function search(?string $name, ?string $statut, ?int $role, ?string $scoring): array
     {

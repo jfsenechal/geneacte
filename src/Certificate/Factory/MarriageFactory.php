@@ -4,7 +4,7 @@ namespace App\Certificate\Factory;
 
 use App\Certificate\CertificateEnum;
 use App\Certificate\Form\MarriageCertificateType;
-use App\Entity\ActMar3;
+use App\Entity\MarriageCertificate;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Twig\Environment;
@@ -17,9 +17,9 @@ class MarriageFactory implements CertificateFactoryInterface
     ) {
     }
 
-    public function newInstance(): ActMar3
+    public function newInstance(): MarriageCertificate
     {
-        return new ActMar3();
+        return new MarriageCertificate();
     }
 
     public function generateForm(object $data): FormInterface

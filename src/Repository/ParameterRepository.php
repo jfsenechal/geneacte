@@ -3,16 +3,16 @@
 namespace App\Repository;
 
 use App\Doctrine\OrmCrudTrait;
-use App\Entity\ActParams;
+use App\Entity\Param;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method ActParams|null find($id, $lockMode = null, $lockVersion = null)
- * @method ActParams|null findOneBy(array $criteria, array $orderBy = null)
- * @method ActParams[]    findAll()
- * @method ActParams[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Param|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Param|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Param[]    findAll()
+ * @method Param[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class ParameterRepository extends ServiceEntityRepository
 {
@@ -20,11 +20,11 @@ class ParameterRepository extends ServiceEntityRepository
 
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ActParams::class);
+        parent::__construct($registry, Param::class);
     }
 
     /**
-     * @return ActParams[]
+     * @return Param[]
      */
     public function findAllOrdered(array $except = ['Hidden', 'Deleted']): array
     {
@@ -36,7 +36,7 @@ class ParameterRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findByName(string $name): ?ActParams
+    public function findByName(string $name): ?Param
     {
         return $this->createQb()
             ->andWhere('parameter.param = :name')

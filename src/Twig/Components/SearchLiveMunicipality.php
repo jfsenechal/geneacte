@@ -2,7 +2,7 @@
 
 namespace App\Twig\Components;
 
-use App\Repository\ActSumRepository;
+use App\Repository\SummaryRepository;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
@@ -18,7 +18,7 @@ class SearchLiveMunicipality
     #[LiveProp(writable: true)]
     public ?string $certificateType = null;
 
-    public function __construct(private readonly ActSumRepository $actSumRepository)
+    public function __construct(private readonly SummaryRepository $actSumRepository)
     {
     }
 

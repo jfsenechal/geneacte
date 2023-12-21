@@ -3,16 +3,16 @@
 namespace App\Repository;
 
 use App\Doctrine\OrmCrudTrait;
-use App\Entity\ActDiv3;
+use App\Entity\OtherCertificate;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method ActDiv3|null find($id, $lockMode = null, $lockVersion = null)
- * @method ActDiv3|null findOneBy(array $criteria, array $orderBy = null)
- * @method ActDiv3[]    findAll()
- * @method ActDiv3[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method OtherCertificate|null find($id, $lockMode = null, $lockVersion = null)
+ * @method OtherCertificate|null findOneBy(array $criteria, array $orderBy = null)
+ * @method OtherCertificate[]    findAll()
+ * @method OtherCertificate[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class DivorceRepository extends ServiceEntityRepository
 {
@@ -20,11 +20,11 @@ class DivorceRepository extends ServiceEntityRepository
 
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ActDiv3::class);
+        parent::__construct($registry, OtherCertificate::class);
     }
 
     /**
-     * @return ActDiv3[]
+     * @return OtherCertificate[]
      */
     public function findAllOrdered(): array
     {
@@ -34,7 +34,7 @@ class DivorceRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findByCommercant(ActDiv3 $divorce): array
+    public function findByCommercant(OtherCertificate $divorce): array
     {
         return $this->createQb()
             ->andWhere('divorce.email = :shop')

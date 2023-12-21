@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\ActParams;
+use App\Entity\Param;
 use App\Parameter\Form\ParamType;
 use App\Repository\ParameterRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -36,7 +36,7 @@ class ParameterController extends AbstractController
     #[Route('/new', name: 'expoacte_parameter_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
-        $parameter = new ActParams();
+        $parameter = new Param();
         $form = $this->createForm(ParamType::class, $parameter);
         $form->handleRequest($request);
 
@@ -55,7 +55,7 @@ class ParameterController extends AbstractController
     }
 
     #[Route('/{uuid}', name: 'expoacte_parameter_show', methods: ['GET'])]
-    public function show(ActParams $parameter): Response
+    public function show(Param $parameter): Response
     {
         return $this->render('@ExpoActe/parameter/show.html.twig', [
             'act_param' => $parameter,
@@ -63,7 +63,7 @@ class ParameterController extends AbstractController
     }
 
     #[Route('/{uuid}/edit', name: 'expoacte_parameter_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, ActParams $parameter): Response
+    public function edit(Request $request, Param $parameter): Response
     {
         $form = $this->createForm(ParamType::class, $parameter);
         $form->handleRequest($request);
@@ -83,7 +83,7 @@ class ParameterController extends AbstractController
     }
 
     #[Route('/{uuid}', name: 'expoacte_parameter_delete', methods: ['POST'])]
-    public function delete(Request $request, ActParams $parameter): Response
+    public function delete(Request $request, Param $parameter): Response
     {
         if ($this->isCsrfTokenValid('delete'.$parameter->uuid, $request->request->get('_token'))) {
             $this->parameterRepository->remove($parameter);

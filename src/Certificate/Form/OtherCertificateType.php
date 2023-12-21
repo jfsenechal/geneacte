@@ -2,13 +2,13 @@
 
 namespace App\Certificate\Form;
 
-use App\Entity\ActDiv3;
+use App\Entity\OtherCertificate;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DivorceCertificateType extends AbstractType
+class OtherCertificateType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -187,7 +187,7 @@ class DivorceCertificateType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => ActDiv3::class,
+            'data_class' => OtherCertificate::class,
         ]);
     }
 }

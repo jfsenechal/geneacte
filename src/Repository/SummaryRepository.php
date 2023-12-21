@@ -3,28 +3,28 @@
 namespace App\Repository;
 
 use App\Doctrine\OrmCrudTrait;
-use App\Entity\ActSums;
+use App\Entity\Summary;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method ActSums|null find($id, $lockMode = null, $lockVersion = null)
- * @method ActSums|null findOneBy(array $criteria, array $orderBy = null)
- * @method ActSums[]    findAll()
- * @method ActSums[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Summary|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Summary|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Summary[]    findAll()
+ * @method Summary[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ActSumRepository extends ServiceEntityRepository
+class SummaryRepository extends ServiceEntityRepository
 {
     use OrmCrudTrait;
 
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ActSums::class);
+        parent::__construct($registry, Summary::class);
     }
 
     /**
-     * @return ActSums[]
+     * @return Summary[]
      */
     public function findAllOrdered(): array
     {
@@ -35,7 +35,7 @@ class ActSumRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return ActSums[]
+     * @return Summary[]
      */
     public function findMunicipalitiesByTable(string $table): array
     {
@@ -50,7 +50,7 @@ class ActSumRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return ActSums[]
+     * @return Summary[]
      */
     public function findMunicipalitiesByTableAndName(string $table, string $name): array
     {
@@ -67,7 +67,7 @@ class ActSumRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return ActSums[]
+     * @return Summary[]
      */
     public function findLabelsForOtherCertificates(): array
     {

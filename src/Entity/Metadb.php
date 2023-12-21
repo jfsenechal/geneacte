@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'act_metadb')]
 #[ORM\UniqueConstraint(name: 'ZID', columns: ['ZID'])]
 #[ORM\Entity]
-class ActMetadb
+class Metadb
 {
     #[ORM\Column(name: 'id', type: Types::INTEGER, nullable: false)]
     #[ORM\Id]
@@ -54,5 +54,5 @@ class ActMetadb
     ])]
     public string $affich = 'F';
 
-    public ?ActMetalg $label = null;
+    public ?MetaLabel $label = null;
 }

@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\ActMetadb;
+use App\Entity\Metadb;
 use App\Repository\MetaDbRepository;
-use App\Repository\MetaLgRepository;
-use App\Repository\MgrplgRepository;
+use App\Repository\MetaLabelRepository;
+use App\Repository\MetaGroupLabelRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -14,8 +14,8 @@ use Symfony\Component\Routing\Attribute\Route;
 class LabelController extends AbstractController
 {
     public function __construct(
-        private readonly MgrplgRepository $mgrplgRepository,
-        private readonly MetaLgRepository $metaLgRepository,
+        private readonly MetaGroupLabelRepository $metaGroupLabelRepository,
+        private readonly MetaLabelRepository $metaLabelRepository,
         private readonly MetaDbRepository $metaDbRepository
     ) {
 
@@ -26,19 +26,19 @@ class LabelController extends AbstractController
     {
         $metas = $this->metaDbRepository->findByTable($table);
         foreach ($metas as $meta) {
-            $meta->label = $this->metaLgRepository->findOneByZid($meta->zid);
+            $meta->label = $this->metaLabelRepository->findOneByZid($meta->zid);
         }
 
-        $grps = array_map(function (ActMetaDb $meta) {
+        $grps = array_map(function (Metadb $meta) {
             return $meta->groupe;
         }, $metas);
 
-        $groupes = $this->mgrplgRepository->findByTableAndGrps($table, array_values(array_unique($grps)));
+        $groupes = $this->metaGroupLabelRepository->findByTableAndGrps($table, array_values(array_unique($grps)));
 
         foreach ($groupes as $group) {
             $group->metas = $this->metaDbRepository->findByTableAndGroup($table, $group->grp);
             foreach ($group->metas as $meta) {
-                $meta->label = $this->metaLgRepository->findOneByZid($meta->zid);
+                $meta->label = $this->metaLabelRepository->findOneByZid($meta->zid);
             }
         }
 
@@ -54,9 +54,9 @@ class LabelController extends AbstractController
     public function draft(string $table = 'N'): Response
     {
         $metas = $this->metaDbRepository->findByTable($table);
-        $groupes = $this->mgrplgRepository->findByTable($table);
-        $mgrplgs = $this->mgrplgRepository->findAllOrdered();
-        $metasLg = $this->metaLgRepository->findAllOrdered();
+        $groupes = $this->metaGroupLabelRepository->findByTable($table);
+        $mgrplgs = $this->metaGroupLabelRepository->findAllOrdered();
+        $metasLg = $this->metaLabelRepository->findAllOrdered();
         foreach ($metasLg as $label) {
             $label->meta = $this->metaDbRepository->findOneByZid($label->zid);
         }

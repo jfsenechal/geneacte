@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Table(name: 'act_user3')]
 #[ORM\Entity]
-class ActUser3 implements UserInterface
+class User implements UserInterface
 {
     use IdTrait, UuidTrait;
 

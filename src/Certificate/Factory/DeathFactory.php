@@ -4,7 +4,7 @@ namespace App\Certificate\Factory;
 
 use App\Certificate\CertificateEnum;
 use App\Certificate\Form\DeathCertificateType;
-use App\Entity\ActDec3;
+use App\Entity\DeathCertificate;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Twig\Environment;
@@ -17,9 +17,9 @@ class DeathFactory implements CertificateFactoryInterface
     ) {
     }
 
-    public function newInstance(): ActDec3
+    public function newInstance(): DeathCertificate
     {
-        return new ActDec3();
+        return new DeathCertificate();
     }
 
     public function generateForm(object $data): FormInterface

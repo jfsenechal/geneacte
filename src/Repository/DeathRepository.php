@@ -3,16 +3,16 @@
 namespace App\Repository;
 
 use App\Doctrine\OrmCrudTrait;
-use App\Entity\ActDec3;
+use App\Entity\DeathCertificate;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method ActDec3|null find($id, $lockMode = null, $lockVersion = null)
- * @method ActDec3|null findOneBy(array $criteria, array $orderBy = null)
- * @method ActDec3[]    findAll()
- * @method ActDec3[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method DeathCertificate|null find($id, $lockMode = null, $lockVersion = null)
+ * @method DeathCertificate|null findOneBy(array $criteria, array $orderBy = null)
+ * @method DeathCertificate[]    findAll()
+ * @method DeathCertificate[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class DeathRepository extends ServiceEntityRepository
 {
@@ -20,11 +20,11 @@ class DeathRepository extends ServiceEntityRepository
 
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ActDec3::class);
+        parent::__construct($registry, DeathCertificate::class);
     }
 
     /**
-     * @return ActDec3[]
+     * @return DeathCertificate[]
      */
     public function findAllOrdered(): array
     {
@@ -34,7 +34,7 @@ class DeathRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findByCommercant(ActDec3 $death): array
+    public function findByCommercant(DeathCertificate $death): array
     {
         return $this->createQb()
             ->andWhere('death.email = :shop')

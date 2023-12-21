@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'act_sums')]
 #[ORM\Index(name: 'typ_lib_com_dep', columns: ['TYPACT', 'LIBELLE', 'COMMUNE', 'DEPART'])]
 #[ORM\Entity]
-class ActSums
+class Summary
 {
     #[ORM\Column(name: 'id', type: Types::INTEGER, nullable: false)]
     #[ORM\Id]

@@ -4,7 +4,7 @@ namespace App\Certificate\Factory;
 
 use App\Certificate\CertificateEnum;
 use App\Certificate\Form\BirthCertificateType;
-use App\Entity\ActNai3;
+use App\Entity\BirthCertificate;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Twig\Environment;
@@ -17,9 +17,9 @@ class BirthFactory implements CertificateFactoryInterface
     ) {
     }
 
-    public function newInstance(): ActNai3
+    public function newInstance(): BirthCertificate
     {
-        return new ActNai3();
+        return new BirthCertificate();
     }
 
     public function generateForm(object $data): FormInterface

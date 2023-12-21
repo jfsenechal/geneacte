@@ -3,28 +3,28 @@
 namespace App\Repository;
 
 use App\Doctrine\OrmCrudTrait;
-use App\Entity\ActMetalg;
+use App\Entity\MetaLabel;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method ActMetalg|null find($id, $lockMode = null, $lockVersion = null)
- * @method ActMetalg|null findOneBy(array $criteria, array $orderBy = null)
- * @method ActMetalg[]    findAll()
- * @method ActMetalg[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method MetaLabel|null find($id, $lockMode = null, $lockVersion = null)
+ * @method MetaLabel|null findOneBy(array $criteria, array $orderBy = null)
+ * @method MetaLabel[]    findAll()
+ * @method MetaLabel[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class MetaLgRepository extends ServiceEntityRepository
+class MetaLabelRepository extends ServiceEntityRepository
 {
     use OrmCrudTrait;
 
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ActMetalg::class);
+        parent::__construct($registry, MetaLabel::class);
     }
 
     /**
-     * @return ActMetalg[]
+     * @return MetaLabel[]
      */
     public function findAllOrdered(): array
     {
@@ -34,7 +34,7 @@ class MetaLgRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findOneByZid(int $zid): ?ActMetalg
+    public function findOneByZid(int $zid): ?MetaLabel
     {
         return $this->createQb()
             ->andWhere('meta_lg.zid = :zid')

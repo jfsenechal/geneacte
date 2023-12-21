@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'act_traceip')]
 #[ORM\Index(name: 'ip', columns: ['ip'])]
 #[ORM\Entity]
-class ActTraceip
+class Traceip
 {
     #[ORM\Column(name: 'id', type: Types::INTEGER, nullable: false)]
     #[ORM\Id]
