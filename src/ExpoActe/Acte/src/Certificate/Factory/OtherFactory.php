@@ -3,8 +3,8 @@
 namespace ExpoActe\Acte\Certificate\Factory;
 
 use ExpoActe\Acte\Certificate\CertificateEnum;
-use ExpoActe\Acte\Certificate\Form\BirthCertificateType;
-use ExpoActe\Acte\Entity\BirthCertificate;
+use ExpoActe\Acte\Certificate\Form\OtherCertificateType;
+use ExpoActe\Acte\Entity\OtherCertificate;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Twig\Environment;
@@ -17,14 +17,14 @@ class OtherFactory implements CertificateFactoryInterface
     ) {
     }
 
-    public function newInstance(): BirthCertificate
+    public function newInstance(): OtherCertificate
     {
-        return new BirthCertificate();
+        return new OtherCertificate();
     }
 
     public function generateForm(object $data): FormInterface
     {
-        return $this->formFactory->create(BirthCertificateType::class, $data);
+        return $this->formFactory->create(OtherCertificateType::class, $data);
     }
 
     public function renderForm(FormInterface $form): string
