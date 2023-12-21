@@ -52,35 +52,35 @@ class BaseCertificateType extends AbstractType
                 'label' => 'Prénoms',
                 'required' => false,
             ])
-            ->add('pNom', TextType::class, [
+            ->add('p_nom', TextType::class, [
                 'label' => 'Nom du père',
                 'required' => false,
             ])
-            ->add('pPre', TextType::class, [
+            ->add('p_pre', TextType::class, [
                 'label' => 'Prénoms',
                 'required' => false,
             ])
-            ->add('pCom', TextType::class, [
+            ->add('p_com', TextType::class, [
                 'label' => 'Commentaire',
                 'required' => false,
             ])
-            ->add('pPro', TextType::class, [
+            ->add('p_pro', TextType::class, [
                 'label' => 'Profession',
                 'required' => false,
             ])
-            ->add('mNom', TextType::class, [
+            ->add('m_nom', TextType::class, [
                 'label' => 'Nom de la mère',
                 'required' => false,
             ])
-            ->add('mPre', TextType::class, [
+            ->add('m_pre', TextType::class, [
                 'label' => 'Prénoms',
                 'required' => false,
             ])
-            ->add('mCom', TextType::class, [
+            ->add('m_com', TextType::class, [
                 'label' => 'Commentaire',
                 'required' => false,
             ])
-            ->add('mPro', TextType::class, [
+            ->add('m_pro', TextType::class, [
                 'label' => 'Profession',
                 'required' => false,
             ])

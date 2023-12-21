@@ -8,29 +8,28 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait ParentsTrait
 {
-
     #[ORM\Column(name: 'P_NOM', type: Types::STRING, length: 140, nullable: true)]
-    public ?string $pNom = null;
+    public ?string $p_nom = null;
 
     #[ORM\Column(name: 'P_PRE', type: Types::STRING, length: 140, nullable: true)]
-    public ?string $pPre = null;
+    public ?string $p_pre = null;
 
     #[ORM\Column(name: 'P_COM', type: Types::STRING, length: 140, nullable: true)]
-    public ?string $pCom = null;
+    public ?string $p_com = null;
 
     #[ORM\Column(name: 'P_PRO', type: Types::STRING, length: 140, nullable: true)]
-    public ?string $pPro = null;
+    public ?string $p_pro = null;
 
     #[ORM\Column(name: 'M_NOM', type: Types::STRING, length: 140, nullable: true)]
-    public ?string $mNom = null;
+    public ?string $m_nom = null;
 
     #[ORM\Column(name: 'M_PRE', type: Types::STRING, length: 140, nullable: true)]
-    public ?string $mPre = null;
+    public ?string $m_pre = null;
 
     #[ORM\Column(name: 'M_COM', type: Types::STRING, length: 140, nullable: true)]
-    public ?string $mCom = null;
+    public ?string $m_com = null;
 
     #[ORM\Column(name: 'M_PRO', type: Types::STRING, length: 140, nullable: true)]
-    public ?string $mPro = null;
+    public ?string $m_pro = null;
 
 }

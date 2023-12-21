@@ -17,27 +17,27 @@ class BirthCertificateType extends AbstractType
                 'label' => 'Sexe',
                 'required' => false,
             ])
-            ->add('t1Nom', TextType::class, [
+            ->add('t1_nom', TextType::class, [
                 'label' => 'Nom du parrain',
                 'required' => false,
             ])
-            ->add('t1Pre', TextType::class, [
+            ->add('t1_pre', TextType::class, [
                 'label' => 'Prénoms',
                 'required' => false,
             ])
-            ->add('t1Com', TextType::class, [
+            ->add('t1_com', TextType::class, [
                 'label' => 'Commentaire',
                 'required' => false,
             ])
-            ->add('t2Nom', TextType::class, [
+            ->add('t2_nom', TextType::class, [
                 'label' => 'Nom de la marraine',
                 'required' => false,
             ])
-            ->add('t2Pre', TextType::class, [
+            ->add('t2_pre', TextType::class, [
                 'label' => 'Prénoms',
                 'required' => false,
             ])
-            ->add('t2Com', TextType::class, [
+            ->add('t2_com', TextType::class, [
                 'label' => 'Commentaire',
                 'required' => false,
             ]);

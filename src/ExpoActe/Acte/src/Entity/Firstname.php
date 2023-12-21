@@ -5,9 +5,6 @@ namespace ExpoActe\Acte\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * ActPrenom
- */
 #[ORM\Table(name: 'act_prenom')]
 #[ORM\Entity]
 class Firstname
@@ -16,6 +13,4 @@ class Firstname
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     public string $prenom = '';
-
-
 }

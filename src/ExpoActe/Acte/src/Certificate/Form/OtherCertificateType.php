@@ -41,135 +41,127 @@ class OtherCertificateType extends AbstractType
                 'label' => 'excon',
                 'required' => false,
             ])
-            ->add('excPre', TextType::class, [
+            ->add('exc_pre', TextType::class, [
                 'label' => 'excPre',
                 'required' => false,
             ])
-            ->add('excCom', TextType::class, [
+            ->add('exc_com', TextType::class, [
                 'label' => 'excCom',
                 'required' => false,
             ])
-            ->add('cNom', TextType::class, [
+            ->add('c_nom', TextType::class, [
                 'label' => 'cNom',
                 'required' => false,
             ])
-            ->add('cPre', TextType::class, [
+            ->add('c_pre', TextType::class, [
                 'label' => 'cPre',
                 'required' => false,
             ])
-            ->add('cSexe', TextType::class, [
+            ->add('c_sexe', TextType::class, [
                 'label' => 'cSexe',
                 'required' => false,
             ])
-            ->add('cOri', TextType::class, [
+            ->add('c_ori', TextType::class, [
                 'label' => 'cOri',
                 'required' => false,
             ])
-            ->add('cDnais', TextType::class, [
+            ->add('c_dnais', TextType::class, [
                 'label' => 'cDnais',
                 'required' => false,
             ])
-            ->add('cAge', TextType::class, [
+            ->add('c_age', TextType::class, [
                 'label' => 'cAge',
                 'required' => false,
             ])
-            ->add('cCom', TextType::class, [
+            ->add('c_com', TextType::class, [
                 'label' => 'cCom',
                 'required' => false,
             ])
-            ->add('cPro', TextType::class, [
+            ->add('c_pro', TextType::class, [
                 'label' => 'cPro',
                 'required' => false,
             ])
-            ->add('cExcon', TextType::class, [
+            ->add('c_excon', TextType::class, [
                 'label' => 'cExcon',
                 'required' => false,
             ])
-            ->add('cXPre', TextType::class, [
+            ->add('c_x_pre', TextType::class, [
                 'label' => 'cXPre',
                 'required' => false,
             ])
-            ->add('cXCom', TextType::class, [
+            ->add('c_x_com', TextType::class, [
                 'label' => 'cXCom',
                 'required' => false,
             ])
-            ->add('cpNom', TextType::class, [
+            ->add('cp_nom', TextType::class, [
                 'label' => 'cpNom',
                 'required' => false,
             ])
-            ->add('cpPre', TextType::class, [
+            ->add('cp_pre', TextType::class, [
                 'label' => 'cpPre',
                 'required' => false,
             ])
-            ->add('cpCom', TextType::class, [
+            ->add('cp_com', TextType::class, [
                 'label' => 'cpCom',
                 'required' => false,
             ])
-            ->add('cpPro', TextType::class, [
+            ->add('cp_pro', TextType::class, [
                 'label' => 'cpPro',
                 'required' => false,
             ])
-            ->add('cmNom', TextType::class, [
+            ->add('cm_nom', TextType::class, [
                 'label' => 'cmNom',
                 'required' => false,
             ])
-            ->add('cmPre', TextType::class, [
+            ->add('cm_pre', TextType::class, [
                 'label' => 'cmPre',
                 'required' => false,
             ])
-            ->add('cmCom', TextType::class, [
+            ->add('cm_com', TextType::class, [
                 'label' => 'cmCom',
                 'required' => false,
             ])
-            ->add('cmPro', TextType::class, [
+            ->add('cm_pro', TextType::class, [
                 'label' => 'cmPro',
                 'required' => false,
             ])
-            ->add('t1Nom', TextType::class, [
-                'label' => 't1Nom',
-                'required' => false,
-            ])
-            ->add('t1Pre', TextType::class, [
-                'label' => 't1Pre',
-                'required' => false,
-            ])
-            ->add('t1Com', TextType::class, [
+            ->add('t1_com', TextType::class, [
                 'label' => 't1Com',
                 'required' => false,
             ])
-            ->add('t2Nom', TextType::class, [
+            ->add('t2_nom', TextType::class, [
                 'label' => 't2Nom',
                 'required' => false,
             ])
-            ->add('t2Pre', TextType::class, [
+            ->add('t2_pre', TextType::class, [
                 'label' => 't2Pre',
                 'required' => false,
             ])
-            ->add('t2Com', TextType::class, [
+            ->add('t2_com', TextType::class, [
                 'label' => 't2Com',
                 'required' => false,
             ])
-            ->add('t3Nom', TextType::class, [
+            ->add('t3_nom', TextType::class, [
                 'label' => 't3Nom',
                 'required' => false,
             ])
-            ->add('t3Pre', TextType::class, [
+            ->add('t3_pre', TextType::class, [
                 'label' => 't3Pre',
                 'required' => false,
             ])
-            ->add('t3Com', TextType::class, [
+            ->add('t3_com', TextType::class, [
                 'label' => 't3Com',
                 'required' => false,
             ])
-            ->add('t4Nom', TextType::class, [
+            ->add('t4_nom', TextType::class, [
                 'label' => 't4Nom',
                 'required' => false,
             ])
-            ->add('t4Pre', TextType::class, [
+            ->add('t4_pre', TextType::class, [
                 'label' => 't4Pre',
                 'required' => false,
             ])
-            ->add('t4Com', TextType::class, [
+            ->add('t4_com', TextType::class, [
                 'label' => 't4Com',
                 'required' => false,
             ])
@@ -179,7 +171,7 @@ class OtherCertificateType extends AbstractType
             ]);
     }
 
-    public function getParent()
+    public function getParent(): string
     {
         return BaseCertificateType::class;
     }

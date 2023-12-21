@@ -8,14 +8,14 @@ use Doctrine\ORM\Mapping as ORM;
 trait SpouseTrait
 {
     #[ORM\Column(name: 'C_NOM', type: Types::STRING, length: 140, nullable: true)]
-    public ?string $cNom = null;
+    public ?string $c_nom = null;
 
     #[ORM\Column(name: 'C_PRE', type: Types::STRING, length: 140, nullable: true)]
-    public ?string $cPre = null;
+    public ?string $c_pre = null;
 
     #[ORM\Column(name: 'C_COM', type: Types::STRING, length: 140, nullable: true)]
-    public ?string $cCom = null;
+    public ?string $c_com = null;
 
     #[ORM\Column(name: 'C_PRO', type: Types::STRING, length: 140, nullable: true)]
-    public ?string $cPro = null;
+    public ?string $c_pro = null;
 }

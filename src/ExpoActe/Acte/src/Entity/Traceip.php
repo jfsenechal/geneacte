@@ -5,9 +5,6 @@ namespace ExpoActe\Acte\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * ActTraceip
- */
 #[ORM\Table(name: 'act_traceip')]
 #[ORM\Index(name: 'ip', columns: ['ip'])]
 #[ORM\Entity]

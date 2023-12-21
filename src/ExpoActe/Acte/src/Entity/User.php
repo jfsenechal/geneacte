@@ -33,7 +33,7 @@ class User implements UserInterface
     #[ORM\Column(name: 'email', type: Types::STRING, length: 140, nullable: true)]
     public ?string $email = null;
 
-    #[ORM\Column(name: 'level', type: Types::INTEGER, enumType: RoleEnum::class, nullable: true, options: ['default' => '1'])]
+    #[ORM\Column(name: 'level', type: Types::INTEGER, nullable: true, enumType: RoleEnum::class, options: ['default' => '1'])]
     public RoleEnum $level;
 
     #[ORM\Column(name: 'regime', type: Types::INTEGER, nullable: true, enumType: ScoringSystemEnum::class)]
@@ -43,7 +43,7 @@ class User implements UserInterface
     public int $solde = 0;
 
     #[ORM\Column(name: 'maj_solde', type: Types::DATE_MUTABLE, nullable: true, options: ['default' => '1001-01-01'])]
-    public DateTimeInterface|null $majSolde;
+    public DateTimeInterface|null $maj_solde;
 
     #[ORM\Column(name: 'statut', type: Types::STRING, length: 1, nullable: false, enumType: UserStatusEnum::class, options: ['default' => 'N'])]
     public UserStatusEnum $statut;
@@ -55,7 +55,7 @@ class User implements UserInterface
     public ?DateTimeInterface $dtexpiration;
 
     #[ORM\Column(name: 'pt_conso', type: Types::INTEGER, nullable: false)]
-    public int $ptConso = 0;
+    public int $pt_conso = 0;
 
     #[ORM\Column(name: 'REM', type: Types::STRING, length: 140, nullable: true)]
     public ?string $rem = null;

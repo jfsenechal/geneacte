@@ -33,27 +33,27 @@ class DeathCertificateType extends AbstractType
                 'label' => 'Pro',
                 'required' => false,
             ])
-            ->add('t1Nom', TextType::class, [
+            ->add('t1_nom', TextType::class, [
                 'label' => 'Nom témoin 1',
                 'required' => false,
             ])
-            ->add('t1Pre', TextType::class, [
+            ->add('t1_pre', TextType::class, [
                 'label' => 'Prénom témoin 1',
                 'required' => false,
             ])
-            ->add('t1Com', TextType::class, [
+            ->add('t1_com', TextType::class, [
                 'label' => 'Commentaire témoin 1',
                 'required' => false,
             ])
-            ->add('t2Nom', TextType::class, [
+            ->add('t2_nom', TextType::class, [
                 'label' => 'Nom témoin 2',
                 'required' => false,
             ])
-            ->add('t2Pre', TextType::class, [
+            ->add('t2_pre', TextType::class, [
                 'label' => 'Prénom témoin 2',
                 'required' => false,
             ])
-            ->add('t2Com', TextType::class, [
+            ->add('t2_com', TextType::class, [
                 'label' => 'Commentaire témoin 2',
                 'required' => false,
             ])

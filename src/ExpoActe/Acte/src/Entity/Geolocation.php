@@ -32,16 +32,16 @@ class Geolocation
     public GeolocationEnum $statut;
 
     #[ORM\Column(name: 'NOTE_N', type: Types::TEXT, length: 65535, nullable: true)]
-    public ?string $noteN = null;
+    public ?string $note_n = null;
 
     #[ORM\Column(name: 'NOTE_M', type: Types::TEXT, length: 65535, nullable: true)]
-    public ?string $noteM = null;
+    public ?string $note_m = null;
 
     #[ORM\Column(name: 'NOTE_D', type: Types::TEXT, length: 65535, nullable: true)]
-    public ?string $noteD = null;
+    public ?string $note_d = null;
 
     #[ORM\Column(name: 'NOTE_V', type: Types::TEXT, length: 65535, nullable: true)]
-    public ?string $noteV = null;
+    public ?string $note_v = null;
 
     public function __toString(): string
     {

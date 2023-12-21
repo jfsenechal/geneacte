@@ -50,31 +50,31 @@ class OtherCertificate
     public ?string $excon = null;
 
     #[ORM\Column(name: 'EXC_PRE', type: Types::STRING, length: 140, nullable: true)]
-    public ?string $excPre = null;
+    public ?string $exc_pre = null;
 
     #[ORM\Column(name: 'EXC_COM', type: Types::STRING, length: 140, nullable: true)]
-    public ?string $excCom = null;
+    public ?string $exc_com = null;
 
     #[ORM\Column(name: 'C_SEXE', type: Types::STRING, length: 1, nullable: true, options: ['fixed' => true])]
-    public ?string $cSexe = null;
+    public ?string $c_sexe = null;
 
     #[ORM\Column(name: 'C_ORI', type: Types::STRING, length: 140, nullable: true)]
-    public ?string $cOri = null;
+    public ?string $c_ori = null;
 
     #[ORM\Column(name: 'C_DNAIS', type: Types::STRING, length: 10, nullable: true)]
-    public ?string $cDnais = null;
+    public ?string $c_dnais = null;
 
     #[ORM\Column(name: 'C_AGE', type: Types::STRING, length: 8, nullable: true)]
-    public ?string $cAge = null;
+    public ?string $c_age = null;
 
     #[ORM\Column(name: 'C_EXCON', type: Types::STRING, length: 140, nullable: true)]
-    public ?string $cExcon = null;
+    public ?string $c_excon = null;
 
     #[ORM\Column(name: 'C_X_PRE', type: Types::STRING, length: 140, nullable: true)]
-    public ?string $cXPre = null;
+    public ?string $c_x_pre = null;
 
     #[ORM\Column(name: 'C_X_COM', type: Types::STRING, length: 140, nullable: true)]
-    public ?string $cXCom = null;
+    public ?string $c_x_com = null;
 
     public function __construct()
     {

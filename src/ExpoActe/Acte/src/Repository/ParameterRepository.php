@@ -59,6 +59,7 @@ class ParameterRepository extends ServiceEntityRepository
         return $this->createQb()
             ->andWhere('parameter.groupe = :name')
             ->setParameter('name', $name)
+            ->addOrderBy('parameter.libelle', 'ASC')
             ->getQuery()->getResult();
     }
 

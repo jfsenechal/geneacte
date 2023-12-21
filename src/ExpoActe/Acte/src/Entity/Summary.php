@@ -38,22 +38,22 @@ class Summary
     public ?DateTimeInterface $dtdepot = null;
 
     #[ORM\Column(name: 'AN_MIN', type: Types::INTEGER, nullable: true)]
-    public ?int $anMin = null;
+    public ?int $an_min = null;
 
     #[ORM\Column(name: 'AN_MAX', type: Types::INTEGER, nullable: true)]
-    public ?int $anMax = null;
+    public ?int $an_max = null;
 
     #[ORM\Column(name: 'NB_TOT', type: Types::INTEGER, nullable: true)]
-    public ?int $nbTot = null;
+    public ?int $nb_tot = null;
 
     #[ORM\Column(name: 'NB_N_NUL', type: Types::INTEGER, nullable: true)]
-    public ?int $nbNNul = null;
+    public ?int $nb_n_nul = null;
 
     #[ORM\Column(name: 'NB_FIL', type: Types::INTEGER, nullable: true)]
-    public ?int $nbFil = null;
+    public ?int $nb_fil = null;
 
     #[ORM\Column(name: 'DER_MAJ', type: Types::DATETIME_MUTABLE, nullable: true)]
-    public ?DateTimeInterface $derMaj = null;
+    public ?DateTimeInterface $der_maj = null;
 
 
 }
