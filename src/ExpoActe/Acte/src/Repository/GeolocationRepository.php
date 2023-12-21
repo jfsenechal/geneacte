@@ -47,10 +47,14 @@ class GeolocationRepository extends ServiceEntityRepository
         return $resultSet->fetchAllAssociative();
     }
 
+    /**
+     * @return Geolocation[]
+     */
     public function findMunicipalitiesByFirstLetter(string $letter): array
     {
         return $this->createQb()
-            ->andWhere('geolocation.commune')
+            ->andWhere('geolocation.commune LIKE :letter')
+            ->setParameter('letter', $letter.'%')
             ->getQuery()
             ->getResult();
     }
