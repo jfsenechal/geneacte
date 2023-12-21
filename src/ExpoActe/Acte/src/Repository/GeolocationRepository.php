@@ -29,24 +29,41 @@ class GeolocationRepository extends ServiceEntityRepository
     public function findAllOrdered(): array
     {
         return $this->createQb()
-            ->orderBy('geolocation.nom', 'DESC')
             ->getQuery()
             ->getResult();
     }
 
-    public function findByCommercant(Geoloc $geolocation): array
+    public function alphabetMunicipalities(): array
+    {
+        $sql = "select alphabet.init  from ( select upper(left(commune,1)) as init,ascii(upper(left(commune,1)))  as oo from act_geoloc group by init,oo  order by init , oo asc) as alphabet group by init";
+        $conn = $this->getEntityManager()->getConnection();
+        $resultSet = $conn->executeQuery($sql);
+
+        return $resultSet->fetchAllAssociative();
+    }
+
+    public function findMunicipalitiesByFirstLetter(string $letter): array
     {
         return $this->createQb()
-            ->andWhere('geolocation.email = :shop')
-            ->setParameter('shop', $geolocation)
-            ->getQuery()->getResult();
+            ->andWhere('geolocation.commune')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Geoloc[]
+     */
+    public function findAllMunicipalities(): array
+    {
+        return $this->createQb()
+            ->getQuery()
+            ->getResult();
     }
 
     private function createQb(): QueryBuilder
     {
         return $this->createQueryBuilder('geolocation')
-            ->leftJoin('geolocation.country', 'country', 'WITH')
-            ->addSelect('country');
+            ->orderBy('geolocation.nom', 'ASC');
     }
 
 }

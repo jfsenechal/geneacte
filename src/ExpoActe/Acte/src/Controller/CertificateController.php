@@ -9,6 +9,7 @@ use ExpoActe\Acte\Certificate\Form\CertificateNewType;
 use ExpoActe\Acte\Repository\SummaryRepository;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -97,7 +98,9 @@ class CertificateController extends AbstractController
     }
 
     #[Route('/{uuid}/show', name: 'expoacte_certificate_show', methods: ['GET', 'POST'])]
-    public function show(object $certificate): Response
+    public function show(
+    #[MapEntity(objectManager: 'foo')]
+    object $certificate): Response
     {
         return $this->render('@ExpoActe/certificate/show.html.twig', [
             'certificate' => $certificate,
