@@ -14,7 +14,7 @@ use ExpoActe\Acte\Entity\OtherCertificate;
  * @method OtherCertificate[]    findAll()
  * @method OtherCertificate[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class DivorceRepository extends ServiceEntityRepository
+class OtherCertificateRepository extends ServiceEntityRepository
 {
     use OrmCrudTrait;
 
@@ -29,24 +29,14 @@ class DivorceRepository extends ServiceEntityRepository
     public function findAllOrdered(): array
     {
         return $this->createQb()
-            ->orderBy('divorce.nom', 'DESC')
+            ->orderBy('other_certificate.nom', 'DESC')
             ->getQuery()
             ->getResult();
     }
 
-    public function findByCommercant(OtherCertificate $divorce): array
-    {
-        return $this->createQb()
-            ->andWhere('divorce.email = :shop')
-            ->setParameter('shop', $divorce)
-            ->getQuery()->getResult();
-    }
-
     private function createQb(): QueryBuilder
     {
-        return $this->createQueryBuilder('divorce')
-            ->leftJoin('divorce.country', 'country', 'WITH')
-            ->addSelect('country');
+        return $this->createQueryBuilder('other_certificate');
     }
 
 }
