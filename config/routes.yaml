@@ -3,3 +3,9 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+acte:
+    resource:
+        path: ../src/ExpoActe/Acte/src/Controller/
+        namespace: ExpoActe\Acte\Controller
+    type: attribute
