@@ -1,13 +1,15 @@
+{% extends '@ExpoActe/base.html.twig' %}
+
 {% block body %}
 
     <div class="card">
-        <h3 class="card-header">{{ geoloc }}</h3>
+        <h3 class="card-header">{{ geolocation }}</h3>
 
         <div class="card-body">
             {{ form(form()) }}
         </div>
         <div class="card-footer text-end">
-            <a href="{{ path('expoacte_municipality_index') }}" class="btn btn-secondary">
+            <a href="{{ path('expoacte_geolocation_index') }}" class="btn btn-secondary">
                 <i class="ti ti-arrow-left"></i> Annuler
             </a>
         </div>

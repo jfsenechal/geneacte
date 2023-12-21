@@ -1,0 +1,44 @@
+{% extends '@ExpoActe/base.html.twig' %}
+
+{% block title %}Localités{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <h3 class="card-header">Localités connues</h3>
+
+        <div class="card-body">
+            <ul class="list-group  list-group-horizontal my-3">
+                {% for letter in alphabets %}
+                    <li class="list-group-item">
+                        <a href="{{ path('expoacte_geolocation_index', {'letter': letter.init}) }}">{{ letter.init }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Commune</th>
+                    <th>Localité</th>
+                    <th>Géolocalisation</th>
+                </tr>
+                {% for municipality in geolocations %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('expoacte_geolocation_show', {'id': municipality.id}) }}">
+                                {% if municipality.commune %}
+                                    {{ municipality.commune }}
+                                {% else %}
+                                    Non déterminé
+                                {% endif %}
+                            </a>
+                        </td>
+                        <td>{{ municipality.depart }}</td>
+                        <td>{{ municipality.statut }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="card-footer text-end">
+
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends '@ExpoActe/base.html.twig' %}
+
+{% block body %}
+
+    <div class="card">
+        <h3 class="card-header">{{ geolocation }}</h3>
+        <div class="card-body">
+
+            {% include '@ExpoActe/geolocation/_actions.html.twig' %}
+
+            <table class="table table-bordered">
+                <tr>
+                    <th>Commune</th>
+                    <td>
+                        {% if geolocation.commune %}
+                            {{ geolocation.commune }}
+                        {% else %}
+                            Non déterminé
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Localité</th>
+                    <td>{{ geolocation.depart }}</td>
+                </tr>
+                <tr>
+                    <th>Statut</th>
+                    <td>{{ geolocation.statut }}</td>
+                </tr>
+                <tr>
+                    <th>Commentaire actes de naissances</th>
+                    <td>{{ geolocation.noteN }}</td>
+                </tr>
+                <tr>
+                    <th>Commentaire actes de mariage</th>
+                    <td>{{ geolocation.noteM }}</td>
+                </tr>
+                <tr>
+                    <th>Commentaire actes de décès</th>
+                    <td>{{ geolocation.noteD }}</td>
+                </tr>
+                <tr>
+                    <th>Commentaire actes divers</th>
+                    <td>{{ geolocation.noteV }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    {% include '@ExpoActe/geolocation/_delete_form.html.twig' %}
+
+{% endblock %}

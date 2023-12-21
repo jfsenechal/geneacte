@@ -3,16 +3,17 @@
 namespace ExpoActe\Acte\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use ExpoActe\Acte\Doctrine\OrmCrudTrait;
-use ExpoActe\Acte\Entity\Geoloc;
+use ExpoActe\Acte\Entity\Geolocation;
 
 /**
- * @method Geoloc|null find($id, $lockMode = null, $lockVersion = null)
- * @method Geoloc|null findOneBy(array $criteria, array $orderBy = null)
- * @method Geoloc[]    findAll()
- * @method Geoloc[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Geolocation|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Geolocation|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Geolocation[]    findAll()
+ * @method Geolocation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class GeolocationRepository extends ServiceEntityRepository
 {
@@ -20,11 +21,11 @@ class GeolocationRepository extends ServiceEntityRepository
 
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Geoloc::class);
+        parent::__construct($registry, Geolocation::class);
     }
 
     /**
-     * @return Geoloc[]
+     * @return Geolocation[]
      */
     public function findAllOrdered(): array
     {
@@ -33,9 +34,13 @@ class GeolocationRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * @throws Exception
+     */
     public function alphabetMunicipalities(): array
     {
-        $sql = "select alphabet.init  from ( select upper(left(commune,1)) as init,ascii(upper(left(commune,1)))  as oo from act_geoloc group by init,oo  order by init , oo asc) as alphabet group by init";
+        $table = $this->getClassMetadata()->table['name'];
+        $sql = "select alphabet.init  from ( select upper(left(commune,1)) as init,ascii(upper(left(commune,1)))  as oo from $table group by init,oo  order by init , oo asc) as alphabet group by init";
         $conn = $this->getEntityManager()->getConnection();
         $resultSet = $conn->executeQuery($sql);
 
@@ -51,7 +56,7 @@ class GeolocationRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Geoloc[]
+     * @return Geolocation[]
      */
     public function findAllMunicipalities(): array
     {
@@ -63,7 +68,7 @@ class GeolocationRepository extends ServiceEntityRepository
     private function createQb(): QueryBuilder
     {
         return $this->createQueryBuilder('geolocation')
-            ->orderBy('geolocation.nom', 'ASC');
+            ->orderBy('geolocation.commune', 'ASC');
     }
 
 }

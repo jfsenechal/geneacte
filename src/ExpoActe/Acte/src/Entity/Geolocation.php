@@ -5,13 +5,10 @@ namespace ExpoActe\Acte\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * ActGeoloc
- */
 #[ORM\Table(name: 'act_geoloc')]
 //#[ORM\UniqueConstraint(name: 'COMMUNE', columns: ['COMMUNE', 'DEPART'])]
 #[ORM\Entity]
-class Geoloc
+class Geolocation
 {
     #[ORM\Column(name: 'ID', type: Types::INTEGER, nullable: false)]
     #[ORM\Id]
@@ -45,5 +42,9 @@ class Geoloc
     #[ORM\Column(name: 'NOTE_V', type: Types::TEXT, length: 65535, nullable: true)]
     public ?string $noteV = null;
 
+    public function __toString(): string
+    {
+        return $this->commune.' ['.$this->depart.']';
+    }
 
 }
