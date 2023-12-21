@@ -6,6 +6,7 @@ use ExpoActe\Acte\Certificate\TypeEnum;
 use ExpoActe\Acte\Entity\BirthCertificate;
 use ExpoActe\Acte\Repository\MetaDbRepository;
 use ExpoActe\Acte\Repository\MetaLabelRepository;
+use ExpoActe\Acte\Tools\StringUtil;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -49,7 +50,7 @@ class AddCertificateFieldsSubscriber implements EventSubscriberInterface
         foreach ($metas as $meta) {
             $constraints = [];
             $default = [
-                'required' => $this->transformToBoolean($meta->oblig),
+                'required' => StringUtil::transformToBoolean($meta->oblig),
                 'help' => $meta->label->aide,
                 'label' => $meta->label->etiq,
             ];
@@ -63,11 +64,11 @@ class AddCertificateFieldsSubscriber implements EventSubscriberInterface
                 $default['attr'] = ['rows' => 6];
             }
 
-            if ($meta->typ == TypeEnum::DAT->value) {
+            if ($meta->type == TypeEnum::DAT->value) {
                 $type = DateType::class;
             }
 
-            if ($meta->typ == TypeEnum::SEX->value) {
+            if ($meta->type == TypeEnum::SEX->value) {
 
             }
 
@@ -81,20 +82,4 @@ class AddCertificateFieldsSubscriber implements EventSubscriberInterface
         }
     }
 
-    private function transformToBoolean(string|bool|null $valeur): ?bool
-    {
-        if (is_bool($valeur) || $valeur === null) {
-            return $valeur;
-        }
-
-        if ($valeur == "Y") {
-            return true;
-        }
-
-        if ($valeur == "1") {
-            return true;
-        }
-
-        return false;
-    }
 }
