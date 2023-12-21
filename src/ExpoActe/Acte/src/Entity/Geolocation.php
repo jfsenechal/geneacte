@@ -4,6 +4,7 @@ namespace ExpoActe\Acte\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ExpoActe\Acte\Geolocation\GeolocationEnum;
 
 #[ORM\Table(name: 'act_geoloc')]
 //#[ORM\UniqueConstraint(name: 'COMMUNE', columns: ['COMMUNE', 'DEPART'])]
@@ -27,8 +28,8 @@ class Geolocation
     #[ORM\Column(name: 'LAT', type: Types::FLOAT, precision: 10, scale: 0, nullable: true)]
     public ?float $lat = null;
 
-    #[ORM\Column(name: 'STATUT', type: Types::STRING, length: 1, nullable: false, options: ['default' => 'N'])]
-    public string $statut = 'N';
+    #[ORM\Column(name: 'STATUT', type: Types::STRING, length: 1, nullable: false, enumType: GeolocationEnum::class, options: ['default' => 'N'])]
+    public GeolocationEnum $statut;
 
     #[ORM\Column(name: 'NOTE_N', type: Types::TEXT, length: 65535, nullable: true)]
     public ?string $noteN = null;

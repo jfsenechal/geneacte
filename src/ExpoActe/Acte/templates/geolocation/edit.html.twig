@@ -6,7 +6,7 @@
         <h3 class="card-header">{{ geolocation }}</h3>
 
         <div class="card-body">
-            {{ form(form()) }}
+           {% include '@ExpoActe/geolocation/_form.html.twig' %}
         </div>
         <div class="card-footer text-end">
             <a href="{{ path('expoacte_geolocation_index') }}" class="btn btn-secondary">

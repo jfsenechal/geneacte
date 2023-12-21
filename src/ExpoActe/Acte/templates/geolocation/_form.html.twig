@@ -1,0 +1,25 @@
+{{ form_start(form) }}
+{{ form_errors(form) }}
+<div class="row">
+    <div class="col-6">
+        {{ form_row(form.commune) }}
+        {{ form_row(form.depart) }}
+        {{ form_row(form.statut) }}
+    </div>
+    <div class="col-6">
+        {{ form_row(form.lat) }}
+        {{ form_row(form.lon) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        {{ form_row(form.noteN) }}
+        {{ form_row(form.noteD) }}
+    </div>
+    <div class="col-6">
+        {{ form_row(form.noteM) }}
+        {{ form_row(form.noteV) }}
+    </div>
+</div>
+<button class="btn btn-primary"><i class="ti ti-device-floppy"></i> Sauvegarder</button>
+{{ form_end(form) }}

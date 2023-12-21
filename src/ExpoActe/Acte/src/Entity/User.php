@@ -7,6 +7,9 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use ExpoActe\Acte\Entity\Traits\IdTrait;
 use ExpoActe\Acte\Entity\Traits\UuidTrait;
+use ExpoActe\Acte\Security\RoleEnum;
+use ExpoActe\Acte\User\ScoringSystemEnum;
+use ExpoActe\Acte\User\UserStatusEnum;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Table(name: 'act_user3')]
@@ -30,11 +33,11 @@ class User implements UserInterface
     #[ORM\Column(name: 'email', type: Types::STRING, length: 140, nullable: true)]
     public ?string $email = null;
 
-    #[ORM\Column(name: 'level', type: Types::INTEGER, nullable: true, options: ['default' => '1'])]
-    public int $level = 1;
+    #[ORM\Column(name: 'level', type: Types::INTEGER, enumType: RoleEnum::class, nullable: true, options: ['default' => '1'])]
+    public RoleEnum $level;
 
-    #[ORM\Column(name: 'regime', type: Types::INTEGER, nullable: true)]
-    public int $regime = 0;
+    #[ORM\Column(name: 'regime', type: Types::INTEGER, nullable: true, enumType: ScoringSystemEnum::class)]
+    public ScoringSystemEnum $regime;
 
     #[ORM\Column(name: 'solde', type: Types::INTEGER, nullable: true)]
     public int $solde = 0;
@@ -42,8 +45,8 @@ class User implements UserInterface
     #[ORM\Column(name: 'maj_solde', type: Types::DATE_MUTABLE, nullable: true, options: ['default' => '1001-01-01'])]
     public DateTimeInterface|null $majSolde;
 
-    #[ORM\Column(name: 'statut', type: Types::STRING, length: 1, nullable: false, options: ['default' => 'N'])]
-    public string $statut = 'N';
+    #[ORM\Column(name: 'statut', type: Types::STRING, length: 1, nullable: false, enumType: UserStatusEnum::class, options: ['default' => 'N'])]
+    public UserStatusEnum $statut;
 
     #[ORM\Column(name: 'dtcreation', type: Types::DATE_MUTABLE, nullable: true)]
     public ?DateTimeInterface $dtcreation = null;

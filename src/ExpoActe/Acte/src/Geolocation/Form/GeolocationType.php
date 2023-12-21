@@ -79,7 +79,7 @@ class GeolocationType extends AbstractType
                 'lon',
                 TextType::class,
                 [
-                    'label'=>'Longitude',
+                    'label' => 'Longitude',
                     'attr' => [
                         'autocomplete' => 'off',
                     ],
@@ -89,7 +89,7 @@ class GeolocationType extends AbstractType
                 'lat',
                 TextType::class,
                 [
-                    'label'=>'Latitude',
+                    'label' => 'Latitude',
                     'attr' => [
                         'autocomplete' => 'off',
                     ],
@@ -100,7 +100,7 @@ class GeolocationType extends AbstractType
                 EnumType::class,
                 [
                     'class' => GeolocationEnum::class,
-                    'choice_label' => fn(GeolocationEnum $geolocationEnum) => $geolocationEnum->getLabel(),
+                    'choice_label' => fn(GeolocationEnum $geolocationEnum): string => $geolocationEnum->getLabel(),
                 ]
             );
     }

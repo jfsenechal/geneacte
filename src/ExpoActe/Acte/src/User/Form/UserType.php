@@ -24,7 +24,7 @@ class UserType extends AbstractType
             ->add('dtexpiration')
             ->add('ptConso')
             ->add('rem')
-            ->add('libre')        ;
+            ->add('libre');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

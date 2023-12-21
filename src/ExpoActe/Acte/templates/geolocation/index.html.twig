@@ -20,19 +20,19 @@
                     <th>Localité</th>
                     <th>Géolocalisation</th>
                 </tr>
-                {% for municipality in geolocations %}
+                {% for geolocation in geolocations %}
                     <tr>
                         <td>
-                            <a href="{{ path('expoacte_geolocation_show', {'id': municipality.id}) }}">
-                                {% if municipality.commune %}
-                                    {{ municipality.commune }}
+                            <a href="{{ path('expoacte_geolocation_show', {'id': geolocation.id}) }}">
+                                {% if geolocation.commune %}
+                                    {{ geolocation.commune }}
                                 {% else %}
                                     Non déterminé
                                 {% endif %}
                             </a>
                         </td>
-                        <td>{{ municipality.depart }}</td>
-                        <td>{{ municipality.statut }}</td>
+                        <td>{{ geolocation.depart }}</td>
+                        <td>{{ geolocation.statut.label }}</td>
                     </tr>
                 {% endfor %}
             </table>
