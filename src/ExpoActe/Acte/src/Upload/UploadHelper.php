@@ -1,6 +1,6 @@
 <?php
 
-namespace ExpoActe\Acte\Certificate;
+namespace ExpoActe\Acte\Upload;
 
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
