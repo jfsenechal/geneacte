@@ -4,6 +4,7 @@ namespace ExpoActe\Acte\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use ExpoActe\Acte\Certificate\CertificateEnum;
+use ExpoActe\Acte\Certificate\CertificateInterface;
 use ExpoActe\Acte\Entity\Traits\CommentsTrait;
 use ExpoActe\Acte\Entity\Traits\CreditTrait;
 use ExpoActe\Acte\Entity\Traits\IdentityTrait;
@@ -24,7 +25,7 @@ use ExpoActe\Acte\Entity\Traits\WitnessesTrait;
 #[ORM\Index(name: 'NOM', columns: ['NOM'])]
 #[ORM\Index(name: 'P_NOM', columns: ['P_NOM'])]
 #[ORM\Entity]
-class BirthCertificate
+class BirthCertificate implements CertificateInterface
 {
     use IdTrait, UuidTrait, IdentityTrait, SexeTrait, ParentsTrait, WitnessesTrait, CreditTrait,
         TimestampTrait, CommentsTrait, PhotosTrait, TypeTrait;

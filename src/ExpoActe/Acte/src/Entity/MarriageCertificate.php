@@ -5,6 +5,7 @@ namespace ExpoActe\Acte\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use ExpoActe\Acte\Certificate\CertificateEnum;
+use ExpoActe\Acte\Certificate\CertificateInterface;
 use ExpoActe\Acte\Entity\Traits\BirthTrait;
 use ExpoActe\Acte\Entity\Traits\CommentsTrait;
 use ExpoActe\Acte\Entity\Traits\CreditTrait;
@@ -33,7 +34,7 @@ use ExpoActe\Acte\Entity\Traits\WitnessesTrait;
 #[ORM\Index(name: 'CP_NOM', columns: ['CP_NOM'])]
 #[ORM\Index(name: 'C_NOM', columns: ['C_NOM'])]
 #[ORM\Entity]
-class MarriageCertificate
+class MarriageCertificate implements CertificateInterface
 {
     use IdTrait, UuidTrait, IdentityTrait, ParentsTrait, WitnessesTrait, Witnesses2Trait,
         CreditTrait, TimestampTrait, CommentsTrait, PhotosTrait, TypeTrait, SurnameTrait, SpouseTrait, BirthTrait;
