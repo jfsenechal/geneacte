@@ -6,12 +6,9 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use ExpoActe\Acte\Entity\Traits\UuidTrait;
 
-/**
- * ActParams
- */
 #[ORM\Table(name: 'act_params')]
 #[ORM\Entity]
-class Param
+class Parameter
 {
     use UuidTrait;
 
@@ -44,5 +41,8 @@ class Param
     #[ORM\Column(name: 'aide', type: Types::TEXT, length: 65535, nullable: false)]
     public string $aide;
 
-
+    public function __toString(): string
+    {
+        return $this->libelle;
+    }
 }

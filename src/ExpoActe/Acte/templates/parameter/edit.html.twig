@@ -3,13 +3,13 @@
 {% block body %}
 
     <div class="card">
-        <h3 class="card-header">{{ parameter.name }}</h3>
+        <h3 class="card-header">{{ parameter.libelle }}</h3>
 
         <div class="card-body">
             {% include '@ExpoActe/parameter/_form.html.twig' %}
         </div>
         <div class="card-footer text-end">
-            <a href="{{ path('expoacte_parameter_show', {'id': parameter.id}) }}" class="btn btn-secondary">
+            <a href="{{ path('expoacte_parameter_index', {'name': parameter.groupe}) }}" class="btn btn-secondary">
                 <i class="ti ti-arrow-left"></i> Annuler
             </a>
         </div>

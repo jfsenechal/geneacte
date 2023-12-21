@@ -5,19 +5,19 @@ namespace ExpoActe\Acte\Parameter;
 enum ParameterEnum: string
 {
     case CHECKBOX = 'B';
-    case C = 'C';
+    case CHAR = 'C';
     case LIST = 'L';
-    case N = 'N';
-    case T = 'T';
+    case NUMERIC = 'N';
+    case TEXTAREA = 'T';
 
     public static function getSize(string $type): int
     {
         return match ($type) {
-            ParameterEnum::T->value => 1000,
-            ParameterEnum::C->value => 50,
-            ParameterEnum::LIST->value, ParameterEnum::N->value => 5,
+            ParameterEnum::TEXTAREA->value => 1000,
+            ParameterEnum::CHAR->value => 50,
+            ParameterEnum::LIST->value, ParameterEnum::NUMERIC->value => 5,
             default => 1
         };
-
     }
+
 }
