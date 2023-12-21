@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use ExpoActe\Acte\Certificate\CertificateEnum;
 use ExpoActe\Acte\Certificate\Factory\CertificateFactory;
 use ExpoActe\Acte\Certificate\Form\CertificateNewType;
+use ExpoActe\Acte\Certificate\Form\CertificateType;
 use ExpoActe\Acte\Repository\SummaryRepository;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -78,7 +79,8 @@ class CertificateController extends AbstractController
             return $this->redirectToRoute('expoacte_home');
         }
         $certificate = $factory->newInstance();
-        $form = $factory->generateForm($certificate);
+
+        $form = $this->createForm(CertificateType::class, $certificate);
         $formHtml = $factory->renderForm($form);
 
         $form->handleRequest($request);
@@ -99,9 +101,9 @@ class CertificateController extends AbstractController
 
     #[Route('/{uuid}/show', name: 'expoacte_certificate_show', methods: ['GET', 'POST'])]
     public function show(
-    #[MapEntity(objectManager: 'foo')]
-    object $certificate): Response
-    {
+        #[MapEntity(objectManager: 'foo')]
+        object $certificate
+    ): Response {
         return $this->render('@ExpoActe/certificate/show.html.twig', [
             'certificate' => $certificate,
         ]);
@@ -118,7 +120,7 @@ class CertificateController extends AbstractController
             return $this->redirectToRoute('expoacte_home');
         }
 
-        $form = $factory->generateForm($certificate);
+        $form = $this->createForm(CertificateType::class, $certificate);
         $formHtml = $factory->renderForm($form);
 
         $form->handleRequest($request);
