@@ -30,7 +30,7 @@ class OtherFactory implements CertificateFactoryInterface
     public function renderForm(FormInterface $form): string
     {
         return $this->environment->render('@ExpoActe/certificate/form/_other_form.html.twig', [
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 

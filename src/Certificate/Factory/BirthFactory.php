@@ -30,7 +30,7 @@ class BirthFactory implements CertificateFactoryInterface
     public function renderForm(FormInterface $form): string
     {
         return $this->environment->render('@ExpoActe/certificate/form/_birth_form.html.twig', [
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 

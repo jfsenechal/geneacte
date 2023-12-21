@@ -4,9 +4,7 @@ namespace App\Controller;
 
 use App\Certificate\CertificateEnum;
 use App\Certificate\Factory\CertificateFactory;
-use App\Certificate\Form\BirthCertificateType;
 use App\Certificate\Form\CertificateNewType;
-use App\Entity\ActNai3;
 use App\Repository\ActSumRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Container\ContainerExceptionInterface;
@@ -68,7 +66,7 @@ class CertificateController extends AbstractController
         ]);
     }
 
-    #[Route('/new/{type}', name: 'expoacte_certificate_certificate_new', methods: ['GET', 'POST'])]
+    #[Route('/new/{type}', name: 'expoacte_certificate_new', methods: ['GET', 'POST'])]
     public function new(Request $request, string $type): Response
     {
         try {
@@ -94,11 +92,12 @@ class CertificateController extends AbstractController
 
         return $this->render('@ExpoActe/certificate/new.html.twig', [
             'formHtml' => $formHtml,
+            'name' => CertificateEnum::from($type)->getLabel(),
         ]);
     }
 
     #[Route('/{uuid}/show', name: 'expoacte_certificate_show', methods: ['GET', 'POST'])]
-    public function show(ActNai3 $certificate): Response
+    public function show(object $certificate): Response
     {
         return $this->render('@ExpoActe/certificate/show.html.twig', [
             'certificate' => $certificate,
@@ -106,14 +105,23 @@ class CertificateController extends AbstractController
     }
 
     #[Route('/{uuid}/edit', name: 'expoacte_certificate_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, ActNai3 $certificate): Response
+    public function edit(Request $request, object $certificate): Response
     {
-        $form = $this->createForm(BirthCertificateType::class, $certificate);
+        try {
+            $factory = $this->certificateFactory->getFactory($certificate->type);
+        } catch (NotFoundExceptionInterface|ContainerExceptionInterface $e) {
+            $this->addFlash('danger', 'Ce type d\'acte n\'est pas supporté');
+
+            return $this->redirectToRoute('expoacte_home');
+        }
+
+        $form = $factory->generateForm($certificate);
+        $formHtml = $factory->renderForm($form);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
-
             $this->addFlash('success', 'L\'acte a été modifié');
 
             return $this->redirectToRoute('expoacte_certificate_show', ['uuid' => $certificate->uuid]);
@@ -121,12 +129,13 @@ class CertificateController extends AbstractController
 
         return $this->render('@ExpoActe/certificate/edit.html.twig', [
             'certificate' => $certificate,
-            'form' => $form,
+            'formHtml' => $formHtml,
+            'name' => CertificateEnum::from($certificate->type)->getLabel(),
         ]);
     }
 
     #[Route('/{uuid}', name: 'expoacte_certificate_delete', methods: ['POST'])]
-    public function delete(Request $request, ActNai3 $certificate): Response
+    public function delete(Request $request, object $certificate): Response
     {
         if ($this->isCsrfTokenValid('delete'.$certificate->uuid, $request->request->get('_token'))) {
             $this->entityManager->remove($certificate);

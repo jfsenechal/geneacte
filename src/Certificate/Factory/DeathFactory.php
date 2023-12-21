@@ -30,7 +30,7 @@ class DeathFactory implements CertificateFactoryInterface
     public function renderForm(FormInterface $form): string
     {
         return $this->environment->render('@ExpoActe/certificate/form/_death_form.html.twig', [
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
