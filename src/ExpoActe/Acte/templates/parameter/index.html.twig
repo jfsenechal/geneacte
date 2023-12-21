@@ -34,7 +34,14 @@
                         <p class="text-muted">{{ parameter.aide|raw }}</p>
                     </div>
                     <div class="col-4">
-                        <p class="text-warning">{{ parameter.valeur|raw }}</p>
+                        {% if parameter.listval|length > 0 %}
+                            <p class="text-warning">{{ parameter.valeur|raw }}</p>
+                            <p class="text-muted">
+                                {{ parameter|parameter_list|join(' | ') }}
+                            </p>
+                        {% else %}
+                            <p class="text-warning">{{ parameter.valeur|raw }}</p>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

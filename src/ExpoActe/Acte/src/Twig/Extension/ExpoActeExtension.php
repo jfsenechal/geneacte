@@ -16,13 +16,7 @@ class ExpoActeExtension extends AbstractExtension
             // parameter: ['is_safe' => ['html']]
             // Reference: https://twig.symfony.com/doc/3.x/advanced.html#automatic-escaping
             new TwigFilter('group_name', [ExpoActeExtensionRuntime::class, 'groupName']),
-        ];
-    }
-
-    public function getFunctions(): array
-    {
-        return [
-            new TwigFunction('function_name', [ExpoActeExtensionRuntime::class, 'doSomething']),
+            new TwigFilter('parameter_list', [ExpoActeExtensionRuntime::class, 'parameterList']),
         ];
     }
 }
