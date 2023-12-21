@@ -4,6 +4,7 @@ namespace ExpoActe\Acte\Parameter\Form;
 
 use ExpoActe\Acte\Entity\Parameter;
 use ExpoActe\Acte\Parameter\ParameterEnum;
+use ExpoActe\Acte\Tools\StringUtil;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -52,8 +53,8 @@ class AddParameterFieldsSubscriber implements EventSubscriberInterface
         }
         if ($parameter->type == ParameterEnum::CHECKBOX->value) {
             $type = CheckboxType::class;
-            $parameter->valeur = $this->transformToBoolean($parameter->valeur);
-            $default['data'] = $this->transformToBoolean($parameter->valeur);
+            $parameter->valeur = StringUtil::transformToBoolean($parameter->valeur);
+            $default['data'] = StringUtil::transformToBoolean($parameter->valeur);
         }
         if ($parameter->type == ParameterEnum::NUMERIC->value) {
             $type = IntegerType::class;
@@ -69,18 +70,5 @@ class AddParameterFieldsSubscriber implements EventSubscriberInterface
                 $type,
                 $default
             );
-    }
-
-    private function transformToBoolean(string|bool|null $valeur): ?bool
-    {
-        if (is_bool($valeur) || $valeur === null) {
-            return $valeur;
-        }
-
-        if ($valeur == "1") {
-            return true;
-        }
-
-        return false;
     }
 }
