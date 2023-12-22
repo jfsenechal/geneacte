@@ -5,7 +5,7 @@
     <div class="card">
         <h3 class="card-header">Nouvel utilisateur</h3>
         <div class="card-body">
-            {{ form(form) }}
+           {% include '@ExpoActe/user/_form.html.twig' %}
         </div>
         <div class="card-footer text-end">
             <a href="{{ path('expoacte_user_index') }}" class="btn btn-secondary">

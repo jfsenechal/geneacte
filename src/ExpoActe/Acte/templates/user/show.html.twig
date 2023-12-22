@@ -35,7 +35,7 @@
                 </tr>
                 <tr>
                     <th>Consommé</th>
-                    <td>{{ user.ptConso }}</td>
+                    <td>{{ user.pt_conso }}</td>
                 </tr>
                 <tr>
                     <th>Libre</th>
@@ -48,7 +48,7 @@
             </table>
         </div>
         <div class="card-footer">
-            Ajouté le {{ user.dtcreation|format_date('full') }} - Rechargé le {{ user.majSolde|format_date('full') }}
+            Ajouté le {{ user.dtcreation|format_date('full') }} - Rechargé le {{ user.maj_solde|format_date('full') }}
             - Expire le {{ user.dtexpiration|format_date('full') }}
         </div>
     </div>
