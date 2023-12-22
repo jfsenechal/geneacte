@@ -2,6 +2,14 @@
 {{ form_errors(form) }}
 <div class="row">
     <div class="col-6">
+        {{ form_row(form.nom) }}
+    </div>
+    <div class="col-6">
+        {{ form_row(form.prenom) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
         {{ form_row(form.login) }}
         {{ form_row(form.email) }}
     </div>
@@ -13,7 +21,7 @@
 <div class="row">
     <div class="col-6">
         {{ form_row(form.statut) }}
-        {{ form_row(form.ptConso) }}
+        {{ form_row(form.pt_conso) }}
     </div>
     <div class="col-6">
         {{ form_row(form.solde) }}
@@ -26,8 +34,8 @@
         {{ form_row(form.rem) }}
     </div>
     <div class="col-6">
-        {{ form_row(form.majSolde) }}
+        {{ form_row(form.maj_solde) }}
     </div>
 </div>
-<button class="btn btn-primary"><i class="ti ti-device-floppy"></i> Sauvegarder</button>
+<button class="btn btn-primary" type="submit"><i class="ti ti-device-floppy"></i> Sauvegarder</button>
 {{ form_end(form) }}
