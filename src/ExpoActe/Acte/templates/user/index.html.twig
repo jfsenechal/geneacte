@@ -4,50 +4,51 @@
 
 {% block body %}
     <div class="card">
-        <h3 class="card-header">Liste des utilisateurs</h3>
+        <h3 class="card-header">Liste des {{ users|length }} utilisateurs</h3>
         <div class="card-body">
 
             {% include '@ExpoActe/user/_form_search.html.twig' %}
 
-            {{ dump(users) }}
-            {% if isSearch %}
-                <table class="table table-bordered">
-                    <thead>
+            <a href="{{ path('expoacte_user_new') }}" class="btn btn-primary my-3">
+                <i class="ti ti-plus"></i> Ajouter un utilisateur
+            </a>
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Nom d'utilisateur</th>
+                    <th>Email</th>
+                    <th>Niveau d'accès</th>
+                    <th>Statut</th>
+                    <th>Solde</th>
+                    <th>Consommé</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
                     <tr>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>Nom d'utilisateur</th>
-                        <th>Email</th>
-                        <th>Niveau d'accès</th>
-                        <th>Statut</th>
-                        <th>Solde</th>
-                        <th>Consommé</th>
+                        <td>
+                            <a href="{{ path('expoacte_user_show', {'uuid': user.uuid}) }}">
+                                {{ user.nom }}
+                            </a>
+                        </td>
+                        <td>{{ user.prenom }}</td>
+                        <td>{{ user.userIdentifier }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.level.label }}</td>
+                        <td>{{ user.statut.label }}</td>
+                        <td>{{ user.solde }}</td>
+                        <td>{{ user.pt_conso }}</td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    {% for user in users %}
-                        <tr>
-                            <td>
-                                <a href="{{ path('expoacte_user_show', {'uuid': user.uuid}) }}">
-                                    {{ user.nom }}
-                                </a>
-                            </td>
-                            <td>{{ user.prenom }}</td>
-                            <td>{{ user.userIdentifier }}</td>
-                            <td>{{ user.email }}</td>
-                            <td>{{ user.level.label }}</td>
-                            <td>{{ user.statut.label }}</td>
-                            <td>{{ user.solde }}</td>
-                            <td>{{ user.pt_conso }}</td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="8" class="text-warning">Aucun utilisateur trouvé</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            {% endif %}
+                {% else %}
+                    <tr>
+                        <td colspan="8" class="text-warning">Aucun utilisateur trouvé</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 {% endblock %}
