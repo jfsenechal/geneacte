@@ -22,8 +22,8 @@
     "symfony/form": "7.0.*",
     "symfony/framework-bundle": "7.0.*",
     "symfony/http-client": "7.0.*",
-    "symfony/intl": "7.0.*",
     "symfony/lock": "7.0.*",
+    "symfony/intl": "7.0.*",
     "symfony/mailer": "7.0.*",
     "symfony/mime": "7.0.*",
     "symfony/monolog-bundle": "^3.0",
@@ -39,10 +39,10 @@
     "symfony/string": "7.0.*",
     "symfony/translation": "7.0.*",
     "symfony/twig-bundle": "7.0.*",
-    "symfony/uid": "7.0.*",
     "symfony/ux-autocomplete": "^v2.13.3",
     "symfony/ux-live-component": "^v2.13.3",
     "symfony/ux-turbo": "^2.13",
+    "symfony/uid": "^7.0",
     "symfony/validator": "7.0.*",
     "symfony/web-link": "7.0.*",
     "symfony/yaml": "7.0.*",
@@ -55,7 +55,8 @@
     "allow-plugins": {
       "php-http/discovery": true,
       "symfony/flex": true,
-      "symfony/runtime": true
+      "symfony/runtime": true,
+      "phpstan/extension-installer": true
     },
     "sort-packages": true
   },
@@ -103,8 +104,10 @@
     }
   },
   "require-dev": {
+    "phpstan/extension-installer": "^1.3",
+    "phpstan/phpstan-symfony": "^1.3",
     "phpunit/phpunit": "^9.5",
-    "rector/rector": "^0.18.12",
+    "rector/rector": "^0.18.13",
     "symfony/browser-kit": "7.0.*",
     "symfony/css-selector": "7.0.*",
     "symfony/debug-bundle": "7.0.*",
