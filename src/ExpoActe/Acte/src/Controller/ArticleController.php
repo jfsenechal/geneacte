@@ -2,7 +2,6 @@
 
 namespace ExpoActe\Acte\Controller;
 
-use Doctrine\ORM\EntityManagerInterface;
 use ExpoActe\Acte\Entity\Article;
 use ExpoActe\Acte\Form\ArticleType;
 use ExpoActe\Acte\Repository\ArticleRepository;
@@ -14,26 +13,30 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/article')]
 class ArticleController extends AbstractController
 {
-    #[Route('/', name: 'app_article_index', methods: ['GET'])]
-    public function index(ArticleRepository $articleRepository): Response
+    public function __construct(private readonly ArticleRepository $articleRepository)
+    {
+    }
+
+    #[Route('/', name: 'expoacte_article_index', methods: ['GET'])]
+    public function index(): Response
     {
         return $this->render('@ExpoActe/article/index.html.twig', [
-            'articles' => $articleRepository->findAll(),
+            'articles' => $this->articleRepository->findAll(),
         ]);
     }
 
-    #[Route('/new', name: 'app_article_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/new', name: 'expoacte_article_new', methods: ['GET', 'POST'])]
+    public function new(Request $request): Response
     {
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($article);
-            $entityManager->flush();
+            $this->articleRepository->persist($article);
+            $this->articleRepository->flush();
 
-            return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('expoacte_article_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('@ExpoActe/article/new.html.twig', [
@@ -42,7 +45,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_article_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'expoacte_article_show', methods: ['GET'])]
     public function show(Article $article): Response
     {
         return $this->render('@ExpoActe/article/show.html.twig', [
@@ -50,16 +53,16 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_article_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Article $article, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/edit', name: 'expoacte_article_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Article $article): Response
     {
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $this->articleRepository->flush();
 
-            return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('expoacte_article_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('@ExpoActe/article/edit.html.twig', [
@@ -68,14 +71,14 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_article_delete', methods: ['POST'])]
-    public function delete(Request $request, Article $article, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}', name: 'expoacte_article_delete', methods: ['POST'])]
+    public function delete(Request $request, Article $article): Response
     {
         if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($article);
-            $entityManager->flush();
+            $this->articleRepository->remove($article);
+            $this->articleRepository->flush();
         }
 
-        return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('expoacte_article_index', [], Response::HTTP_SEE_OTHER);
     }
 }
