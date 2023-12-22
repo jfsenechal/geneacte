@@ -15,6 +15,9 @@ final class UuidSetubscriber
     ) {
     }
 
+    /**
+     * @return array<int, string>
+     */
     public function getSubscribedEvents(): array
     {
         return [

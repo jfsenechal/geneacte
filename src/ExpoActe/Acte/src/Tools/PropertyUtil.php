@@ -14,6 +14,9 @@ final class PropertyUtil
     ) {
     }
 
+    /**
+     * @return array<int, string>|null
+     */
     public function getProperties(string $className): ?array
     {
         $doctrineExtractor = new DoctrineExtractor($this->entityManager);

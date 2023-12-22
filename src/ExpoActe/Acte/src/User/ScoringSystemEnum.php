@@ -14,6 +14,7 @@ enum ScoringSystemEnum: int
             self::FREEDOM->value => self::FREEDOM->value.': Accès libre',
             self::AUTO->value => self::AUTO->value.': Recharge manuelle',
             self::MANUAL->value => self::MANUAL->value.': Recharge automatique',
+            default => 'Label not found'
         };
     }
 

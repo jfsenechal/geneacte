@@ -8,6 +8,7 @@ enum CertificateEnum: string
     case DEATH = 'D';
     case MARRIAGE = 'M';
     case OTHER = 'V';
+    case OTHER_SPECIAL = 'X';
 
     public function getLabel(): string
     {
@@ -16,9 +17,13 @@ enum CertificateEnum: string
             CertificateEnum::MARRIAGE => 'Mariages',
             CertificateEnum::DEATH => 'Décès',
             CertificateEnum::OTHER => 'Divers',
+            CertificateEnum::OTHER_SPECIAL => 'Divers spéciales',
         };
     }
 
+    /**
+     * @return array<string, string>
+     */
     public static function getTypes(): array
     {
         $types = [];
@@ -27,5 +32,13 @@ enum CertificateEnum: string
         }
 
         return $types;
+    }
+
+    /**
+     * @return array<int, self>
+     */
+    function files(): array
+    {
+        return [self::BIRTH, self::MARRIAGE, self::DEATH, self::OTHER, self::OTHER_SPECIAL];
     }
 }

@@ -16,6 +16,7 @@ enum UserStatusEnum: string
             self::AWAITING_APPROVAL->value => self::AWAITING_APPROVAL->value.': Attente d\'approbation',
             self::GRANTED->value => self::GRANTED->value.': Accès autorisé',
             self::DENIED->value => self::DENIED->value.': Accès bloqué',
+            default => 'Label not found'
         };
     }
 

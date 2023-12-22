@@ -26,6 +26,7 @@ enum RoleEnum: int
             self::ACTE_ADD->value => 'Ajout d\'actes',
             self::ACTE_ADMINISTRATOR->value => 'Administration tous actes',
             self::USER_ADMINISTRATOR->value => 'Gestion des utilisateurs',
+            default => 'Label not found'
         };
     }
 

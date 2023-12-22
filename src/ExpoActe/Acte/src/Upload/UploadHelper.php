@@ -8,7 +8,12 @@ class UploadHelper
 {
     public function __construct(
         #[Autowire('%kernel.project_dir%/data')]
-        private $dataDir,
+        private readonly string $dataDir,
     ) {
+    }
+
+    public function getDataDir(): string
+    {
+        return $this->dataDir;
     }
 }

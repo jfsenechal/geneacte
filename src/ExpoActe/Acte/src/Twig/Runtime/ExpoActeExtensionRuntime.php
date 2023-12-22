@@ -8,21 +8,19 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class ExpoActeExtensionRuntime implements RuntimeExtensionInterface
 {
-    public function __construct()
-    {
-
-    }
-
     public function groupName(string $value): string
     {
         return LabelEnum::getLabelGroupe($value);
     }
 
+    /**
+     * @return  array<int, string>
+     */
     public function parameterList(Parameter $parameter): array
     {
         if ($parameter->listval) {
             $list = explode(";", $parameter->listval);
-            if (count($list) > 0) {
+            if ([] !== $list) {
                 return $list;
             }
         }

@@ -16,7 +16,9 @@ final class UserAddSubscriber
         private PropertyUtil $propertyUtil
     ) {
     }
-
+    /**
+     * @return array<int, string>
+     */
     public function getSubscribedEvents(): array
     {
         return [

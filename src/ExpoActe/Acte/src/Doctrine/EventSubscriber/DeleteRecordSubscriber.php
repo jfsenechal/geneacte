@@ -2,8 +2,6 @@
 
 namespace ExpoActe\Acte\Doctrine\EventSubscriber;
 
-use AcMarche\Mercredi\Entity\History;
-use AcMarche\Mercredi\Spam\Repository\HistoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
@@ -16,11 +14,13 @@ class DeleteRecordSubscriber
 {
     public function __construct(
         private Security $security,
-        private HistoryRepository $historyRepository,
         private EntityManagerInterface $entityManager
     ) {
     }
 
+    /**
+     * @return array<int, string>
+     */
     public function getSubscribedEvents(): array
     {
         return [

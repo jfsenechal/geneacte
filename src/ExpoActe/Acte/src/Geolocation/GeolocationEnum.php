@@ -19,6 +19,7 @@ enum GeolocationEnum: string
             self::AUTO->value => 'Auto',
             self::MANUAL->value => 'Manuel',
             self::NOT_DEFINED->value => 'Non définie',
+            default => 'Label not found'
         };
     }
 }

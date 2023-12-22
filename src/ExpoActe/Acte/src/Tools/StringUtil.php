@@ -4,9 +4,9 @@ namespace ExpoActe\Acte\Tools;
 
 class StringUtil
 {
-    public static function transformToBoolean(string|bool|null $valeur): ?bool
+    public static function transformToBoolean(string|null $valeur): ?bool
     {
-        if (is_bool($valeur) || $valeur === null) {
+        if ($valeur === null) {
             return $valeur;
         }
 

@@ -4,12 +4,6 @@ namespace ExpoActe\Acte\Certificate;
 
 enum LabelEnum: string
 {
-    case BIRTH = 'N';
-    case MARRIAGE = 'M';
-    case DEATH = 'D';
-    case OTHER = 'V';
-    case OTHER_SPECIAL = 'X';
-
     case A0 = 'A0';
     case A1 = 'A1';
     case D1 = 'D1';
@@ -20,17 +14,6 @@ enum LabelEnum: string
     case V1 = 'V1';
     case W1 = 'W1';
     case X0 = 'X0';
-
-    public function getLabel(): string
-    {
-        return match ($this) {
-            LabelEnum::BIRTH => 'Naissance',
-            LabelEnum::MARRIAGE => 'Mariages',
-            LabelEnum::DEATH => 'Décès',
-            LabelEnum::OTHER => 'Divers (par défaut)',
-            LabelEnum::OTHER_SPECIAL => 'Divers spécifiques',
-        };
-    }
 
     public static function getLabelGroupe(string $code): string
     {
@@ -48,10 +31,4 @@ enum LabelEnum: string
             default => 'Group name not found'
         };
     }
-
-    function files():array
-    {
-        return [LabelEnum::BIRTH, LabelEnum::MARRIAGE, LabelEnum::DEATH, LabelEnum::OTHER, LabelEnum::OTHER_SPECIAL];
-    }
-
 }
