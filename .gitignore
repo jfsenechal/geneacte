@@ -24,9 +24,13 @@
 /assets/vendor
 ###< symfony/asset-mapper ###
 
+###> expoacte/acte ###
 .idea/
 data/
 migrations/
+*.sql
+###< expoacte/acte ###
+
 ###> phpstan/phpstan ###
 phpstan.neon
 ###< phpstan/phpstan ###
