@@ -53,6 +53,7 @@ class AddCertificateFieldsSubscriber implements EventSubscriberInterface
                 'required' => StringUtil::transformToBoolean($meta->oblig),
                 'help' => $meta->label->aide,
                 'label' => $meta->label->etiq,
+                'attr' => ['groupLabel' => $meta->groupe],
             ];
             if ($meta->taille > 0) {
                 $constraints[] = new Length(min: $meta->taille);
@@ -61,7 +62,7 @@ class AddCertificateFieldsSubscriber implements EventSubscriberInterface
 
             if ($meta->bloc == '1') {
                 $type = TextareaType::class;
-                $default['attr'] = ['rows' => 6];
+                $default['attr']['rows'] = 6;
             }
 
             if ($meta->type == TypeEnum::DAT->value) {

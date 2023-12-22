@@ -1,0 +1,13 @@
+{{ form_start(form) }}
+{{ form_errors(form) }}
+
+{% for group in groups %}
+    {% if group.fields|length > 0 %}
+        <h4 class="text-success">{{ group.getiq }}</h4>
+        {% for field in group.fields %}
+            {{ form_row(field) }}
+        {% endfor %}
+    {% endif %}
+{% endfor %}
+<button class="btn btn-primary"><i class="ti ti-device-floppy"></i> Sauvegarder</button>
+{{ form_end(form) }}

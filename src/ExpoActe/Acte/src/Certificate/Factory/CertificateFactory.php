@@ -10,6 +10,9 @@ use Symfony\Contracts\Service\ServiceProviderInterface;
 
 readonly class CertificateFactory
 {
+    /**
+     * @param ServiceProviderInterface<int, CertificateFactoryInterface> $factories
+     */
     public function __construct(
         #[TaggedLocator(CertificateFactoryInterface::class, defaultIndexMethod: 'getType')]
         private ServiceProviderInterface $factories,

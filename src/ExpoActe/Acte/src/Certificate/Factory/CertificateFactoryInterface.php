@@ -2,6 +2,7 @@
 
 namespace ExpoActe\Acte\Certificate\Factory;
 
+use ExpoActe\Acte\Certificate\CertificateInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Symfony\Component\Form\FormInterface;
 
@@ -10,9 +11,9 @@ interface CertificateFactoryInterface
 {
     public static function getType(): string;
 
-    public function newInstance();
+    public function newInstance(): CertificateInterface;
 
-    public function generateForm(object $data): FormInterface;
+    public function generateForm(CertificateInterface $data): FormInterface;
 
-    public function renderForm(FormInterface $form): string;
+    public function renderForm(FormInterface $form, string $certificateType): string;
 }

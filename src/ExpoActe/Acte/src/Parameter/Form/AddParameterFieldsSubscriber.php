@@ -16,10 +16,6 @@ use Symfony\Component\Form\FormEvents;
 
 class AddParameterFieldsSubscriber implements EventSubscriberInterface
 {
-    public function __construct()
-    {
-    }
-
     public static function getSubscribedEvents(): array
     {
         return [

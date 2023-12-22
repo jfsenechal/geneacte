@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route(path: '/certificates')]
+#[Route(path: '/certificate')]
 class CertificateController extends AbstractController
 {
     public function __construct(
@@ -81,11 +81,12 @@ class CertificateController extends AbstractController
         $certificate = $factory->newInstance();
 
         $form = $this->createForm(CertificateType::class, $certificate);
-        $formHtml = $factory->renderForm($form);
+        $formHtml = $factory->renderForm($form, $type);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            dd($form);
             $this->entityManager->persist($certificate);
             $this->entityManager->flush();
             $this->addFlash('success', 'L\'acte a été ajouté');

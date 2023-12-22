@@ -4,6 +4,7 @@ namespace ExpoActe\Acte\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Form\Form;
 
 #[ORM\Table(name: 'act_mgrplg')]
 #[ORM\Entity]
@@ -33,5 +34,9 @@ class MetaGroupLabel
      * @var Metadb[]
      */
     public array $metas = [];
+    /**
+     * @var Form[] $fields
+     */
+    public array $fields = [];
 
 }

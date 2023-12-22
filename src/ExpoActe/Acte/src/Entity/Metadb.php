@@ -31,7 +31,7 @@ class Metadb
     public string $bloc = '0';
 
     #[ORM\Column(name: 'typ', type: Types::STRING, length: 3, nullable: false)]
-    public string $typ;
+    public string $type;
 
     #[ORM\Column(name: 'taille', type: Types::INTEGER, nullable: false)]
     public int $taille;

@@ -9,6 +9,7 @@
 
             {% include '@ExpoActe/user/_form_search.html.twig' %}
 
+            {{ dump(users) }}
             {% if isSearch %}
                 <table class="table table-bordered">
                     <thead>
@@ -37,7 +38,7 @@
                             <td>{{ user.level.label }}</td>
                             <td>{{ user.statut.label }}</td>
                             <td>{{ user.solde }}</td>
-                            <td>{{ user.ptConso }}</td>
+                            <td>{{ user.pt_conso }}</td>
                         </tr>
                     {% else %}
                         <tr>
