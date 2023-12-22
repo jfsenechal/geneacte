@@ -33,14 +33,16 @@ final class DatesSetSubscriber
 
         if ($accessor->isWritable($entity, 'dtdepot')) {
             if (!$entity->getId()) {
-                $entity->dtdepot = $today->format('Y-m-d');
+                $entity->dtdepot = $today;
             }
         }
         if ($accessor->isWritable($entity, 'dtmodif')) {
-            $entity->dtmodif = $today->format('Y-m-d');
+            $entity->dtmodif = $today;
         }
         if ($accessor->isWritable($entity, 'dtcreation')) {
-            $entity->dtcreation = $today->format('Y-m-d');
+            if (!$entity->getId()) {
+                $entity->dtcreation = $today;
+            }
         }
     }
 
