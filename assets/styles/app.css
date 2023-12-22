@@ -1,3 +1,13 @@
 .icon-rose {
     color: #d63384;
 }
+
+label.required:after {
+    content: " *";
+    color: red;
+}
+
+legend.required:after {
+    content: " *";
+    color: red;
+}
