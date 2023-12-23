@@ -2,15 +2,15 @@
 
 namespace ExpoActe\Acte\Twig\Runtime;
 
-use ExpoActe\Acte\Certificate\LabelEnum;
 use ExpoActe\Acte\Entity\Parameter;
+use ExpoActe\Acte\Label\LabelEnum;
 use Twig\Extension\RuntimeExtensionInterface;
 
 class ExpoActeExtensionRuntime implements RuntimeExtensionInterface
 {
     public function groupName(string $value): string
     {
-        return LabelEnum::getLabelGroupe($value);
+        return LabelEnum::getLabelByValue($value);
     }
 
     /**

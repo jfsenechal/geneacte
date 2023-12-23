@@ -110,6 +110,7 @@ class UserController extends AbstractController
     {
         $form = $this->createForm(UserPasswordType::class, $user);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $password = $this->userPasswordEncoder->hashPassword($user, $form->getData()->getPlainPassword());
             $user->hashpass = $password;
@@ -123,7 +124,7 @@ class UserController extends AbstractController
             '@ExpoActe/user/password.html.twig',
             [
                 'user' => $user,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

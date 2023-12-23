@@ -43,16 +43,13 @@ class AddCertificateFieldsSubscriber implements EventSubscriberInterface
         $certificate = $event->getData();
 
         $metas = $this->metaDbRepository->findByCertificateType($certificate->typact);
-        foreach ($metas as $meta) {
-            $meta->label = $this->metaLabelRepository->findOneByZid($meta->zid);
-        }
 
         foreach ($metas as $meta) {
             $constraints = [];
             $default = [
                 'required' => StringUtil::transformToBoolean($meta->oblig),
-                'help' => $meta->label->aide,
-                'label' => $meta->label->etiq,
+                'help' => $meta->metaLabel->aide,
+                'label' => $meta->metaLabel->etiq,
                 'attr' => ['groupLabel' => $meta->groupe],
             ];
             if ($meta->taille > 0) {

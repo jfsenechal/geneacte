@@ -8,6 +8,7 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use ExpoActe\Acte\Doctrine\OrmCrudTrait;
 use ExpoActe\Acte\Entity\Metadb;
+use ExpoActe\Acte\Entity\MetaLabel;
 
 /**
  * @method Metadb|null find($id, $lockMode = null, $lockVersion = null)
@@ -67,7 +68,7 @@ class MetaDbRepository extends ServiceEntityRepository
      */
     public function findByCertificateType(string $certificateType, array $except = ['T']): array
     {
-        return $this->createQb()
+        $metas = $this->createQb()
             ->andWhere('metaDb.dtable = :table')
             ->setParameter('table', $certificateType)
             ->andWhere('metaDb.affich NOT IN (:affich)')
@@ -75,6 +76,13 @@ class MetaDbRepository extends ServiceEntityRepository
             ->addOrderBy('metaDb.groupe')
             ->addOrderBy('metaDb.ov3')
             ->getQuery()->getResult();
+
+        $metaLabelRepository = $this->getEntityManager()->getRepository(MetaLabel::class);
+        foreach ($metas as $meta) {
+            $meta->metaLabel = $metaLabelRepository->findOneByZid($meta->zid);
+        }
+
+        return $metas;
     }
 
     private function createQb(): QueryBuilder

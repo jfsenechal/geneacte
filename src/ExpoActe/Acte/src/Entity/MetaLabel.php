@@ -29,4 +29,9 @@ class MetaLabel
 
     public Metadb|null $meta = null;
 
+    public function __toString(): string
+    {
+        return $this->etiq;
+    }
+
 }

@@ -2,10 +2,10 @@
 
 namespace ExpoActe\Acte\Controller;
 
-use ExpoActe\Acte\Entity\Metadb;
+use ExpoActe\Acte\Certificate\CertificateEnum;
+use ExpoActe\Acte\Label\Utils\LabelUtils;
 use ExpoActe\Acte\Repository\MetaDbRepository;
 use ExpoActe\Acte\Repository\MetaGroupLabelRepository;
-use ExpoActe\Acte\Repository\MetaLabelRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -15,59 +15,39 @@ class LabelController extends AbstractController
 {
     public function __construct(
         private readonly MetaGroupLabelRepository $metaGroupLabelRepository,
-        private readonly MetaLabelRepository $metaLabelRepository,
-        private readonly MetaDbRepository $metaDbRepository
+        private readonly MetaDbRepository $metaDbRepository,
     ) {
 
     }
 
-    #[Route(path: '/{table}', name: 'expoacte_label_index')]
-    public function index(string $table = 'N'): Response
+    #[Route(path: '/{type}', name: 'expoacte_label_index')]
+    public function index(CertificateEnum $type = CertificateEnum::BIRTH): Response
     {
-        $metas = $this->metaDbRepository->findByTable($table);
-        foreach ($metas as $meta) {
-            $meta->label = $this->metaLabelRepository->findOneByZid($meta->zid);
-        }
-
-        $grps = array_map(function (Metadb $meta) {
-            return $meta->groupe;
-        }, $metas);
-
-        $groupes = $this->metaGroupLabelRepository->findByTableAndGrps($table, array_values(array_unique($grps)));
-
-        foreach ($groupes as $group) {
-            $group->metas = $this->metaDbRepository->findByTableAndGroup($table, $group->grp);
-            foreach ($group->metas as $meta) {
-                $meta->label = $this->metaLabelRepository->findOneByZid($meta->zid);
-            }
-        }
+        $groups = CertificateEnum::cases();
+        $metas = $this->metaDbRepository->findByCertificateType($type->value);
+        $data = LabelUtils::groupAll($metas);
 
         return $this->render(
             '@ExpoActe/label/index.html.twig',
             [
-                'groupes' => $groupes,
+                'groups' => $groups,
+                'type' => $type,
+                'data' => $data,
             ]
         );
     }
 
-    #[Route(path: '/draft/{table}', name: 'expoacte_label_draft')]
-    public function draft(string $table = 'N'): Response
+    #[Route(path: '/{type}/show', name: 'expoacte_label_show')]
+    public function show(CertificateEnum $type = CertificateEnum::BIRTH): Response
     {
-        $metas = $this->metaDbRepository->findByTable($table);
-        $groupes = $this->metaGroupLabelRepository->findByTable($table);
-        $mgrplgs = $this->metaGroupLabelRepository->findAllOrdered();
-        $metasLg = $this->metaLabelRepository->findAllOrdered();
-        foreach ($metasLg as $label) {
-            $label->meta = $this->metaDbRepository->findOneByZid($label->zid);
-        }
+        $metas = $this->metaDbRepository->findByCertificateType($type->value);
+        $data = LabelUtils::groupAll($metas);
 
         return $this->render(
-            '@ExpoActe/label/draft.html.twig',
+            '@ExpoActe/label/show.html.twig',
             [
-                'groupes' => $groupes,
-                'mgrplgs' => $mgrplgs,
-                'metasLg' => $metasLg,
-                'metas' => $metas,
+                'typeSelected' => $type,
+                'data' => $data,
             ]
         );
     }

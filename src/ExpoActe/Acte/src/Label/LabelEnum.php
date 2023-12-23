@@ -1,6 +1,6 @@
 <?php
 
-namespace ExpoActe\Acte\Certificate;
+namespace ExpoActe\Acte\Label;
 
 enum LabelEnum: string
 {
@@ -15,7 +15,7 @@ enum LabelEnum: string
     case W1 = 'W1';
     case X0 = 'X0';
 
-    public static function getLabelGroupe(string $code): string
+    public static function getLabelByValue(string $code): string
     {
         return match ($code) {
             LabelEnum::A0->value => 'Technique',
@@ -31,4 +31,15 @@ enum LabelEnum: string
             default => 'Group name not found'
         };
     }
+
+    public function getLabel(bool $withValue = false): string
+    {
+        $txt = self::getLabelByValue($this->value);
+        if ($withValue) {
+            $txt = $this->value.': '.$txt;
+        }
+
+        return $txt;
+    }
+
 }

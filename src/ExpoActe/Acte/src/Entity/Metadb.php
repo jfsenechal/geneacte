@@ -54,5 +54,5 @@ class Metadb
     ])]
     public string $affich = 'F';
 
-    public ?MetaLabel $label = null;
+    public ?MetaLabel $metaLabel = null;
 }

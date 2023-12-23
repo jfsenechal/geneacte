@@ -5,6 +5,7 @@ namespace ExpoActe\Acte\Certificate\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class Witnesses2Type extends AbstractType
 {
@@ -35,5 +36,12 @@ class Witnesses2Type extends AbstractType
                 'label' => 't4Com',
                 'required' => false,
             ]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'inherit_data' => true,
+        ]);
     }
 }

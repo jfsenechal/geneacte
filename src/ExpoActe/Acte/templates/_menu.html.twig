@@ -10,11 +10,6 @@
     </a>
 </li>
 <li>
-    <a href="{{ path('expoacte_label_index') }}" class="nav-link px-2 link-dark">
-        <i class="ti ti-list"></i> Labels
-    </a>
-</li>
-<li>
     <a href="{{ path('expoacte_article_index') }}" class="nav-link px-2 link-dark">
         <i class="ti ti-list"></i> Articles
     </a>
@@ -34,8 +29,13 @@
             </a>
         </li>
         <li>
+            <a href="{{ path('expoacte_label_index') }}" class="dropdown-item">
+                <i class="ti ti-tag"></i> Etiquettes
+            </a>
+        </li>
+        <li>
             <a href="{{ path('expoacte_parameter_index') }}" class="dropdown-item">
-             <i class="ti ti-settings"></i> Paramètres
+                <i class="ti ti-settings"></i> Paramètres
             </a>
         </li>
     </ul>

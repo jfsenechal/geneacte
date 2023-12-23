@@ -1,0 +1,22 @@
+{% extends '@ExpoActe/base.html.twig' %}
+
+{% block title %}Etiquette - {{ typeSelected.label }}{% endblock %}
+
+{% block body %}
+
+    <div class="card">
+        <h3 class="card-header">Etiquettes</h3>
+        <div class="card-body">
+            <h4 class="text-success my-3">{{ typeSelected.label }}</h4>
+            <hr>
+            {% for item in data %}
+                <h4 class="text-success my-3" id="{{ item.group.value }}">{{ item.group.label }}</h4>
+                {% for meta in item.metas %}
+                    <h6 class="text-warning">{{ meta.metaLabel.etiq }}</h6>
+                    {% include '@ExpoActe/label/_meta_db_line.html.twig' %}
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
