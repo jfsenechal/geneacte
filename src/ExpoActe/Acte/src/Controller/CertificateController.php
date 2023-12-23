@@ -7,6 +7,9 @@ use ExpoActe\Acte\Certificate\CertificateEnum;
 use ExpoActe\Acte\Certificate\Factory\CertificateFactory;
 use ExpoActe\Acte\Certificate\Form\CertificateNewType;
 use ExpoActe\Acte\Certificate\Form\CertificateType;
+use ExpoActe\Acte\Certificate\Message\CertificateCreated;
+use ExpoActe\Acte\Certificate\Message\CertificateDeleted;
+use ExpoActe\Acte\Certificate\Message\CertificateUpdated;
 use ExpoActe\Acte\Repository\SummaryRepository;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -14,6 +17,7 @@ use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/certificate')]
@@ -22,7 +26,8 @@ class CertificateController extends AbstractController
     public function __construct(
         private readonly SummaryRepository $summaryRepository,
         private readonly CertificateFactory $certificateFactory,
-        private readonly EntityManagerInterface $entityManager
+        private readonly EntityManagerInterface $entityManager,
+        private readonly MessageBusInterface $bus
     ) {
     }
 
@@ -86,10 +91,11 @@ class CertificateController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($form);
+
             $this->entityManager->persist($certificate);
             $this->entityManager->flush();
-            $this->addFlash('success', 'L\'acte a été ajouté');
+
+            $this->bus->dispatch(new CertificateCreated($certificate->id));
 
             return $this->redirectToRoute('expoacte_certificate_show', ['uuid' => $certificate->uuid]);
         }
@@ -122,13 +128,14 @@ class CertificateController extends AbstractController
         }
 
         $form = $this->createForm(CertificateType::class, $certificate);
-        $formHtml = $factory->renderForm($form);
+        $formHtml = $factory->renderForm($certificate->type, $form);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
-            $this->addFlash('success', 'L\'acte a été modifié');
+
+            $this->bus->dispatch(new CertificateUpdated($certificate->id));
 
             return $this->redirectToRoute('expoacte_certificate_show', ['uuid' => $certificate->uuid]);
         }
@@ -146,7 +153,8 @@ class CertificateController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$certificate->uuid, $request->request->get('_token'))) {
             $this->entityManager->remove($certificate);
             $this->entityManager->flush();
-            $this->addFlash('success', 'L\acte a été supprimé');
+
+            $this->bus->dispatch(new CertificateDeleted($certificate->id));
         }
 
         return $this->redirectToRoute('expoacte_certificate_index', []);
