@@ -24,24 +24,18 @@
         <i class="ti ti-list"></i> Les localités
     </a>
 </li>
-<li>
-    <a href="{{ path('expoacte_user_index') }}" class="nav-link px-2 link-dark">
-        <i class="ti ti-list"></i> Utilisateurs
-    </a>
-</li>
 <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
         <i class="ti ti-dots-vertical"></i> <b class="caret"></b></a>
     <ul class="dropdown-menu">
         <li>
-            <a href="{{ path('expoacte_parameter_index') }}" class="dropdown-item">
-                Paramètres
+            <a href="{{ path('expoacte_user_index') }}" class="dropdown-item">
+                <i class="ti ti-users"></i> Utilisateurs
             </a>
         </li>
         <li>
-            <a href="https://expoactes.monrezo.be/"
-               class="dropdown-item" target="_blank">
-                Expoactes.monrezo.be
+            <a href="{{ path('expoacte_parameter_index') }}" class="dropdown-item">
+             <i class="ti ti-settings"></i> Paramètres
             </a>
         </li>
     </ul>

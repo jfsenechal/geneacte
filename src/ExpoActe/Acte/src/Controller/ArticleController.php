@@ -2,8 +2,9 @@
 
 namespace ExpoActe\Acte\Controller;
 
+use ExpoActe\Acte\Article\Form\ArticleSearchType;
+use ExpoActe\Acte\Article\Form\ArticleType;
 use ExpoActe\Acte\Entity\Article;
-use ExpoActe\Acte\Form\ArticleType;
 use ExpoActe\Acte\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,11 +18,22 @@ class ArticleController extends AbstractController
     {
     }
 
-    #[Route('/', name: 'expoacte_article_index', methods: ['GET'])]
-    public function index(): Response
+    #[Route('/', name: 'expoacte_article_index', methods: ['GET', 'POST'])]
+    public function index(Request $request): Response
     {
+        $form = $this->createForm(ArticleSearchType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $articles = $this->articleRepository->findByNamel($data['name']);
+        } else {
+            $articles = $this->articleRepository->findAll();
+        }
+
         return $this->render('@ExpoActe/article/index.html.twig', [
-            'articles' => $this->articleRepository->findAll(),
+            'articles' => $articles,
+            'form' => $form,
         ]);
     }
 

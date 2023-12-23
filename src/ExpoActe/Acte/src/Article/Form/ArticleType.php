@@ -1,6 +1,6 @@
 <?php
 
-namespace ExpoActe\Acte\Form;
+namespace ExpoActe\Acte\Article\Form;
 
 
 use ExpoActe\Acte\Entity\Article;
