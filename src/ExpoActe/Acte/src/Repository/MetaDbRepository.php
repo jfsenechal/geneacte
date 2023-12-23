@@ -49,11 +49,11 @@ class MetaDbRepository extends ServiceEntityRepository
     /**
      * @return Metadb[]
      */
-    public function findByTableAndGroup(string $table, string $groupe, array $except = ['T']): array
+    public function findByCertificateTypeAndGroup(string $certificateType, string $groupe, array $except = ['T']): array
     {
         return $this->createQb()
             ->andWhere('metaDb.dtable = :table')
-            ->setParameter('table', $table)
+            ->setParameter('table', $certificateType)
             ->andWhere('metaDb.groupe = :groupe')
             ->setParameter('groupe', $groupe)
             ->addOrderBy('metaDb.zone')
@@ -65,11 +65,11 @@ class MetaDbRepository extends ServiceEntityRepository
     /**
      * @return Metadb[]
      */
-    public function findByTable(string $table, array $except = ['T']): array
+    public function findByCertificateType(string $certificateType, array $except = ['T']): array
     {
         return $this->createQb()
             ->andWhere('metaDb.dtable = :table')
-            ->setParameter('table', $table)
+            ->setParameter('table', $certificateType)
             ->andWhere('metaDb.affich NOT IN (:affich)')
             ->setParameter('affich', $except)
             ->addOrderBy('metaDb.groupe')

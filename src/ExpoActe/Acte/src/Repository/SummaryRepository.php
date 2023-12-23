@@ -37,13 +37,13 @@ class SummaryRepository extends ServiceEntityRepository
     /**
      * @return Summary[]
      */
-    public function findMunicipalitiesByTable(string $table): array
+    public function findMunicipalitiesByTable(string $certificateType): array
     {
         return $this->createQb()
             ->select('act_sum.commune', 'act_sum.depart')
             ->distinct()
             ->andWhere('act_sum.typact = :table')
-            ->setParameter('table', $table)
+            ->setParameter('table', $certificateType)
             ->addOrderBy('act_sum.commune')
             ->addOrderBy('act_sum.depart')
             ->getQuery()->getResult();
@@ -52,13 +52,13 @@ class SummaryRepository extends ServiceEntityRepository
     /**
      * @return Summary[]
      */
-    public function findMunicipalitiesByTableAndName(string $table, string $name): array
+    public function findMunicipalitiesByTableAndName(string $certificateType, string $name): array
     {
         return $this->createQb()
             ->select('act_sum.commune', 'act_sum.depart')
             ->distinct()
             ->andWhere('act_sum.typact = :table')
-            ->setParameter('table', $table)
+            ->setParameter('table', $certificateType)
             ->andWhere('act_sum.commune LIKE :name OR act_sum.depart LIKE :name')
             ->setParameter('name', '%'.$name.'%')
             ->addOrderBy('act_sum.commune')

@@ -39,8 +39,8 @@ class GeolocationRepository extends ServiceEntityRepository
      */
     public function alphabetMunicipalities(): array
     {
-        $table = $this->getClassMetadata()->table['name'];
-        $sql = "select alphabet.init  from ( select upper(left(commune,1)) as init,ascii(upper(left(commune,1)))  as oo from $table group by init,oo  order by init , oo asc) as alphabet group by init";
+        $certificateType = $this->getClassMetadata()->table['name'];
+        $sql = "select alphabet.init  from ( select upper(left(commune,1)) as init,ascii(upper(left(commune,1)))  as oo from $certificateType group by init,oo  order by init , oo asc) as alphabet group by init";
         $conn = $this->getEntityManager()->getConnection();
         $resultSet = $conn->executeQuery($sql);
 
