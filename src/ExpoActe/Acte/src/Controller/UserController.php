@@ -32,14 +32,16 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $users = $this->userRepository->findAllOrdered();
+            $users = $this->userRepository->findByName($data['name']);
         }
+
+        $response = new Response(null, $form->isSubmitted() ? Response::HTTP_SEE_OTHER : 200);
 
         return $this->render('@ExpoActe/user/index.html.twig', [
             'users' => $users,
             'form' => $form,
             'isSearch' => $form->isSubmitted(),
-        ]);
+        ], $response);
     }
 
     #[Route('/new', name: 'expoacte_user_new', methods: ['GET', 'POST'])]
@@ -54,7 +56,7 @@ class UserController extends AbstractController
             $this->userRepository->flush();
             $this->addFlash('success', 'L\'utilisateur a été ajouté');
 
-            return $this->redirectToRoute('expoacte_user_show', ['uuid' => $user->uuid]);
+            return $this->redirectToRoute('expoacte_user_show', ['uuid' => $user->uuid], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('@ExpoActe/user/new.html.twig', [
@@ -82,7 +84,7 @@ class UserController extends AbstractController
 
             $this->addFlash('success', 'L\'utilisateur a été modifié');
 
-            return $this->redirectToRoute('expoacte_user_show', ['uuid' => $user->uuid]);
+            return $this->redirectToRoute('expoacte_user_show', ['uuid' => $user->uuid], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('@ExpoActe/user/edit.html.twig', [
