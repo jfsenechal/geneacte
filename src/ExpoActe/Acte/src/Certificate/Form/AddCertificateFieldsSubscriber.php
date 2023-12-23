@@ -42,7 +42,7 @@ class AddCertificateFieldsSubscriber implements EventSubscriberInterface
          */
         $certificate = $event->getData();
 
-        $metas = $this->metaDbRepository->findByTable($certificate->typact);
+        $metas = $this->metaDbRepository->findByCertificateType($certificate->typact);
         foreach ($metas as $meta) {
             $meta->label = $this->metaLabelRepository->findOneByZid($meta->zid);
         }

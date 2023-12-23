@@ -31,7 +31,7 @@ trait RenderFormTrait
      */
     public function renderForm(FormInterface $form, string $certificateType): string
     {
-        $groups = $this->metaGroupLabelRepository->findByTable($certificateType);
+        $groups = $this->metaGroupLabelRepository->findByCertificateType($certificateType);
         foreach ($groups as $group) {
             foreach ($form->all() as $field) {
                 if ($group->grp == $field->getConfig()->getOption('attr')['groupLabel']) {
