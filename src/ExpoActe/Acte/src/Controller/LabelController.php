@@ -3,6 +3,9 @@
 namespace ExpoActe\Acte\Controller;
 
 use ExpoActe\Acte\Certificate\CertificateEnum;
+use ExpoActe\Acte\Label\Form\LabelType;
+use ExpoActe\Acte\Label\LabelDocumentEnum;
+use ExpoActe\Acte\Label\LabelDto;
 use ExpoActe\Acte\Label\Utils\LabelUtils;
 use ExpoActe\Acte\Repository\MetaDbRepository;
 use ExpoActe\Acte\Repository\MetaGroupLabelRepository;
@@ -43,11 +46,22 @@ class LabelController extends AbstractController
         $metas = $this->metaDbRepository->findByCertificateType($type->value);
         $data = LabelUtils::groupAll($metas);
 
+        $labelDto = new LabelDto($type);
+        foreach ($metas as $meta) {
+            if (trim($meta->affich) == "") {
+                $meta->affich = LabelDocumentEnum::NOT_EMPTY->value;
+            }
+            $meta->metaLabel->documentEnum = LabelDocumentEnum::from($meta->affich);
+            $labelDto->metasLabel[$meta->zid] = $meta->metaLabel;
+        }
+        $form = $this->createForm(LabelType::class, $labelDto);
+
         return $this->render(
             '@ExpoActe/label/show.html.twig',
             [
                 'typeSelected' => $type,
                 'data' => $data,
+                'form' => $form,
             ]
         );
     }

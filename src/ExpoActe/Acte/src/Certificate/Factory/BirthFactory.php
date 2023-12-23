@@ -27,7 +27,6 @@ class BirthFactory implements CertificateFactoryInterface
         return $this->formFactory->create(BirthCertificateType::class, $data);
     }
 
-
     public static function getType(): string
     {
         return CertificateEnum::BIRTH->value;

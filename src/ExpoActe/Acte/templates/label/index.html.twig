@@ -18,7 +18,9 @@
                 {% endfor %}
             </ul>
 
-            <h4 class="text-success my-3" id="{{ type.value }}">{{ type.label }}</h4>
+            <h4 class="text-success my-3" id="{{ type.value }}">
+                <a href="{{ path('expoacte_label_show', {'type': type.value}) }}">{{ type.label }}</a>
+            </h4>
             <hr>
             {% for item in data %}
                 <h5 class="text-success my-3" id="{{ item.group.value }}">{{ item.group.label }}</h5>

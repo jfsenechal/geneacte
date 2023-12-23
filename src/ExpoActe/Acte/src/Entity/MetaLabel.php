@@ -4,6 +4,7 @@ namespace ExpoActe\Acte\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ExpoActe\Acte\Label\LabelDocumentEnum;
 
 #[ORM\Table(name: 'act_metalg')]
 #[ORM\UniqueConstraint(name: 'ZID', columns: ['ZID', 'lg'])]
@@ -27,7 +28,8 @@ class MetaLabel
     #[ORM\Column(name: 'aide', type: Types::STRING, length: 140, nullable: true)]
     public ?string $aide = null;
 
-    public Metadb|null $meta = null;
+    //for edit form
+    public ?LabelDocumentEnum $documentEnum = null;
 
     public function __toString(): string
     {
