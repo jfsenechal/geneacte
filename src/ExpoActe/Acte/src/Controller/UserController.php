@@ -35,7 +35,7 @@ class UserController extends AbstractController
             $users = $this->userRepository->findByName($data['name']);
         }
 
-        $response = new Response(null, $form->isSubmitted() ? Response::HTTP_SEE_OTHER : 200);
+        $response = new Response(null, $form->isSubmitted() ? Response::HTTP_ACCEPTED : 200);
 
         return $this->render('@ExpoActe/user/index.html.twig', [
             'users' => $users,
