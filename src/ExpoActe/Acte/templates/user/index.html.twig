@@ -4,14 +4,15 @@
 
 {% block body %}
     <div class="card">
-        <h3 class="card-header">Liste des {{ users|length }} utilisateurs</h3>
+        <div class="card-header d-flex flex-nowrap flex-row align-items-center justify-content-between">
+            <h3 class="d-block flex-grow-1">Liste des {{ users|length }} utilisateurs</h3>
+            <a href="{{ path('expoacte_user_new') }}" class="btn btn-primary btn-sm my-3">
+                <i class="ti ti-plus"></i> Ajouter un utilisateur
+            </a>
+        </div>
         <div class="card-body">
 
             {% include '@ExpoActe/user/_form_search.html.twig' %}
-
-            <a href="{{ path('expoacte_user_new') }}" class="btn btn-primary my-3">
-                <i class="ti ti-plus"></i> Ajouter un utilisateur
-            </a>
 
             <table class="table table-bordered">
                 <thead>
