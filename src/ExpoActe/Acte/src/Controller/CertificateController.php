@@ -31,10 +31,10 @@ class CertificateController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/', name: 'expoacte_certificate_index')]
-    public function index(string $table = 'N'): Response
+    #[Route(path: '/{type}', name: 'expoacte_certificate_index')]
+    public function index(string $type = CertificateEnum::BIRTH->value): Response
     {
-        $municipalities = $this->summaryRepository->findMunicipalitiesByTable($table);
+        $municipalities = $this->summaryRepository->findMunicipalitiesByTable($type);
         $typesCertficate = CertificateEnum::cases();
         $otherCertificateLabels = $this->summaryRepository->findLabelsForOtherCertificates();
 
