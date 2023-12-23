@@ -32,18 +32,12 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            dump($data);
-            $users = $this->userRepository->search(
-                $data['name'],
-                $data['statut']?->value,
-                $data['role']?->value,
-                $data['scoring']?->value
-            );
+            $users = $this->userRepository->findAllOrdered();
         }
 
         return $this->render('@ExpoActe/user/index.html.twig', [
             'users' => $users,
-            'form' => $form->createView(),
+            'form' => $form,
             'isSearch' => $form->isSubmitted(),
         ]);
     }
