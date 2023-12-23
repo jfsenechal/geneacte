@@ -2,27 +2,21 @@
 
 namespace ExpoActe\Acte\Label\Form;
 
-use ExpoActe\Acte\Entity\Metadb;
 use ExpoActe\Acte\Label\LabelDto;
-use ExpoActe\Acte\Repository\MetaDbRepository;
-use ExpoActe\Acte\Repository\MetaLabelRepository;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class LabelType extends AbstractType
 {
-    public function __construct(
-        private readonly MetaLabelRepository $metaLabelRepository,
-        private readonly MetaDbRepository $metaDbRepository
-    ) {
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->addEventSubscriber(
-            new AddLabelFieldsSubscriber($this->metaLabelRepository, $this->metaDbRepository)
-        );
+        $builder->add('metasLabel', CollectionType::class, [
+          //  'label' => false,
+            'entry_type' => MetaLabelType::class,
+            'entry_options' => [],
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

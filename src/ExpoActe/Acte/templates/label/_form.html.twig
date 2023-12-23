@@ -1,0 +1,15 @@
+{{ form_start(form) }}
+<table class="table table-bordered">
+    {% for metaLabel in form.metasLabel %}
+        <tr>
+            <td>
+                {{ metaLabel.vars.value.metaDb.zone }}
+                {{ dump(metaLabel.vars.value) }}
+            </td>
+            <td>{{ form_row(metaLabel.documentEnum) }}</td>
+            <td>{{ form_row(metaLabel.etiq) }}</td>
+        </tr>
+    {% endfor %}
+</table>
+<button class="btn btn-primary" type="submit"><i class="ti ti-device-floppy"></i> Sauvegarder</button>
+{{ form_end(form) }}

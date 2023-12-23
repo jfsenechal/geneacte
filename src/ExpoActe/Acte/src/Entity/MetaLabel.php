@@ -30,6 +30,8 @@ class MetaLabel
 
     //for edit form
     public ?LabelDocumentEnum $documentEnum = null;
+    public ?Metadb $metaDb = null;
+    public ?string $zone = null;
 
     public function __toString(): string
     {

@@ -2,23 +2,21 @@
 
 namespace ExpoActe\Acte\Label;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use ExpoActe\Acte\Certificate\CertificateEnum;
 use ExpoActe\Acte\Entity\Metadb;
 
 class LabelDto
 {
     /**
-     * @var Metadb[]
+     * @var Metadb[]|Collection
      */
-    public array $metasLabel = [];
+    public Collection $metasLabel;
 
     public function __construct(public ?CertificateEnum $certificateEnum)
     {
-    }
-
-    public function __get(string $zid)
-    {
-        return $this->metasLabel[$zid];
+        $this->metasLabel = new ArrayCollection();
     }
 
 }

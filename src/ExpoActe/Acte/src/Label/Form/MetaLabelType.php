@@ -15,10 +15,26 @@ class MetaLabelType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('etiq', TextType::class)
+            ->add('etiq', TextType::class, [
+                'label' => 'Etiquette',
+            ])
             ->add('documentEnum', EnumType::class, [
                 'class' => LabelDocumentEnum::class,
+                'label' => 'Document',
+                'choice_label' => fn(LabelDocumentEnum $labelDocumentEnum) => $labelDocumentEnum->getLabel(),
+                'placeholder' => 'Sélectionnez',
             ]);
+
+        /*    $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
+                /**
+                 * @var MetaLabel $data
+                 *
+                $data = $event->getData();
+                $form = $event->getForm();
+                $form->add('etiq', TextType::class, [
+                    'label' => $data->etiq,
+                ]);
+            });*/
     }
 
     public function configureOptions(OptionsResolver $resolver): void

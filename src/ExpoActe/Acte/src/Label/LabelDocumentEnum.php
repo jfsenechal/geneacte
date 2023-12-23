@@ -20,7 +20,7 @@ enum LabelDocumentEnum: string
         };
     }
 
-    public function getLabel(bool $withValue = true): string
+    public function getLabel(bool $withValue = false): string
     {
         $txt = self::getLabelByValue($this->value);
         if ($withValue) {
