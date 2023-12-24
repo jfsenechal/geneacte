@@ -2,7 +2,7 @@
 
 namespace ExpoActe\Acte\Certificate;
 
-enum CertificateEnum: string
+enum CertificateTypeEnum: string
 {
     case BIRTH = 'N';
     case DEATH = 'D';
@@ -13,11 +13,11 @@ enum CertificateEnum: string
     public function getLabel(): string
     {
         return match ($this) {
-            CertificateEnum::BIRTH => 'Naissance',
-            CertificateEnum::MARRIAGE => 'Mariages',
-            CertificateEnum::DEATH => 'Décès',
-            CertificateEnum::OTHER => 'Divers',
-            CertificateEnum::OTHER_SPECIAL => 'Divers spéciales',
+            CertificateTypeEnum::BIRTH => 'Naissance',
+            CertificateTypeEnum::MARRIAGE => 'Mariages',
+            CertificateTypeEnum::DEATH => 'Décès',
+            CertificateTypeEnum::OTHER => 'Divers',
+            CertificateTypeEnum::OTHER_SPECIAL => 'Divers spéciales',
         };
     }
 

@@ -1,10 +1,14 @@
 {{ form_start(form) }}
 <table class="table table-bordered">
+    <tr>
+        <th>Zone</th>
+        <th>Document</th>
+        <th>Etiquette</th>
+    </tr>
     {% for metaLabel in form.metasLabel %}
         <tr>
             <td>
                 {{ metaLabel.vars.value.metaDb.zone }}
-                {{ dump(metaLabel.vars.value) }}
             </td>
             <td>{{ form_row(metaLabel.documentEnum) }}</td>
             <td>{{ form_row(metaLabel.etiq) }}</td>

@@ -45,20 +45,6 @@ class MetaGroupLabelRepository extends ServiceEntityRepository
             ->getQuery()->getResult();
     }
 
-    /**
-     * @return MetaGroupLabel[]
-     */
-    public function findByCertificateTypeAndGrps(string $certificateType, array $grps): array
-    {
-        return $this->createQb()
-            ->andWhere('mgrplg.dtable = :table')
-            ->setParameter('table', $certificateType)
-            ->andWhere('mgrplg.grp IN (:grps)')
-            ->setParameter('grps', $grps)
-            ->orderBy('mgrplg.grp')
-            ->getQuery()->getResult();
-    }
-
     private function createQb(): QueryBuilder
     {
         return $this->createQueryBuilder('mgrplg');

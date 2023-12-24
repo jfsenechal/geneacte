@@ -5,10 +5,9 @@
 {% block body %}
 
     <div class="card">
-        <h3 class="card-header">Etiquettes</h3>
+        <h3 class="card-header">Etiquettes: {{ typeSelected.label }}</h3>
         <div class="card-body">
-            <h4 class="text-success my-3">{{ typeSelected.label }}</h4>
-            <hr>
+            {% include '@ExpoActe/label/_groups_label.html.twig' %}
             {% include '@ExpoActe/label/_form.html.twig' %}
         </div>
     </div>

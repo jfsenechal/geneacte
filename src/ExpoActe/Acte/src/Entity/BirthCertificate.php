@@ -3,7 +3,7 @@
 namespace ExpoActe\Acte\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use ExpoActe\Acte\Certificate\CertificateEnum;
+use ExpoActe\Acte\Certificate\CertificateTypeEnum;
 use ExpoActe\Acte\Certificate\CertificateInterface;
 use ExpoActe\Acte\Entity\Traits\CommentsTrait;
 use ExpoActe\Acte\Entity\Traits\CreditTrait;
@@ -33,7 +33,7 @@ class BirthCertificate implements CertificateInterface
 
     public function __construct()
     {
-        $this->typact = CertificateEnum::BIRTH->value;
+        $this->typact = CertificateTypeEnum::BIRTH->value;
     }
 
     public function getName(): string

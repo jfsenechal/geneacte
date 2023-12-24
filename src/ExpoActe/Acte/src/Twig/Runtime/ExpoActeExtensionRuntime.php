@@ -3,14 +3,14 @@
 namespace ExpoActe\Acte\Twig\Runtime;
 
 use ExpoActe\Acte\Entity\Parameter;
-use ExpoActe\Acte\Label\LabelEnum;
+use ExpoActe\Acte\Label\LabelGroupEnum;
 use Twig\Extension\RuntimeExtensionInterface;
 
 class ExpoActeExtensionRuntime implements RuntimeExtensionInterface
 {
     public function groupName(string $value): string
     {
-        return LabelEnum::getLabelByValue($value);
+        return LabelGroupEnum::getLabelByValue($value);
     }
 
     /**

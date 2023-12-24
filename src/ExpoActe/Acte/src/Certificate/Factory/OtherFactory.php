@@ -2,7 +2,7 @@
 
 namespace ExpoActe\Acte\Certificate\Factory;
 
-use ExpoActe\Acte\Certificate\CertificateEnum;
+use ExpoActe\Acte\Certificate\CertificateTypeEnum;
 use ExpoActe\Acte\Certificate\CertificateInterface;
 use ExpoActe\Acte\Certificate\Form\OtherCertificateType;
 use ExpoActe\Acte\Entity\OtherCertificate;
@@ -29,6 +29,6 @@ class OtherFactory implements CertificateFactoryInterface
 
     public static function getType(): string
     {
-        return CertificateEnum::OTHER->value;
+        return CertificateTypeEnum::OTHER->value;
     }
 }

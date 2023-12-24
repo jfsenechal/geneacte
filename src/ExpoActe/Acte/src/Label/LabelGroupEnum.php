@@ -2,7 +2,7 @@
 
 namespace ExpoActe\Acte\Label;
 
-enum LabelEnum: string
+enum LabelGroupEnum: string
 {
     case A0 = 'A0';
     case A1 = 'A1';
@@ -18,16 +18,16 @@ enum LabelEnum: string
     public static function getLabelByValue(string $code): string
     {
         return match ($code) {
-            LabelEnum::A0->value => 'Technique',
-            LabelEnum::A1->value => 'Document',
-            LabelEnum::D1->value => 'Intéressé',
-            LabelEnum::D2->value => 'Parents intéressé',
-            LabelEnum::F1->value => 'Second intéressé',
-            LabelEnum::F2->value => 'Parents 2d intéressé',
-            LabelEnum::T1->value => 'Témoins',
-            LabelEnum::V1->value => 'Références',
-            LabelEnum::W1->value => 'Crédits',
-            LabelEnum::X0->value => 'Gestion',
+            LabelGroupEnum::A0->value => 'Technique',
+            LabelGroupEnum::A1->value => 'Document',
+            LabelGroupEnum::D1->value => 'Intéressé',
+            LabelGroupEnum::D2->value => 'Parents intéressé',
+            LabelGroupEnum::F1->value => 'Second intéressé',
+            LabelGroupEnum::F2->value => 'Parents 2d intéressé',
+            LabelGroupEnum::T1->value => 'Témoins',
+            LabelGroupEnum::V1->value => 'Références',
+            LabelGroupEnum::W1->value => 'Crédits',
+            LabelGroupEnum::X0->value => 'Gestion',
             default => 'Group name not found'
         };
     }

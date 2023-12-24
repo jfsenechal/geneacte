@@ -2,7 +2,7 @@
 
 namespace ExpoActe\Acte\Certificate\Factory;
 
-use ExpoActe\Acte\Certificate\CertificateEnum;
+use ExpoActe\Acte\Certificate\CertificateTypeEnum;
 use ExpoActe\Acte\Certificate\CertificateInterface;
 use ExpoActe\Acte\Certificate\Form\MarriageCertificateType;
 use ExpoActe\Acte\Entity\MarriageCertificate;
@@ -29,6 +29,6 @@ class MarriageFactory implements CertificateFactoryInterface
 
     public static function getType(): string
     {
-        return CertificateEnum::MARRIAGE->value;
+        return CertificateTypeEnum::MARRIAGE->value;
     }
 }

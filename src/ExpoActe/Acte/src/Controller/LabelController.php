@@ -3,7 +3,7 @@
 namespace ExpoActe\Acte\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use ExpoActe\Acte\Certificate\CertificateEnum;
+use ExpoActe\Acte\Certificate\CertificateTypeEnum;
 use ExpoActe\Acte\Label\Form\LabelType;
 use ExpoActe\Acte\Label\LabelDocumentEnum;
 use ExpoActe\Acte\Label\LabelDto;
@@ -26,10 +26,13 @@ class LabelController extends AbstractController
     }
 
     #[Route(path: '/{type}', name: 'expoacte_label_index')]
-    public function index(CertificateEnum $type = CertificateEnum::BIRTH): Response
+    public function index(CertificateTypeEnum $type = null): Response
     {
-        $groups = CertificateEnum::cases();
-        $metas = $this->metaDbRepository->findByCertificateType($type->value);
+        $groups = CertificateTypeEnum::cases();
+        $metas = [];
+        if ($type) {
+            $metas = $this->metaDbRepository->findByCertificateType($type->value);
+        }
         $data = LabelUtils::groupAll($metas);
 
         return $this->render(
@@ -43,22 +46,24 @@ class LabelController extends AbstractController
     }
 
     #[Route(path: '/{type}/show', name: 'expoacte_label_show')]
-    public function show(Request $request, CertificateEnum $type = CertificateEnum::BIRTH): Response
+    public function show(Request $request, CertificateTypeEnum $type = CertificateTypeEnum::BIRTH): Response
     {
         $metas = $this->metaDbRepository->findByCertificateType($type->value);
         $data = LabelUtils::groupAll($metas);
+        $labelGroups = $this->metaGroupLabelRepository->findByCertificateType($type->value);
 
         return $this->render(
             '@ExpoActe/label/show.html.twig',
             [
                 'typeSelected' => $type,
+                'labelGroups' => $labelGroups,
                 'data' => $data,
             ]
         );
     }
 
     #[Route(path: '/{type}/edit', name: 'expoacte_label_edit')]
-    public function edit(Request $request, CertificateEnum $type = CertificateEnum::BIRTH): Response
+    public function edit(Request $request, CertificateTypeEnum $type = CertificateTypeEnum::BIRTH): Response
     {
         $metas = $this->metaDbRepository->findByCertificateType($type->value);
         $labelDto = new LabelDto($type);
@@ -73,6 +78,7 @@ class LabelController extends AbstractController
         }
 
         $labelDto->metasLabel = new ArrayCollection($metasLabel);
+        $labelGroups = $this->metaGroupLabelRepository->findByCertificateType($type->value);
 
         $form = $this->createForm(LabelType::class, $labelDto);
         $form->handleRequest($request);
@@ -86,6 +92,7 @@ class LabelController extends AbstractController
             [
                 'typeSelected' => $type,
                 'form' => $form,
+                'labelGroups' => $labelGroups,
             ]
         );
     }

@@ -2,7 +2,7 @@
 
 namespace ExpoActe\Acte\Certificate\Form;
 
-use ExpoActe\Acte\Certificate\TypeEnum;
+use ExpoActe\Acte\Certificate\TypeFieldEnum;
 use ExpoActe\Acte\Entity\BirthCertificate;
 use ExpoActe\Acte\Repository\MetaDbRepository;
 use ExpoActe\Acte\Repository\MetaLabelRepository;
@@ -62,11 +62,11 @@ class AddCertificateFieldsSubscriber implements EventSubscriberInterface
                 $default['attr']['rows'] = 6;
             }
 
-            if ($meta->type == TypeEnum::DAT->value) {
+            if ($meta->type == TypeFieldEnum::DAT->value) {
                 $type = DateType::class;
             }
 
-            if ($meta->type == TypeEnum::SEX->value) {
+            if ($meta->type == TypeFieldEnum::SEX->value) {
 
             }
 

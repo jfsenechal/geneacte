@@ -1,0 +1,14 @@
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Groupe</th>
+        <th>Etiquette</th>
+    </tr>
+    </thead>
+    {% for meta in labelGroups %}
+        <tr>
+            <td>{{ meta.grp|label_group_name }}</td>
+            <td>{{ meta.getiq }}</td>
+        </tr>
+    {% endfor %}
+</table>

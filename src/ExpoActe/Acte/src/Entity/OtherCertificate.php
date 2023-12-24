@@ -4,7 +4,7 @@ namespace ExpoActe\Acte\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use ExpoActe\Acte\Certificate\CertificateEnum;
+use ExpoActe\Acte\Certificate\CertificateTypeEnum;
 use ExpoActe\Acte\Certificate\CertificateInterface;
 use ExpoActe\Acte\Entity\Traits\BirthTrait;
 use ExpoActe\Acte\Entity\Traits\CommentsTrait;
@@ -79,6 +79,6 @@ class OtherCertificate implements CertificateInterface
 
     public function __construct()
     {
-        $this->typact = CertificateEnum::OTHER->value;
+        $this->typact = CertificateTypeEnum::OTHER->value;
     }
 }

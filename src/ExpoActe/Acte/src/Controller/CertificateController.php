@@ -3,7 +3,7 @@
 namespace ExpoActe\Acte\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
-use ExpoActe\Acte\Certificate\CertificateEnum;
+use ExpoActe\Acte\Certificate\CertificateTypeEnum;
 use ExpoActe\Acte\Certificate\Factory\CertificateFactory;
 use ExpoActe\Acte\Certificate\Form\CertificateNewType;
 use ExpoActe\Acte\Certificate\Form\CertificateType;
@@ -32,10 +32,10 @@ class CertificateController extends AbstractController
     }
 
     #[Route(path: '/{type}', name: 'expoacte_certificate_index')]
-    public function index(string $type = CertificateEnum::BIRTH->value): Response
+    public function index(string $type = CertificateTypeEnum::BIRTH->value): Response
     {
         $municipalities = $this->summaryRepository->findMunicipalitiesByTable($type);
-        $typesCertficate = CertificateEnum::cases();
+        $typesCertficate = CertificateTypeEnum::cases();
         $otherCertificateLabels = $this->summaryRepository->findLabelsForOtherCertificates();
 
         return $this->render(
@@ -53,7 +53,7 @@ class CertificateController extends AbstractController
     public function selectType(): Response
     {
         return $this->render('@ExpoActe/certificate/select_type.html.twig', [
-            'types' => CertificateEnum::getTypes(),
+            'types' => CertificateTypeEnum::getTypes(),
         ]);
     }
 
@@ -68,7 +68,7 @@ class CertificateController extends AbstractController
 
         return $this->render('@ExpoActe/certificate/select_municipality.html.twig', [
             'municipalities' => $municipalities,
-            'certificateType' => CertificateEnum::from($type),
+            'certificateType' => CertificateTypeEnum::from($type),
             'form' => $form,
         ]);
     }
@@ -102,7 +102,7 @@ class CertificateController extends AbstractController
 
         return $this->render('@ExpoActe/certificate/new.html.twig', [
             'formHtml' => $formHtml,
-            'name' => CertificateEnum::from($type)->getLabel(),
+            'name' => CertificateTypeEnum::from($type)->getLabel(),
         ]);
     }
 
@@ -143,7 +143,7 @@ class CertificateController extends AbstractController
         return $this->render('@ExpoActe/certificate/edit.html.twig', [
             'certificate' => $certificate,
             'formHtml' => $formHtml,
-            'name' => CertificateEnum::from($certificate->type)->getLabel(),
+            'name' => CertificateTypeEnum::from($certificate->type)->getLabel(),
         ]);
     }
 

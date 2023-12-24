@@ -2,7 +2,7 @@
 
 namespace ExpoActe\Acte\Certificate\Factory;
 
-use ExpoActe\Acte\Certificate\CertificateEnum;
+use ExpoActe\Acte\Certificate\CertificateTypeEnum;
 use ExpoActe\Acte\Certificate\CertificateInterface;
 use ExpoActe\Acte\Certificate\Form\DeathCertificateType;
 use ExpoActe\Acte\Entity\DeathCertificate;
@@ -29,6 +29,6 @@ class DeathFactory implements CertificateFactoryInterface
 
     public static function getType(): string
     {
-        return CertificateEnum::DEATH->value;
+        return CertificateTypeEnum::DEATH->value;
     }
 }

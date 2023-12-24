@@ -2,7 +2,7 @@
 
 namespace ExpoActe\Acte\Certificate\Factory;
 
-use ExpoActe\Acte\Certificate\CertificateEnum;
+use ExpoActe\Acte\Certificate\CertificateTypeEnum;
 use ExpoActe\Acte\Certificate\CertificateInterface;
 use ExpoActe\Acte\Certificate\Form\BirthCertificateType;
 use ExpoActe\Acte\Entity\BirthCertificate;
@@ -29,6 +29,6 @@ class BirthFactory implements CertificateFactoryInterface
 
     public static function getType(): string
     {
-        return CertificateEnum::BIRTH->value;
+        return CertificateTypeEnum::BIRTH->value;
     }
 }

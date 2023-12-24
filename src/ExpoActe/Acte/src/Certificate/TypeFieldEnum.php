@@ -2,7 +2,7 @@
 
 namespace ExpoActe\Acte\Certificate;
 
-enum TypeEnum: string
+enum TypeFieldEnum: string
 {
     case AGE = 'AGE';
     case DAT = 'DAT';

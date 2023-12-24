@@ -8,6 +8,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MetaLabelType extends AbstractType
@@ -16,25 +18,33 @@ class MetaLabelType extends AbstractType
     {
         $builder
             ->add('etiq', TextType::class, [
-                'label' => 'Etiquette',
+                'label' => false,
             ])
             ->add('documentEnum', EnumType::class, [
                 'class' => LabelDocumentEnum::class,
-                'label' => 'Document',
+                'label' => false,
                 'choice_label' => fn(LabelDocumentEnum $labelDocumentEnum) => $labelDocumentEnum->getLabel(),
                 'placeholder' => 'Sélectionnez',
             ]);
 
-        /*    $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
-                /**
-                 * @var MetaLabel $data
-                 *
-                $data = $event->getData();
-                $form = $event->getForm();
-                $form->add('etiq', TextType::class, [
-                    'label' => $data->etiq,
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
+            /**
+             * @var MetaLabel $data
+             */
+            $data = $event->getData();
+            $form = $event->getForm();
+
+            if (str_contains($data->metaDb->zone, 'PRE')) {
+
+            } else {
+                $form->add('documentEnum', EnumType::class, [
+                    'class' => LabelDocumentEnum::class,
+                    'label' => false,
+                    'choice_label' => fn(LabelDocumentEnum $labelDocumentEnum) => $labelDocumentEnum->getLabel(),
+                    'placeholder' => 'Sélectionnez',
                 ]);
-            });*/
+            }
+        });
     }
 
     public function configureOptions(OptionsResolver $resolver): void
