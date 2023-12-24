@@ -48,5 +48,4 @@ class DeathRepository extends ServiceEntityRepository
             ->leftJoin('death.country', 'country', 'WITH')
             ->addSelect('country');
     }
-
 }

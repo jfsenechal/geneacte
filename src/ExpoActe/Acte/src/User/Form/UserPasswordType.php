@@ -18,7 +18,9 @@ class UserPasswordType extends AbstractType
                 TextType::class,
                 [
                     'label' => 'Nouveau mot de passe',
-                    'attr' => ['autocomplete' => 'off'],
+                    'attr' => [
+                        'autocomplete' => 'off',
+                    ],
                 ]
             );
     }

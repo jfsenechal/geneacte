@@ -54,7 +54,6 @@ class MetaGroupLabelRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return MetaGroupLabel|null
      * @throws NonUniqueResultException
      */
     public function findByCertificateTypeAndGrp(string $certificateType, string $grp): ?MetaGroupLabel
@@ -71,6 +70,4 @@ class MetaGroupLabelRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('meta_group_label');
     }
-
-
 }

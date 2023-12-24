@@ -20,7 +20,9 @@ class Parameter
     #[ORM\Column(name: 'groupe', type: Types::STRING, length: 140, nullable: false)]
     public string $groupe = '';
 
-    #[ORM\Column(name: 'ordre', type: Types::INTEGER, nullable: false, options: ['default' => '100'])]
+    #[ORM\Column(name: 'ordre', type: Types::INTEGER, nullable: false, options: [
+        'default' => '100',
+    ])]
     public int $ordre = 100;
 
     #[ORM\Column(name: 'type', type: Types::STRING, length: 1, nullable: false, options: [

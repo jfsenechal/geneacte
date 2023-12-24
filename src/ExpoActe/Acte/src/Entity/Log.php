@@ -2,7 +2,6 @@
 
 namespace ExpoActe\Acte\Entity;
 
-use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -19,8 +18,10 @@ class Log
     #[ORM\Column(name: 'user', type: Types::INTEGER, nullable: false)]
     public string $user = '0';
 
-    #[ORM\Column(name: 'date', type: Types::DATETIME_MUTABLE, nullable: false, options: ['default' => '1001-01-01 00:00:00'])]
-    public ?DateTimeInterface $date;
+    #[ORM\Column(name: 'date', type: Types::DATETIME_MUTABLE, nullable: false, options: [
+        'default' => '1001-01-01 00:00:00',
+    ])]
+    public ?\DateTimeInterface $date;
 
     #[ORM\Column(name: 'action', type: Types::STRING, length: 40, nullable: false)]
     public string $action = '';
@@ -30,6 +31,4 @@ class Log
 
     #[ORM\Column(name: 'nb_actes', type: Types::INTEGER, nullable: true)]
     public ?int $nb_actes = null;
-
-
 }

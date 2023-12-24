@@ -1,4 +1,5 @@
 <?php
+
 use Symfony\Config\DoctrineConfig;
 
 return static function (DoctrineConfig $doctrine) {

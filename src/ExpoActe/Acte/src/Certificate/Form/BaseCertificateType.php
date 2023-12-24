@@ -113,6 +113,5 @@ class BaseCertificateType extends AbstractType
                 'required' => false,
             ])
         ;
-
     }
 }

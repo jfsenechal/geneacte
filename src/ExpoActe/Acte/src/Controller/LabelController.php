@@ -24,7 +24,6 @@ class LabelController extends AbstractController
         private readonly MetaDbRepository $metaDbRepository,
         private readonly LabelHandler $labelHandler
     ) {
-
     }
 
     #[Route(path: '/', name: 'expoacte_label_index')]
@@ -71,16 +70,17 @@ class LabelController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $this->labelHandler->treatmentEdit($form->getData());
             $this->addFlash('success', 'Les étiquettes ont bien été modifiées');
 
-            return $this->redirectToRoute('expoacte_label_edit', ['type' => $type->value]);
+            return $this->redirectToRoute('expoacte_label_edit', [
+                'type' => $type->value,
+            ]);
         }
 
         foreach ($labelGroups as $labelGroup) {
             foreach ($form->get('metasLabel') as $field) {
-                if ($labelGroup->grp == $field->getData()->metaDb->groupe) {
+                if ($labelGroup->grp === $field->getData()->metaDb->groupe) {
                     $labelGroup->fields[] = $field;
                 }
             }
@@ -103,11 +103,12 @@ class LabelController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $this->metaGroupLabelRepository->flush();
             $this->addFlash('success', 'Les étiquettes ont bien été modifiées');
 
-            return $this->redirectToRoute('expoacte_label_edit', ['type' => $metaGroupLabel->dtable]);
+            return $this->redirectToRoute('expoacte_label_edit', [
+                'type' => $metaGroupLabel->dtable,
+            ]);
         }
 
         return $this->render(

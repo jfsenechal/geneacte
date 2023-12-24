@@ -13,8 +13,9 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/parameter')]
 class ParameterController extends AbstractController
 {
-    public function __construct(private readonly ParameterRepository $parameterRepository)
-    {
+    public function __construct(
+        private readonly ParameterRepository $parameterRepository
+    ) {
     }
 
     #[Route('/{name}', name: 'expoacte_parameter_index', methods: ['GET'])]
@@ -49,7 +50,9 @@ class ParameterController extends AbstractController
 
             $this->addFlash('success', 'Le paramètre a été modifié');
 
-            return $this->redirectToRoute('expoacte_parameter_index', ['name' => $parameter->groupe]);
+            return $this->redirectToRoute('expoacte_parameter_index', [
+                'name' => $parameter->groupe,
+            ]);
         }
 
         return $this->render('@ExpoActe/parameter/edit.html.twig', [
@@ -61,7 +64,7 @@ class ParameterController extends AbstractController
     #[Route('/{param}/delete', name: 'expoacte_parameter_delete', methods: ['POST'])]
     public function delete(Request $request, Parameter $parameter): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$parameter->uuid, $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $parameter->uuid, $request->request->get('_token'))) {
             $parameter->valeur = null;
             $this->parameterRepository->flush();
             $this->addFlash('success', 'Le paramètre a été supprimé');

@@ -32,6 +32,4 @@ class Traceip
 
     #[ORM\Column(name: 'locked', type: Types::SMALLINT, nullable: false)]
     public string $locked = '0';
-
-
 }

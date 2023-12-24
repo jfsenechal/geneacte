@@ -6,15 +6,15 @@ class StringUtil
 {
     public static function transformToBoolean(string|null $valeur): ?bool
     {
-        if ($valeur === null) {
+        if (null === $valeur) {
             return $valeur;
         }
 
-        if ($valeur == "Y") {
+        if ('Y' === $valeur) {
             return true;
         }
 
-        if ($valeur == "1") {
+        if ('1' === $valeur) {
             return true;
         }
 

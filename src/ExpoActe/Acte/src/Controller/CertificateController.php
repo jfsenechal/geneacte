@@ -55,7 +55,6 @@ class CertificateController extends AbstractController
         ], $response);
     }
 
-
     #[Route('/select/type', name: 'expoacte_certificat_select_type', methods: ['GET', 'POST'])]
     public function selectType(): Response
     {
@@ -98,14 +97,15 @@ class CertificateController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             dd($certificate);
             $this->entityManager->persist($certificate);
             $this->entityManager->flush();
 
             $this->bus->dispatch(new CertificateCreated($certificate->id));
 
-            return $this->redirectToRoute('expoacte_certificate_show', ['uuid' => $certificate->uuid]);
+            return $this->redirectToRoute('expoacte_certificate_show', [
+                'uuid' => $certificate->uuid,
+            ]);
         }
 
         $labelGroups = $this->certificateHandler->groupFieldsForForm($form, $type);
@@ -148,7 +148,9 @@ class CertificateController extends AbstractController
 
             $this->bus->dispatch(new CertificateUpdated($certificate->id));
 
-            return $this->redirectToRoute('expoacte_certificate_show', ['uuid' => $certificate->uuid]);
+            return $this->redirectToRoute('expoacte_certificate_show', [
+                'uuid' => $certificate->uuid,
+            ]);
         }
 
         $labelGroups = $this->certificateHandler->groupFieldsForForm($form, $type);
@@ -164,7 +166,7 @@ class CertificateController extends AbstractController
     #[Route('/{uuid}', name: 'expoacte_certificate_delete', methods: ['POST'])]
     public function delete(Request $request, object $certificate): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$certificate->uuid, $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $certificate->uuid, $request->request->get('_token'))) {
             $this->entityManager->remove($certificate);
             $this->entityManager->flush();
 

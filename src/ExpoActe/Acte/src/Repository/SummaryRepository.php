@@ -60,7 +60,7 @@ class SummaryRepository extends ServiceEntityRepository
             ->andWhere('act_sum.typact = :table')
             ->setParameter('table', $certificateType)
             ->andWhere('act_sum.commune LIKE :name OR act_sum.depart LIKE :name')
-            ->setParameter('name', '%'.$name.'%')
+            ->setParameter('name', '%' . $name . '%')
             ->addOrderBy('act_sum.commune')
             ->addOrderBy('act_sum.depart')
             ->getQuery()->getResult();

@@ -23,28 +23,28 @@ class MetaLabelType extends AbstractType
             ->add('labelDocumentEnum', EnumType::class, [
                 'class' => LabelDocumentEnum::class,
                 'label' => false,
-                'choice_label' => fn(LabelDocumentEnum $labelDocumentEnum) => $labelDocumentEnum->getLabel(),
+                'choice_label' => fn (LabelDocumentEnum $labelDocumentEnum) => $labelDocumentEnum->getLabel(),
                 'placeholder' => 'Sélectionnez',
             ]);
 
-      /*  $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
-            /**
-             * @var MetaLabel $data
-             *
-            $data = $event->getData();
-            $form = $event->getForm();
+        /*  $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
+              /**
+               * @var MetaLabel $data
+               *
+              $data = $event->getData();
+              $form = $event->getForm();
 
-            if (str_contains($data->metaDb->zone, 'PRE')) {
+              if (str_contains($data->metaDb->zone, 'PRE')) {
 
-            } else {
-                $form->add('documentEnum', EnumType::class, [
-                    'class' => LabelDocumentEnum::class,
-                    'label' => false,
-                    'choice_label' => fn(LabelDocumentEnum $labelDocumentEnum) => $labelDocumentEnum->getLabel(),
-                    'placeholder' => 'Sélectionnez',
-                ]);
-            }
-        });*/
+              } else {
+                  $form->add('documentEnum', EnumType::class, [
+                      'class' => LabelDocumentEnum::class,
+                      'label' => false,
+                      'choice_label' => fn(LabelDocumentEnum $labelDocumentEnum) => $labelDocumentEnum->getLabel(),
+                      'placeholder' => 'Sélectionnez',
+                  ]);
+              }
+          });*/
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -23,5 +23,4 @@ class MetaGroupLabelType extends AbstractType
             'data_class' => MetaGroupLabel::class,
         ]);
     }
-
 }

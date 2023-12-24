@@ -11,8 +11,9 @@ use Symfony\Component\Form\FormInterface;
 
 class MarriageFactory implements CertificateFactoryInterface
 {
-    public function __construct(private readonly FormFactoryInterface $formFactory)
-    {
+    public function __construct(
+        private readonly FormFactoryInterface $formFactory
+    ) {
     }
 
     public function newInstance(): MarriageCertificate

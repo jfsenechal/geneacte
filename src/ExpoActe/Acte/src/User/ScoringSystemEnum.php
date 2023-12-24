@@ -11,9 +11,9 @@ enum ScoringSystemEnum: int
     public function getLabelByValue(int $number): string
     {
         return match ($number) {
-            self::FREEDOM->value => self::FREEDOM->value.': Accès libre',
-            self::AUTO->value => self::AUTO->value.': Recharge manuelle',
-            self::MANUAL->value => self::MANUAL->value.': Recharge automatique',
+            self::FREEDOM->value => self::FREEDOM->value . ': Accès libre',
+            self::AUTO->value => self::AUTO->value . ': Recharge manuelle',
+            self::MANUAL->value => self::MANUAL->value . ': Recharge automatique',
             default => 'Label not found'
         };
     }

@@ -21,5 +21,4 @@ class CertificateDeletedHandler
     {
         $this->flashBag->add('success', 'Le certificat a bien été supprimé');
     }
-
 }

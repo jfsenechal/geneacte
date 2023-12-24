@@ -56,7 +56,9 @@ class UserController extends AbstractController
             $this->userRepository->flush();
             $this->addFlash('success', 'L\'utilisateur a été ajouté');
 
-            return $this->redirectToRoute('expoacte_user_show', ['uuid' => $user->uuid], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('expoacte_user_show', [
+                'uuid' => $user->uuid,
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('@ExpoActe/user/new.html.twig', [
@@ -84,7 +86,9 @@ class UserController extends AbstractController
 
             $this->addFlash('success', 'L\'utilisateur a été modifié');
 
-            return $this->redirectToRoute('expoacte_user_show', ['uuid' => $user->uuid], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('expoacte_user_show', [
+                'uuid' => $user->uuid,
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('@ExpoActe/user/edit.html.twig', [
@@ -96,7 +100,7 @@ class UserController extends AbstractController
     #[Route('/{uuid}', name: 'expoacte_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->uuid, $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $user->uuid, $request->request->get('_token'))) {
             $this->userRepository->remove($user);
             $this->userRepository->flush();
             $this->addFlash('success', 'L\utilisateur a été supprimé');
@@ -117,7 +121,9 @@ class UserController extends AbstractController
             $this->userRepository->flush();
             $this->addFlash('success', 'Le mot de passe a bien été modifié');
 
-            return $this->redirectToRoute('expoacte_user_show', ['uuid' => $user->uuid]);
+            return $this->redirectToRoute('expoacte_user_show', [
+                'uuid' => $user->uuid,
+            ]);
         }
 
         return $this->render(

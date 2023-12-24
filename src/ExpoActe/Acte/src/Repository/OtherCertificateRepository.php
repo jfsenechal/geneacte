@@ -38,5 +38,4 @@ class OtherCertificateRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('other_certificate');
     }
-
 }

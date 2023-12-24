@@ -4,8 +4,8 @@ namespace ExpoActe\Acte\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use ExpoActe\Acte\Certificate\CertificateTypeEnum;
 use ExpoActe\Acte\Certificate\CertificateInterface;
+use ExpoActe\Acte\Certificate\CertificateTypeEnum;
 use ExpoActe\Acte\Entity\Traits\BirthTrait;
 use ExpoActe\Acte\Entity\Traits\CommentsTrait;
 use ExpoActe\Acte\Entity\Traits\CreditTrait;
@@ -38,8 +38,21 @@ use ExpoActe\Acte\Entity\Traits\WitnessesTrait;
 #[ORM\Entity]
 class OtherCertificate implements CertificateInterface
 {
-    use IdTrait, UuidTrait, IdentityTrait, SexeTrait, ParentsTrait, WitnessesTrait, Witnesses2Trait,
-        CreditTrait, TimestampTrait, CommentsTrait, PhotosTrait, TypeTrait, SurnameTrait, SpouseTrait, BirthTrait;
+    use IdTrait;
+    use UuidTrait;
+    use IdentityTrait;
+    use SexeTrait;
+    use ParentsTrait;
+    use WitnessesTrait;
+    use Witnesses2Trait;
+    use CreditTrait;
+    use TimestampTrait;
+    use CommentsTrait;
+    use PhotosTrait;
+    use TypeTrait;
+    use SurnameTrait;
+    use SpouseTrait;
+    use BirthTrait;
 
     #[ORM\Column(name: 'SIGLE', type: Types::STRING, length: 5, nullable: true)]
     public ?string $sigle = null;
@@ -56,7 +69,9 @@ class OtherCertificate implements CertificateInterface
     #[ORM\Column(name: 'EXC_COM', type: Types::STRING, length: 140, nullable: true)]
     public ?string $exc_com = null;
 
-    #[ORM\Column(name: 'C_SEXE', type: Types::STRING, length: 1, nullable: true, options: ['fixed' => true])]
+    #[ORM\Column(name: 'C_SEXE', type: Types::STRING, length: 1, nullable: true, options: [
+        'fixed' => true,
+    ])]
     public ?string $c_sexe = null;
 
     #[ORM\Column(name: 'C_ORI', type: Types::STRING, length: 140, nullable: true)]

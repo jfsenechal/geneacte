@@ -5,7 +5,6 @@ namespace ExpoActe\Acte\Entity\Traits;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-
 trait ParentsTrait
 {
     #[ORM\Column(name: 'P_NOM', type: Types::STRING, length: 140, nullable: true)]
@@ -31,5 +30,4 @@ trait ParentsTrait
 
     #[ORM\Column(name: 'M_PRO', type: Types::STRING, length: 140, nullable: true)]
     public ?string $m_pro = null;
-
 }

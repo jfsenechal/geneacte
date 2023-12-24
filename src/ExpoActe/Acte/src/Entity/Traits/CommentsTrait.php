@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait CommentsTrait
 {
-
     #[ORM\Column(name: 'COM', type: Types::STRING, length: 140, nullable: true)]
     public ?string $com = null;
 

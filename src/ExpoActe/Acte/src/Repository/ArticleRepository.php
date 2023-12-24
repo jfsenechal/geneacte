@@ -32,7 +32,7 @@ class ArticleRepository extends ServiceEntityRepository
     {
         return $this->createQB()
             ->andWhere('article.name = :name')
-            ->setParameter('name', '%'.$name.'%')
+            ->setParameter('name', '%' . $name . '%')
             ->getQuery()
             ->getResult();
     }
@@ -41,5 +41,4 @@ class ArticleRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('article');
     }
-
 }

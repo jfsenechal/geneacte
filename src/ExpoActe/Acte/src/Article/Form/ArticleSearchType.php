@@ -13,7 +13,9 @@ class ArticleSearchType extends AbstractType
         $builder
             ->add('name', SearchType::class, [
                 'label' => 'Nom',
-                'attr' => ['autocomplete' => 'off'],
+                'attr' => [
+                    'autocomplete' => 'off',
+                ],
                 'required' => false,
             ]);
     }

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace ExpoActe\Acte\Entity\Traits;
 
 use Doctrine\ORM\Mapping as ORM;

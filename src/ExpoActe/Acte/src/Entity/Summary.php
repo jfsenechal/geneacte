@@ -2,12 +2,11 @@
 
 namespace ExpoActe\Acte\Entity;
 
-use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ActSums
+ * ActSums.
  */
 #[ORM\Table(name: 'act_sums')]
 #[ORM\Index(name: 'typ_lib_com_dep', columns: ['TYPACT', 'LIBELLE', 'COMMUNE', 'DEPART'])]
@@ -25,7 +24,9 @@ class Summary
     #[ORM\Column(name: 'DEPART', type: Types::STRING, length: 40, nullable: true)]
     public ?string $depart = null;
 
-    #[ORM\Column(name: 'TYPACT', type: Types::STRING, length: 1, nullable: false, options: ['fixed' => true])]
+    #[ORM\Column(name: 'TYPACT', type: Types::STRING, length: 1, nullable: false, options: [
+        'fixed' => true,
+    ])]
     public string $typact = '';
 
     #[ORM\Column(name: 'LIBELLE', type: Types::STRING, length: 140, nullable: true)]
@@ -35,7 +36,7 @@ class Summary
     public ?int $deposant = null;
 
     #[ORM\Column(name: 'DTDEPOT', type: Types::DATE_MUTABLE, nullable: true)]
-    public ?DateTimeInterface $dtdepot = null;
+    public ?\DateTimeInterface $dtdepot = null;
 
     #[ORM\Column(name: 'AN_MIN', type: Types::INTEGER, nullable: true)]
     public ?int $an_min = null;
@@ -53,7 +54,5 @@ class Summary
     public ?int $nb_fil = null;
 
     #[ORM\Column(name: 'DER_MAJ', type: Types::DATETIME_MUTABLE, nullable: true)]
-    public ?DateTimeInterface $der_maj = null;
-
-
+    public ?\DateTimeInterface $der_maj = null;
 }

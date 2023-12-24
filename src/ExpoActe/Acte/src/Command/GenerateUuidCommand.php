@@ -17,8 +17,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class GenerateUuidCommand extends Command
 {
-    public function __construct(private readonly UserRepository $userRepository)
-    {
+    public function __construct(
+        private readonly UserRepository $userRepository
+    ) {
         parent::__construct();
     }
 
@@ -34,7 +35,7 @@ class GenerateUuidCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $arg1 = $input->getArgument('arg1');
         foreach ($this->userRepository->findAllOrdered(5000) as $user) {
-            if (!$user->uuid) {
+            if (! $user->uuid) {
                 $user->uuid = $user->generateUuid();
             }
         }

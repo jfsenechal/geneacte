@@ -75,5 +75,4 @@ class ParameterRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('parameter');
     }
-
 }

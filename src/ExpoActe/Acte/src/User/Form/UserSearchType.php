@@ -18,25 +18,27 @@ class UserSearchType extends AbstractType
             ->add('name', SearchType::class, [
                 'label' => 'Nom',
                 'help' => 'Recherche sur le nom, prénom, email et login',
-                'attr' => ['autocomplete' => 'off'],
+                'attr' => [
+                    'autocomplete' => 'off',
+                ],
                 'required' => false,
             ])
             ->add('statut', EnumType::class, [
                 'class' => UserStatusEnum::class,
                 'label' => 'Statut',
-                'choice_label' => fn(UserStatusEnum $userStatus) => $userStatus->getLabel(),
+                'choice_label' => fn (UserStatusEnum $userStatus) => $userStatus->getLabel(),
                 'required' => false,
             ])
             ->add('scoring', EnumType::class, [
                 'class' => ScoringSystemEnum::class,
                 'label' => 'Régime point',
-                'choice_label' => fn(ScoringSystemEnum $userStatus) => $userStatus->getLabel(),
+                'choice_label' => fn (ScoringSystemEnum $userStatus) => $userStatus->getLabel(),
                 'required' => false,
             ])
             ->add('role', EnumType::class, [
                 'class' => RoleEnum::class,
                 'label' => 'Rôle',
-                'choice_label' => fn(RoleEnum $userStatus) => $userStatus->getLabel(),
+                'choice_label' => fn (RoleEnum $userStatus) => $userStatus->getLabel(),
                 'required' => false,
             ]);
     }

@@ -23,16 +23,10 @@ class AddParameterFieldsSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param FormEvent $event
-     * @return void
-     */
     public function preSetData(FormEvent $event): void
     {
         $form = $event->getForm();
-        /**
-         * @var Parameter $parameter
-         */
+        /** @var Parameter $parameter */
         $parameter = $event->getData();
 
         $type = TextType::class;
@@ -42,22 +36,24 @@ class AddParameterFieldsSubscriber implements EventSubscriberInterface
             'label' => $parameter->libelle,
         ];
 
-        if ($parameter->type == ParameterEnum::TEXTAREA->value) {
+        if ($parameter->type === ParameterEnum::TEXTAREA->value) {
             $type = TextareaType::class;
-            //$default['size'] = ParameterEnum::getSize($parameter->type);
-            $default['attr'] = ['rows' => 12];
+            // $default['size'] = ParameterEnum::getSize($parameter->type);
+            $default['attr'] = [
+                'rows' => 12,
+            ];
         }
-        if ($parameter->type == ParameterEnum::CHECKBOX->value) {
+        if ($parameter->type === ParameterEnum::CHECKBOX->value) {
             $type = CheckboxType::class;
             $parameter->valeur = StringUtil::transformToBoolean($parameter->valeur);
             $default['data'] = StringUtil::transformToBoolean($parameter->valeur);
         }
-        if ($parameter->type == ParameterEnum::NUMERIC->value) {
+        if ($parameter->type === ParameterEnum::NUMERIC->value) {
             $type = IntegerType::class;
         }
-        if ($parameter->type == ParameterEnum::LIST->value) {
+        if ($parameter->type === ParameterEnum::LIST->value) {
             $type = ChoiceType::class;
-            $default['choices'] = array_flip(explode(";", $parameter->listval));
+            $default['choices'] = array_flip(explode(';', $parameter->listval));
         }
 
         $form

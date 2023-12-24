@@ -12,10 +12,10 @@ enum UserStatusEnum: string
     public function getLabelByValue(string $value): string
     {
         return match ($value) {
-            self::AWAITING_ACTIVATION->value => self::AWAITING_ACTIVATION->value.': Attente d\'activation',
-            self::AWAITING_APPROVAL->value => self::AWAITING_APPROVAL->value.': Attente d\'approbation',
-            self::GRANTED->value => self::GRANTED->value.': Accès autorisé',
-            self::DENIED->value => self::DENIED->value.': Accès bloqué',
+            self::AWAITING_ACTIVATION->value => self::AWAITING_ACTIVATION->value . ': Attente d\'activation',
+            self::AWAITING_APPROVAL->value => self::AWAITING_APPROVAL->value . ': Attente d\'approbation',
+            self::GRANTED->value => self::GRANTED->value . ': Accès autorisé',
+            self::DENIED->value => self::DENIED->value . ': Accès bloqué',
             default => 'Label not found'
         };
     }

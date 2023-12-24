@@ -3,8 +3,8 @@
 namespace ExpoActe\Acte\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use ExpoActe\Acte\Certificate\CertificateTypeEnum;
 use ExpoActe\Acte\Certificate\CertificateInterface;
+use ExpoActe\Acte\Certificate\CertificateTypeEnum;
 use ExpoActe\Acte\Entity\Traits\BirthTrait;
 use ExpoActe\Acte\Entity\Traits\CommentsTrait;
 use ExpoActe\Acte\Entity\Traits\CreditTrait;
@@ -31,8 +31,19 @@ use ExpoActe\Acte\Entity\Traits\WitnessesTrait;
 #[ORM\Entity]
 class DeathCertificate implements CertificateInterface
 {
-    use IdTrait, UuidTrait, IdentityTrait, SexeTrait, ParentsTrait, WitnessesTrait,
-        CreditTrait, TimestampTrait, CommentsTrait, PhotosTrait, TypeTrait, SpouseTrait, BirthTrait;
+    use IdTrait;
+    use UuidTrait;
+    use IdentityTrait;
+    use SexeTrait;
+    use ParentsTrait;
+    use WitnessesTrait;
+    use CreditTrait;
+    use TimestampTrait;
+    use CommentsTrait;
+    use PhotosTrait;
+    use TypeTrait;
+    use SpouseTrait;
+    use BirthTrait;
 
     public function __construct()
     {

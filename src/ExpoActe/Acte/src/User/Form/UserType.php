@@ -39,13 +39,13 @@ class UserType extends AbstractType
                 'label' => 'Niveau d\'accès',
                 'required' => true,
                 'class' => RoleEnum::class,
-                'choice_label' => fn(RoleEnum $userStatusEnum) => $userStatusEnum->getLabel(),
+                'choice_label' => fn (RoleEnum $userStatusEnum) => $userStatusEnum->getLabel(),
             ])
             ->add('regime', EnumType::class, [
                 'label' => 'Régime points',
                 'required' => true,
                 'class' => ScoringSystemEnum::class,
-                'choice_label' => fn(ScoringSystemEnum $userStatusEnum) => $userStatusEnum->getLabel(),
+                'choice_label' => fn (ScoringSystemEnum $userStatusEnum) => $userStatusEnum->getLabel(),
             ])
             ->add('solde', IntegerType::class, [
                 'label' => 'Solde',
@@ -59,7 +59,7 @@ class UserType extends AbstractType
                 'label' => 'Statut',
                 'required' => true,
                 'class' => UserStatusEnum::class,
-                'choice_label' => fn(UserStatusEnum $userStatusEnum) => $userStatusEnum->getLabel(),
+                'choice_label' => fn (UserStatusEnum $userStatusEnum) => $userStatusEnum->getLabel(),
             ])
             ->add('dtexpiration', DateType::class, [
                 'label' => 'Date d\'expiration',

@@ -8,7 +8,7 @@ use ExpoActe\Acte\Tools\PropertyUtil;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-//#[AsDoctrineListener(Events::prePersist)]
+// #[AsDoctrineListener(Events::prePersist)]
 final class UserAddSubscriber
 {
     public function __construct(
@@ -16,6 +16,7 @@ final class UserAddSubscriber
         private PropertyUtil $propertyUtil
     ) {
     }
+
     /**
      * @return array<int, string>
      */
@@ -30,7 +31,7 @@ final class UserAddSubscriber
     public function prePersist(LifecycleEventArgs $lifecycleEventArgs): void
     {
         $object = $lifecycleEventArgs->getObject();
-        if (!$this->propertyUtil->getPropertyAccessor()->isWritable($object, 'userAdd')) {
+        if (! $this->propertyUtil->getPropertyAccessor()->isWritable($object, 'userAdd')) {
             return;
         }
 
@@ -39,14 +40,14 @@ final class UserAddSubscriber
 
     private function setUserAdd(object $entity): void
     {
-        //for loading fixtures
+        // for loading fixtures
         if ($entity->getUserAdd()) {
             return;
         }
 
         $user = $this->security->getUser();
 
-        if (!$user instanceof UserInterface) {
+        if (! $user instanceof UserInterface) {
             // throw new Exception('You must be login');
         }
         if ($user instanceof UserInterface) {

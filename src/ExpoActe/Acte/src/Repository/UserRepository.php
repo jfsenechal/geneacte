@@ -43,7 +43,7 @@ class UserRepository extends ServiceEntityRepository
             ->andWhere(
                 'user.email LIKE :name OR user.nom LIKE :name OR user.prenom LIKE :name OR user.login LIKE :name'
             )
-            ->setParameter('name', '%'.$name.'%')
+            ->setParameter('name', '%' . $name . '%')
             ->getQuery()->getResult();
     }
 
@@ -57,7 +57,7 @@ class UserRepository extends ServiceEntityRepository
             $qb
                 ->andWhere(
                     'user.email LIKE :name OR user.nom LIKE :name OR user.prenom LIKE :name OR user.login LIKE :name'
-                )->setParameter('name', '%'.$name.'%');
+                )->setParameter('name', '%' . $name . '%');
         }
         if ($statut) {
             $qb->andWhere('user.statut = :statut')
@@ -80,5 +80,4 @@ class UserRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('user')
             ->addOrderBy('user.nom');
     }
-
 }

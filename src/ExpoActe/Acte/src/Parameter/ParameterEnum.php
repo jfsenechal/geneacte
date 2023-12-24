@@ -19,5 +19,4 @@ enum ParameterEnum: string
             default => 1
         };
     }
-
 }

@@ -38,5 +38,4 @@ class BirthRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('birth');
     }
-
 }

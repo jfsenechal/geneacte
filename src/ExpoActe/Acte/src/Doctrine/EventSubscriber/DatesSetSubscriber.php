@@ -32,7 +32,7 @@ final class DatesSetSubscriber
         $today = new \DateTime();
 
         if ($accessor->isWritable($entity, 'dtdepot')) {
-            if (!$entity->getId()) {
+            if (! $entity->getId()) {
                 $entity->dtdepot = $today;
             }
         }
@@ -40,10 +40,9 @@ final class DatesSetSubscriber
             $entity->dtmodif = $today;
         }
         if ($accessor->isWritable($entity, 'dtcreation')) {
-            if (!$entity->getId()) {
+            if (! $entity->getId()) {
                 $entity->dtcreation = $today;
             }
         }
     }
-
 }

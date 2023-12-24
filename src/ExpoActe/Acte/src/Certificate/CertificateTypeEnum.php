@@ -37,7 +37,7 @@ enum CertificateTypeEnum: string
     /**
      * @return array<int, self>
      */
-    function files(): array
+    public function files(): array
     {
         return [self::BIRTH, self::MARRIAGE, self::DEATH, self::OTHER, self::OTHER_SPECIAL];
     }

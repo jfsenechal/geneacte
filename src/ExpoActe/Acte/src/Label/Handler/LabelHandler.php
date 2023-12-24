@@ -7,8 +7,9 @@ use ExpoActe\Acte\Repository\MetaDbRepository;
 
 class LabelHandler
 {
-    public function __construct(private readonly MetaDbRepository $metaDbRepository)
-    {
+    public function __construct(
+        private readonly MetaDbRepository $metaDbRepository
+    ) {
     }
 
     public function treatmentEdit(LabelDto $labelDto)

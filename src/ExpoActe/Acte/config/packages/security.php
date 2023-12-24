@@ -15,12 +15,14 @@ return static function (SecurityConfig $security) {
     // @see Symfony\Config\Security\FirewallConfig
     $main = [
         'provider' => 'pathfinder_user_provider',
-        'logout' => ['path' => 'app_logout'],
+        'logout' => [
+            'path' => 'app_logout',
+        ],
         'form_login' => [],
         'entry_point' => ExpoActeAuthenticator::class,
         'custom_authenticators' => [ExpoActeAuthenticator::class],
         'login_throttling' => [
-            'max_attempts' => 6, //per minute...
+            'max_attempts' => 6, // per minute...
         ],
         'remember_me' => [
             'secret' => '%kernel.secret%',

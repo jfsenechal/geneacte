@@ -12,5 +12,4 @@ trait PhotosTrait
 
     #[ORM\Column(name: 'PHOTOS', type: Types::TEXT, length: 65535, nullable: true)]
     public ?string $photos = null;
-
 }

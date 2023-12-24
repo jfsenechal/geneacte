@@ -9,7 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
 class Firstname
 {
-    #[ORM\Column(name: 'prenom', type: Types::STRING, length: 140, nullable: false, options: ['fixed' => true])]
+    #[ORM\Column(name: 'prenom', type: Types::STRING, length: 140, nullable: false, options: [
+        'fixed' => true,
+    ])]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     public string $prenom = '';

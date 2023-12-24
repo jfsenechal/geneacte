@@ -14,8 +14,9 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/article')]
 class ArticleController extends AbstractController
 {
-    public function __construct(private readonly ArticleRepository $articleRepository)
-    {
+    public function __construct(
+        private readonly ArticleRepository $articleRepository
+    ) {
     }
 
     #[Route('/', name: 'expoacte_article_index', methods: ['GET', 'POST'])]
@@ -86,7 +87,7 @@ class ArticleController extends AbstractController
     #[Route('/{id}', name: 'expoacte_article_delete', methods: ['POST'])]
     public function delete(Request $request, Article $article): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->request->get('_token'))) {
             $this->articleRepository->remove($article);
             $this->articleRepository->flush();
         }

@@ -28,16 +28,10 @@ readonly class AddCertificateFieldsSubscriber implements EventSubscriberInterfac
         ];
     }
 
-    /**
-     * @param FormEvent $event
-     * @return void
-     */
     public function preSetData(FormEvent $event): void
     {
         $form = $event->getForm();
-        /**
-         * @var CertificateInterface $certificate
-         */
+        /** @var CertificateInterface $certificate */
         $certificate = $event->getData();
 
         $metas = $this->metaDbRepository->findByCertificateType($certificate->typact);
@@ -48,7 +42,9 @@ readonly class AddCertificateFieldsSubscriber implements EventSubscriberInterfac
                 'required' => StringUtil::transformToBoolean($meta->oblig),
                 'help' => $meta->metaLabel->aide,
                 'label' => $meta->metaLabel->etiq,
-                'attr' => ['groupLabel' => $meta->groupe],
+                'attr' => [
+                    'groupLabel' => $meta->groupe,
+                ],
                 //   'data_class' => Metadb::class,
             ];
             if ($meta->taille > 0) {
@@ -56,17 +52,16 @@ readonly class AddCertificateFieldsSubscriber implements EventSubscriberInterfac
             }
             $type = TextType::class;
 
-            if ($meta->bloc == '1') {
+            if ('1' === $meta->bloc) {
                 $type = TextareaType::class;
                 $default['attr']['rows'] = 6;
             }
 
-            if ($meta->type == TypeFieldEnum::DAT->value) {
+            if ($meta->type === TypeFieldEnum::DAT->value) {
                 $type = DateType::class;
             }
 
-            if ($meta->type == TypeFieldEnum::SEX->value) {
-
+            if ($meta->type === TypeFieldEnum::SEX->value) {
             }
 
             $default['constraints'] = $constraints;
@@ -78,5 +73,4 @@ readonly class AddCertificateFieldsSubscriber implements EventSubscriberInterfac
                 );
         }
     }
-
 }

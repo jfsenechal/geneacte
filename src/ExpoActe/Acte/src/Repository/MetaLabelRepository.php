@@ -43,7 +43,6 @@ class MetaLabelRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
-
     private function createQb(): QueryBuilder
     {
         return $this->createQueryBuilder('meta_lg');

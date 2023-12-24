@@ -16,13 +16,19 @@ class MetaGroupLabel
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     public int $id;
 
-    #[ORM\Column(name: 'grp', type: Types::STRING, length: 2, nullable: false, options: ['fixed' => true])]
+    #[ORM\Column(name: 'grp', type: Types::STRING, length: 2, nullable: false, options: [
+        'fixed' => true,
+    ])]
     public string $grp;
 
-    #[ORM\Column(name: 'dtable', type: Types::STRING, length: 1, nullable: false, options: ['fixed' => true])]
+    #[ORM\Column(name: 'dtable', type: Types::STRING, length: 1, nullable: false, options: [
+        'fixed' => true,
+    ])]
     public string $dtable;
 
-    #[ORM\Column(name: 'lg', type: Types::STRING, length: 2, nullable: false, options: ['fixed' => true])]
+    #[ORM\Column(name: 'lg', type: Types::STRING, length: 2, nullable: false, options: [
+        'fixed' => true,
+    ])]
     public string $lg;
 
     #[ORM\Column(name: 'sigle', type: Types::STRING, length: 5, nullable: true)]
@@ -32,13 +38,12 @@ class MetaGroupLabel
     public string $getiq;
 
     /**
-     * To get original name
+     * To get original name.
      */
     public ?LabelGroupEnum $labelGroupEnum = null;
 
     /**
-     * @var FormView[] $fields
+     * @var FormView[]
      */
     public array $fields = [];
-
 }

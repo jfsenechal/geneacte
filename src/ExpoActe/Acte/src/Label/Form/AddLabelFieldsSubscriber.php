@@ -24,16 +24,10 @@ class AddLabelFieldsSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param FormEvent $event
-     * @return void
-     */
     public function preSetData(FormEvent $event): void
     {
         $form = $event->getForm();
-        /**
-         * @var LabelDto $labelDto
-         */
+        /** @var LabelDto $labelDto */
         $labelDto = $event->getData();
 
         $metas = $this->metaDbRepository->findByCertificateType($labelDto->certificateEnum->value);
@@ -47,7 +41,9 @@ class AddLabelFieldsSubscriber implements EventSubscriberInterface
                 'required' => true,
                 'help' => $meta->metaLabel->aide,
                 'label' => $meta->metaLabel->etiq,
-                'attr' => ['groupLabel' => $meta->groupe],
+                'attr' => [
+                    'groupLabel' => $meta->groupe,
+                ],
             ];
 
             $form
@@ -58,5 +54,4 @@ class AddLabelFieldsSubscriber implements EventSubscriberInterface
                 );
         }
     }
-
 }

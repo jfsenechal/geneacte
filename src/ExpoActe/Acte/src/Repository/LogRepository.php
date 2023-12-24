@@ -48,5 +48,4 @@ class LogRepository extends ServiceEntityRepository
             ->leftJoin('log.country', 'country', 'WITH')
             ->addSelect('country');
     }
-
 }

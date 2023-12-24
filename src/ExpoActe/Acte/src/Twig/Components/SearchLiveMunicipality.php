@@ -18,8 +18,9 @@ class SearchLiveMunicipality
     #[LiveProp(writable: true)]
     public ?string $certificateType = null;
 
-    public function __construct(private readonly SummaryRepository $actSumRepository)
-    {
+    public function __construct(
+        private readonly SummaryRepository $actSumRepository
+    ) {
     }
 
     public function getMunicipalities(): array

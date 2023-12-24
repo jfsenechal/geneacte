@@ -39,5 +39,4 @@ trait IdentityTrait
 
     #[ORM\Column(name: 'PRE', type: Types::STRING, length: 140, nullable: true)]
     public ?string $pre = null;
-
 }

@@ -14,9 +14,10 @@ class LabelDto
      */
     public Collection $metasLabel;
 
-    public function __construct(public ?CertificateTypeEnum $certificateEnum, array $metasLabel)
-    {
+    public function __construct(
+        public ?CertificateTypeEnum $certificateEnum,
+        array $metasLabel
+    ) {
         $this->metasLabel = new ArrayCollection($metasLabel);
     }
-
 }

@@ -28,7 +28,7 @@ class MetaLabel
     #[ORM\Column(name: 'aide', type: Types::STRING, length: 140, nullable: true)]
     public ?string $aide = null;
 
-    //for edit form
+    // for edit form
     public ?LabelDocumentEnum $labelDocumentEnum = null;
     public ?Metadb $metaDb = null;
     public ?string $zone = null;
@@ -38,5 +38,4 @@ class MetaLabel
     {
         return $this->etiq;
     }
-
 }

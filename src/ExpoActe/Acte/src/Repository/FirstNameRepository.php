@@ -48,5 +48,4 @@ class FirstNameRepository extends ServiceEntityRepository
             ->leftJoin('firstname.country', 'country', 'WITH')
             ->addSelect('country');
     }
-
 }

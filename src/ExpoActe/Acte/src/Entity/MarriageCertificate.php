@@ -4,8 +4,8 @@ namespace ExpoActe\Acte\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use ExpoActe\Acte\Certificate\CertificateTypeEnum;
 use ExpoActe\Acte\Certificate\CertificateInterface;
+use ExpoActe\Acte\Certificate\CertificateTypeEnum;
 use ExpoActe\Acte\Entity\Traits\BirthTrait;
 use ExpoActe\Acte\Entity\Traits\CommentsTrait;
 use ExpoActe\Acte\Entity\Traits\CreditTrait;
@@ -36,8 +36,20 @@ use ExpoActe\Acte\Entity\Traits\WitnessesTrait;
 #[ORM\Entity]
 class MarriageCertificate implements CertificateInterface
 {
-    use IdTrait, UuidTrait, IdentityTrait, ParentsTrait, WitnessesTrait, Witnesses2Trait,
-        CreditTrait, TimestampTrait, CommentsTrait, PhotosTrait, TypeTrait, SurnameTrait, SpouseTrait, BirthTrait;
+    use IdTrait;
+    use UuidTrait;
+    use IdentityTrait;
+    use ParentsTrait;
+    use WitnessesTrait;
+    use Witnesses2Trait;
+    use CreditTrait;
+    use TimestampTrait;
+    use CommentsTrait;
+    use PhotosTrait;
+    use TypeTrait;
+    use SurnameTrait;
+    use SpouseTrait;
+    use BirthTrait;
 
     #[ORM\Column(name: 'EXCON', type: Types::STRING, length: 140, nullable: true)]
     public ?string $excon = null;

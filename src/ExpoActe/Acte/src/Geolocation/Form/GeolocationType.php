@@ -100,7 +100,7 @@ class GeolocationType extends AbstractType
                 EnumType::class,
                 [
                     'class' => GeolocationEnum::class,
-                    'choice_label' => fn(GeolocationEnum $geolocationEnum): string => $geolocationEnum->getLabel(),
+                    'choice_label' => fn (GeolocationEnum $geolocationEnum): string => $geolocationEnum->getLabel(),
                 ]
             );
     }
@@ -111,5 +111,4 @@ class GeolocationType extends AbstractType
             'data_class' => Geolocation::class,
         ]);
     }
-
 }

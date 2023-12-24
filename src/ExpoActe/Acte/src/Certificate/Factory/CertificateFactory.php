@@ -25,7 +25,7 @@ readonly class CertificateFactory
      */
     public function getFactory(string $type): CertificateFactoryInterface
     {
-        if (!$this->factories->has($type)) {
+        if (! $this->factories->has($type)) {
             throw new NotFoundHttpException('Type not supported.');
         }
 

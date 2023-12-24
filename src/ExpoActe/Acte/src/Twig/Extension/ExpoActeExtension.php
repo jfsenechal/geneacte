@@ -5,7 +5,6 @@ namespace ExpoActe\Acte\Twig\Extension;
 use ExpoActe\Acte\Twig\Runtime\ExpoActeExtensionRuntime;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
-use Twig\TwigFunction;
 
 class ExpoActeExtension extends AbstractExtension
 {

@@ -54,7 +54,7 @@ class GeolocationRepository extends ServiceEntityRepository
     {
         return $this->createQb()
             ->andWhere('geolocation.commune LIKE :letter')
-            ->setParameter('letter', $letter.'%')
+            ->setParameter('letter', $letter . '%')
             ->getQuery()
             ->getResult();
     }
@@ -74,5 +74,4 @@ class GeolocationRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('geolocation')
             ->orderBy('geolocation.commune', 'ASC');
     }
-
 }

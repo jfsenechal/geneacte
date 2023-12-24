@@ -30,5 +30,4 @@ trait SurnameTrait
 
     #[ORM\Column(name: 'CM_PRO', type: Types::STRING, length: 140, nullable: true)]
     public ?string $cm_pro = null;
-
 }

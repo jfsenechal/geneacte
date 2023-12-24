@@ -13,7 +13,7 @@ class LabelType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('metasLabel', CollectionType::class, [
-          //  'label' => false,
+            //  'label' => false,
             'entry_type' => MetaLabelType::class,
             'entry_options' => [],
         ]);
@@ -25,5 +25,4 @@ class LabelType extends AbstractType
             'data_class' => LabelDto::class,
         ]);
     }
-
 }

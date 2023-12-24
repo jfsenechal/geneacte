@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use ExpoActe\Acte\Geolocation\GeolocationEnum;
 
 #[ORM\Table(name: 'act_geoloc')]
-//#[ORM\UniqueConstraint(name: 'COMMUNE', columns: ['COMMUNE', 'DEPART'])]
+// #[ORM\UniqueConstraint(name: 'COMMUNE', columns: ['COMMUNE', 'DEPART'])]
 #[ORM\Entity]
 class Geolocation
 {
@@ -28,7 +28,9 @@ class Geolocation
     #[ORM\Column(name: 'LAT', type: Types::FLOAT, precision: 10, scale: 0, nullable: true)]
     public ?float $lat = null;
 
-    #[ORM\Column(name: 'STATUT', type: Types::STRING, length: 1, nullable: false, enumType: GeolocationEnum::class, options: ['default' => 'N'])]
+    #[ORM\Column(name: 'STATUT', type: Types::STRING, length: 1, nullable: false, enumType: GeolocationEnum::class, options: [
+        'default' => 'N',
+    ])]
     public GeolocationEnum $statut;
 
     #[ORM\Column(name: 'NOTE_N', type: Types::TEXT, length: 65535, nullable: true)]
@@ -45,7 +47,6 @@ class Geolocation
 
     public function __toString(): string
     {
-        return $this->commune.' ['.$this->depart.']';
+        return $this->commune . ' [' . $this->depart . ']';
     }
-
 }

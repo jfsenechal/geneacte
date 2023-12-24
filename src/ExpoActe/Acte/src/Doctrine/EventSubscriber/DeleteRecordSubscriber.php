@@ -5,11 +5,10 @@ namespace ExpoActe\Acte\Doctrine\EventSubscriber;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use Stringable;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-//#[AsDoctrineListener(Events::preRemove)]
+// #[AsDoctrineListener(Events::preRemove)]
 class DeleteRecordSubscriber
 {
     public function __construct(
@@ -39,13 +38,13 @@ class DeleteRecordSubscriber
             $identifier = 'user not found';
         }
 
-        $name = " ";
-        if ($entity instanceof Stringable) {
+        $name = ' ';
+        if ($entity instanceof \Stringable) {
             $name = $entity->__toString();
         }
 
-        $history = new History('delete record '.$entity->getId());
-        $history->message = "suppression de ".$name." par ".$identifier." object : ".$entity::class;
+        $history = new History('delete record ' . $entity->getId());
+        $history->message = 'suppression de ' . $name . ' par ' . $identifier . ' object : ' . $entity::class;
         $history->count = 1;
         $history->created_at = new \DateTime();
         $this->entityManager->persist($history);

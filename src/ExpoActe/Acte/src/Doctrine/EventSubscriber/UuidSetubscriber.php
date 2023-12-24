@@ -29,7 +29,7 @@ final class UuidSetubscriber
     public function prePersist(LifecycleEventArgs $lifecycleEventArgs): void
     {
         $entity = $lifecycleEventArgs->getObject();
-        if (!$this->propertyUtil->getPropertyAccessor()->isWritable($entity, 'uuid')) {
+        if (! $this->propertyUtil->getPropertyAccessor()->isWritable($entity, 'uuid')) {
             return;
         }
 

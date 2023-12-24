@@ -21,5 +21,4 @@ class CertificateCreatedHandler
     {
         $this->flashBag->add('success', 'Le certificat a bien été ajouté');
     }
-
 }

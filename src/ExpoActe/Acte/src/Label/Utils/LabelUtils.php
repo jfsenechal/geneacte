@@ -20,7 +20,7 @@ class LabelUtils
         $data = [];
         foreach (LabelGroupEnum::cases() as $labelEnum) {
             foreach ($metas as $meta) {
-                if ($meta->groupe == $labelEnum->value) {
+                if ($meta->groupe === $labelEnum->value) {
                     $data[$labelEnum->value]['group'] = $labelEnum;
                     $data[$labelEnum->value]['metas'][] = $meta;
                 }
@@ -32,13 +32,14 @@ class LabelUtils
 
     /**
      * @param Metadb[] $metas
+     *
      * @return MetaLabel[]
      */
     public static function extractMetasLabel(array $metas): array
     {
         $metasLabel = [];
         foreach ($metas as $meta) {
-            if (trim($meta->affich) == "") {
+            if ('' === trim($meta->affich)) {
                 $meta->affich = LabelDocumentEnum::NOT_EMPTY->value;
             }
             $metaLabel = $meta->metaLabel;
@@ -49,5 +50,4 @@ class LabelUtils
 
         return $metasLabel;
     }
-
 }

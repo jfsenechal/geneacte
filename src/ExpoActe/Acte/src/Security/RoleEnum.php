@@ -34,7 +34,7 @@ enum RoleEnum: int
     {
         $txt = self::getLabelByValue($this->value);
         if ($withValue) {
-            $txt = $this->value.': '.$txt;
+            $txt = $this->value . ': ' . $txt;
         }
 
         return $txt;

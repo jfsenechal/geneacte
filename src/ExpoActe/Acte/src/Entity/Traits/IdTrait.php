@@ -1,6 +1,5 @@
 <?php
 
-
 namespace ExpoActe\Acte\Entity\Traits;
 
 use Doctrine\DBAL\Types\Types;

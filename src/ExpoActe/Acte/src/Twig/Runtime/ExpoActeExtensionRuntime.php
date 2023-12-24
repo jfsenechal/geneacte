@@ -14,12 +14,12 @@ class ExpoActeExtensionRuntime implements RuntimeExtensionInterface
     }
 
     /**
-     * @return  array<int, string>
+     * @return array<int, string>
      */
     public function parameterList(Parameter $parameter): array
     {
         if ($parameter->listval) {
-            $list = explode(";", $parameter->listval);
+            $list = explode(';', $parameter->listval);
             if ([] !== $list) {
                 return $list;
             }

@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait CreditTrait
 {
-
     #[ORM\Column(name: 'DEPOSANT', type: Types::INTEGER, nullable: true)]
     public ?int $deposant = null;
 
@@ -19,5 +18,4 @@ trait CreditTrait
 
     #[ORM\Column(name: 'VERIFIEU', type: Types::STRING, length: 140, nullable: true)]
     public ?string $verifieu = null;
-
 }
