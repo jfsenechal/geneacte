@@ -31,7 +31,7 @@ class MetaGroupLabelRepository extends ServiceEntityRepository
     public function findAllOrdered(): array
     {
         return $this->createQb()
-            ->orderBy('mgrplg.grp', 'ASC')
+            ->orderBy('meta_group_label.grp', 'ASC')
             ->getQuery()
             ->getResult();
     }
@@ -42,7 +42,7 @@ class MetaGroupLabelRepository extends ServiceEntityRepository
     public function findByCertificateType(string $certificateType): array
     {
         $labelGroups = $this->createQb()
-            ->andWhere('mgrplg.dtable = :table')
+            ->andWhere('meta_group_label.dtable = :table')
             ->setParameter('table', $certificateType)
             ->getQuery()->getResult();
 
@@ -60,16 +60,16 @@ class MetaGroupLabelRepository extends ServiceEntityRepository
     public function findByCertificateTypeAndGrp(string $certificateType, string $grp): ?MetaGroupLabel
     {
         return $this->createQb()
-            ->andWhere('mgrplg.dtable = :table')
+            ->andWhere('meta_group_label.dtable = :table')
             ->setParameter('table', $certificateType)
-            ->andWhere('mgrplg.grp = :code')
+            ->andWhere('meta_group_label.grp = :code')
             ->setParameter('code', $grp)
             ->getQuery()->getOneOrNullResult();
     }
 
     private function createQb(): QueryBuilder
     {
-        return $this->createQueryBuilder('mgrplg');
+        return $this->createQueryBuilder('meta_group_label');
     }
 
 

@@ -1,13 +1,31 @@
 {{ form_start(form) }}
 {{ form_errors(form) }}
+    {% for labelGroup in labelGroups %}
+        {% if labelGroup.fields|length > 0 %}
+            <div class="d-flex flex-row gap-4">
+                <h4 class="text-info">{{ labelGroup.getiq }}</h4>
+            </div>
+            <hr>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Etiquette</th>
+                </tr>
+                </thead>
+                {% for field in form.children %}
+                    {% if field.vars.attr.groupLabel is defined %}
+                        {% if labelGroup.grp == field.vars.attr.groupLabel %}
+                            <tr>
+                                <td>
+                                    {{ form_row(field) }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </table>
+        {% endif %}
+    {% endfor %}
 
-{% for group in groups %}
-    {% if group.fields|length > 0 %}
-        <h4 class="text-success">{{ group.getiq }}</h4>
-        {% for field in group.fields %}
-            {{ form_row(field) }}
-        {% endfor %}
-    {% endif %}
-{% endfor %}
 <button class="btn btn-primary" type="submit"><i class="ti ti-device-floppy"></i> Sauvegarder</button>
 {{ form_end(form) }}

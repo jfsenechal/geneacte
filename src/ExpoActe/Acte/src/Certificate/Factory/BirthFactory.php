@@ -11,8 +11,6 @@ use Symfony\Component\Form\FormInterface;
 
 class BirthFactory implements CertificateFactoryInterface
 {
-    use RenderFormTrait;
-
     public function __construct(private readonly FormFactoryInterface $formFactory)
     {
     }

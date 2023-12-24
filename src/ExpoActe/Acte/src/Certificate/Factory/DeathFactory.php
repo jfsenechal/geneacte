@@ -2,8 +2,8 @@
 
 namespace ExpoActe\Acte\Certificate\Factory;
 
-use ExpoActe\Acte\Certificate\CertificateTypeEnum;
 use ExpoActe\Acte\Certificate\CertificateInterface;
+use ExpoActe\Acte\Certificate\CertificateTypeEnum;
 use ExpoActe\Acte\Certificate\Form\DeathCertificateType;
 use ExpoActe\Acte\Entity\DeathCertificate;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -11,8 +11,6 @@ use Symfony\Component\Form\FormInterface;
 
 class DeathFactory implements CertificateFactoryInterface
 {
-    use RenderFormTrait;
-
     public function __construct(private readonly FormFactoryInterface $formFactory)
     {
     }

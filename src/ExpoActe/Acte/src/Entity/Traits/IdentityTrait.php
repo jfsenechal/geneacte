@@ -22,8 +22,8 @@ trait IdentityTrait
     #[ORM\Column(name: 'DEPART', type: Types::STRING, length: 40, nullable: true)]
     public ?string $depart = null;
 
-    #[ORM\Column(name: 'DATETXT', type: Types::STRING, length: 10, nullable: true)]
-    public ?string $datetxt = null;
+    #[ORM\Column(name: 'DATETXT', type: Types::DATETIME_MUTABLE, length: 10, nullable: true)]
+    public ?\DateTimeInterface $datetxt = null;
 
     #[ORM\Column(name: 'DREPUB', type: Types::STRING, length: 25, nullable: true)]
     public ?string $drepub = null;

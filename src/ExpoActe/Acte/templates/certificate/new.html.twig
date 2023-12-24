@@ -3,10 +3,10 @@
 {% block body %}
 
     <div class="card">
-        <h3 class="card-header">Ajout d'un acte {{ name }}</h3>
+        <h3 class="card-header">Ajout d'un acte {{ certificateType.label }}</h3>
 
         <div class="card-body">
-            {{ formHtml|raw }}
+            {% include '@ExpoActe/certificate/form/_form.html.twig' %}
         </div>
 
         <div class="card-footer text-end">

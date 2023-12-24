@@ -7,6 +7,7 @@ use ExpoActe\Acte\Certificate\CertificateTypeEnum;
 use ExpoActe\Acte\Certificate\Factory\CertificateFactory;
 use ExpoActe\Acte\Certificate\Form\CertificateNewType;
 use ExpoActe\Acte\Certificate\Form\CertificateType;
+use ExpoActe\Acte\Certificate\Handler\CertificateHandler;
 use ExpoActe\Acte\Certificate\Message\CertificateCreated;
 use ExpoActe\Acte\Certificate\Message\CertificateDeleted;
 use ExpoActe\Acte\Certificate\Message\CertificateUpdated;
@@ -26,6 +27,7 @@ class CertificateController extends AbstractController
     public function __construct(
         private readonly SummaryRepository $summaryRepository,
         private readonly CertificateFactory $certificateFactory,
+        private readonly CertificateHandler $certificateHandler,
         private readonly EntityManagerInterface $entityManager,
         private readonly MessageBusInterface $bus
     ) {
@@ -83,15 +85,16 @@ class CertificateController extends AbstractController
 
             return $this->redirectToRoute('expoacte_home');
         }
+
         $certificate = $factory->newInstance();
 
         $form = $this->createForm(CertificateType::class, $certificate);
-        $formHtml = $factory->renderForm($form, $type);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            dd($certificate);
             $this->entityManager->persist($certificate);
             $this->entityManager->flush();
 
@@ -100,10 +103,15 @@ class CertificateController extends AbstractController
             return $this->redirectToRoute('expoacte_certificate_show', ['uuid' => $certificate->uuid]);
         }
 
+        $labelGroups = $this->certificateHandler->groupFieldsForForm($form, $type);
+
+        $response = new Response(null, $form->isSubmitted() ? Response::HTTP_UNPROCESSABLE_ENTITY : 200);
+
         return $this->render('@ExpoActe/certificate/new.html.twig', [
-            'formHtml' => $formHtml,
-            'name' => CertificateTypeEnum::from($type)->getLabel(),
-        ]);
+            'form' => $form,
+            'labelGroups' => $labelGroups,
+            'certificateType' => CertificateTypeEnum::from($type),
+        ], $response);
     }
 
     #[Route('/{uuid}/show', name: 'expoacte_certificate_show', methods: ['GET', 'POST'])]
@@ -120,7 +128,7 @@ class CertificateController extends AbstractController
     public function edit(Request $request, object $certificate): Response
     {
         try {
-            $factory = $this->certificateFactory->getFactory($certificate->type);
+            $this->certificateFactory->getFactory($certificate->type);
         } catch (NotFoundExceptionInterface|ContainerExceptionInterface $e) {
             $this->addFlash('danger', 'Ce type d\'acte n\'est pas supporté');
 
@@ -128,8 +136,6 @@ class CertificateController extends AbstractController
         }
 
         $form = $this->createForm(CertificateType::class, $certificate);
-        $formHtml = $factory->renderForm($certificate->type, $form);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -140,10 +146,13 @@ class CertificateController extends AbstractController
             return $this->redirectToRoute('expoacte_certificate_show', ['uuid' => $certificate->uuid]);
         }
 
+        $labelGroups = $this->certificateHandler->groupFieldsForForm($form, $type);
+
         return $this->render('@ExpoActe/certificate/edit.html.twig', [
             'certificate' => $certificate,
-            'formHtml' => $formHtml,
-            'name' => CertificateTypeEnum::from($certificate->type)->getLabel(),
+            'form' => $form,
+            'labelGroups' => $labelGroups,
+            'certificateType' => CertificateTypeEnum::from($certificate->type)->getLabel(),
         ]);
     }
 

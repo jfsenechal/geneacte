@@ -14,6 +14,4 @@ interface CertificateFactoryInterface
     public function newInstance(): CertificateInterface;
 
     public function generateForm(CertificateInterface $data): FormInterface;
-
-    public function renderForm(FormInterface $form, string $certificateType): string;
 }
