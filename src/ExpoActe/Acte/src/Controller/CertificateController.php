@@ -33,24 +33,6 @@ class CertificateController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/{type}', name: 'expoacte_certificate_index')]
-    public function index(string $type = CertificateTypeEnum::BIRTH->value): Response
-    {
-        $municipalities = $this->summaryRepository->findMunicipalitiesByTable($type);
-        $typesCertficate = CertificateTypeEnum::cases();
-        $otherCertificateLabels = $this->summaryRepository->findLabelsForOtherCertificates();
-
-        return $this->render(
-            '@ExpoActe/certificate/titi.html.twig',
-            [
-                'certificates' => [],
-                'municipalities' => $municipalities,
-                'types' => $typesCertficate,
-                'others' => $otherCertificateLabels,
-            ]
-        );
-    }
-
     #[Route('/select/type', name: 'expoacte_certificat_select_type', methods: ['GET', 'POST'])]
     public function selectType(): Response
     {
