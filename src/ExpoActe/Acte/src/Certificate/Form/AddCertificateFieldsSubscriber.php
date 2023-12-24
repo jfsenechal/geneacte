@@ -49,6 +49,7 @@ readonly class AddCertificateFieldsSubscriber implements EventSubscriberInterfac
                 'help' => $meta->metaLabel->aide,
                 'label' => $meta->metaLabel->etiq,
                 'attr' => ['groupLabel' => $meta->groupe],
+                //   'data_class' => Metadb::class,
             ];
             if ($meta->taille > 0) {
                 $constraints[] = new Length(min: $meta->taille);
