@@ -2,10 +2,9 @@
 
 namespace ExpoActe\Acte\Certificate\Form;
 
+use ExpoActe\Acte\Certificate\CertificateInterface;
 use ExpoActe\Acte\Certificate\TypeFieldEnum;
-use ExpoActe\Acte\Entity\BirthCertificate;
 use ExpoActe\Acte\Repository\MetaDbRepository;
-use ExpoActe\Acte\Repository\MetaLabelRepository;
 use ExpoActe\Acte\Tools\StringUtil;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -15,11 +14,10 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Validator\Constraints\Length;
 
-class AddCertificateFieldsSubscriber implements EventSubscriberInterface
+readonly class AddCertificateFieldsSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private readonly MetaLabelRepository $metaLabelRepository,
-        private readonly MetaDbRepository $metaDbRepository
+        private MetaDbRepository $metaDbRepository
     ) {
     }
 
@@ -38,7 +36,7 @@ class AddCertificateFieldsSubscriber implements EventSubscriberInterface
     {
         $form = $event->getForm();
         /**
-         * @var BirthCertificate $certificate
+         * @var CertificateInterface $certificate
          */
         $certificate = $event->getData();
 

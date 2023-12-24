@@ -2,9 +2,9 @@
 
 namespace ExpoActe\Acte\Controller;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use ExpoActe\Acte\Certificate\CertificateTypeEnum;
 use ExpoActe\Acte\Label\Form\LabelType;
+use ExpoActe\Acte\Label\Handler\LabelHandler;
 use ExpoActe\Acte\Label\LabelDocumentEnum;
 use ExpoActe\Acte\Label\LabelDto;
 use ExpoActe\Acte\Label\Utils\LabelUtils;
@@ -21,26 +21,20 @@ class LabelController extends AbstractController
     public function __construct(
         private readonly MetaGroupLabelRepository $metaGroupLabelRepository,
         private readonly MetaDbRepository $metaDbRepository,
+        private readonly LabelHandler $labelHandler
     ) {
 
     }
 
-    #[Route(path: '/{type}', name: 'expoacte_label_index')]
-    public function index(CertificateTypeEnum $type = null): Response
+    #[Route(path: '/', name: 'expoacte_label_index')]
+    public function index(): Response
     {
         $groups = CertificateTypeEnum::cases();
-        $metas = [];
-        if ($type) {
-            $metas = $this->metaDbRepository->findByCertificateType($type->value);
-        }
-        $data = LabelUtils::groupAll($metas);
 
         return $this->render(
             '@ExpoActe/label/index.html.twig',
             [
                 'groups' => $groups,
-                'type' => $type,
-                'data' => $data,
             ]
         );
     }
@@ -66,7 +60,7 @@ class LabelController extends AbstractController
     public function edit(Request $request, CertificateTypeEnum $type = CertificateTypeEnum::BIRTH): Response
     {
         $metas = $this->metaDbRepository->findByCertificateType($type->value);
-        $labelDto = new LabelDto($type);
+
         $metasLabel = [];
         foreach ($metas as $meta) {
             if (trim($meta->affich) == "") {
@@ -74,17 +68,24 @@ class LabelController extends AbstractController
             }
             $meta->metaLabel->documentEnum = LabelDocumentEnum::from($meta->affich);
             $meta->metaLabel->metaDb = $meta;
+            $meta->metaLabel->metaGroupLabel = $this->metaGroupLabelRepository->findByCertificateTypeAndGrp(
+                $type->value,
+                $meta->groupe
+            );
             $metasLabel[] = $meta->metaLabel;
         }
 
-        $labelDto->metasLabel = new ArrayCollection($metasLabel);
-        $labelGroups = $this->metaGroupLabelRepository->findByCertificateType($type->value);
+        $labelDto = new LabelDto($type, $metasLabel);
 
         $form = $this->createForm(LabelType::class, $labelDto);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $this->labelHandler->treatmentEdit($form->getData());
+            $this->addFlash('success', 'Les étiquettes ont bien été modifiées');
+
+            return $this->redirectToRoute('expoacte_label_edit', ['type' => $type->value]);
         }
 
         return $this->render(
@@ -92,7 +93,6 @@ class LabelController extends AbstractController
             [
                 'typeSelected' => $type,
                 'form' => $form,
-                'labelGroups' => $labelGroups,
             ]
         );
     }

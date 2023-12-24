@@ -1,19 +1,35 @@
 {{ form_start(form) }}
-<table class="table table-bordered">
-    <tr>
-        <th>Zone</th>
-        <th>Document</th>
-        <th>Etiquette</th>
-    </tr>
-    {% for metaLabel in form.metasLabel %}
+ {% set groupOld = '' %}
+    {% for metaLabelFormView in form.metasLabel %}
+
+        {% set metaLabel = metaLabelFormView.vars.value %}
+        {% set group = metaLabel.metaDb.groupe %}
+
+        {% if group != groupOld %}
+            <h4 class="text-info">{{ metaLabel.metaGroupLabel.getiq }}</h4>
+            <span class="text-muted">{{ group|label_group_name }}</span>
+            <hr>
+            <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Zone</th>
+                <th>Document</th>
+                <th>Etiquette</th>
+            </tr>
+            </thead>
+        {% endif %}
         <tr>
             <td>
-                {{ metaLabel.vars.value.metaDb.zone }}
+                {{ metaLabel.metaDb.zone }}
             </td>
-            <td>{{ form_row(metaLabel.documentEnum) }}</td>
-            <td>{{ form_row(metaLabel.etiq) }}</td>
+            <td>{{ form_row(metaLabelFormView.documentEnum) }}</td>
+            <td>{{ form_row(metaLabelFormView.etiq) }}</td>
         </tr>
+        {% set groupOld = group %}
+        {% if group != groupOld %}
+            </table>
+        {% endif %}
+
     {% endfor %}
-</table>
 <button class="btn btn-primary" type="submit"><i class="ti ti-device-floppy"></i> Sauvegarder</button>
 {{ form_end(form) }}

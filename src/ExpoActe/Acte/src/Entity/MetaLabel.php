@@ -32,6 +32,7 @@ class MetaLabel
     public ?LabelDocumentEnum $documentEnum = null;
     public ?Metadb $metaDb = null;
     public ?string $zone = null;
+    public ?MetaGroupLabel $metaGroupLabel = null;
 
     public function __toString(): string
     {

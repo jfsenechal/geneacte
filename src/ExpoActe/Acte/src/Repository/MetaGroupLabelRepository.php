@@ -3,6 +3,7 @@
 namespace ExpoActe\Acte\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use ExpoActe\Acte\Doctrine\OrmCrudTrait;
@@ -43,6 +44,20 @@ class MetaGroupLabelRepository extends ServiceEntityRepository
             ->andWhere('mgrplg.dtable = :table')
             ->setParameter('table', $certificateType)
             ->getQuery()->getResult();
+    }
+
+    /**
+     * @return MetaGroupLabel|null
+     * @throws NonUniqueResultException
+     */
+    public function findByCertificateTypeAndGrp(string $certificateType, string $grp): ?MetaGroupLabel
+    {
+        return $this->createQb()
+            ->andWhere('mgrplg.dtable = :table')
+            ->setParameter('table', $certificateType)
+            ->andWhere('mgrplg.grp = :code')
+            ->setParameter('code', $grp)
+            ->getQuery()->getOneOrNullResult();
     }
 
     private function createQb(): QueryBuilder

@@ -10,13 +10,13 @@ use ExpoActe\Acte\Entity\Metadb;
 class LabelDto
 {
     /**
-     * @var Metadb[]|Collection
+     * @var Collection<Metadb>
      */
     public Collection $metasLabel;
 
-    public function __construct(public ?CertificateTypeEnum $certificateEnum)
+    public function __construct(public ?CertificateTypeEnum $certificateEnum, array $metasLabel)
     {
-        $this->metasLabel = new ArrayCollection();
+        $this->metasLabel = new ArrayCollection($metasLabel);
     }
 
 }
