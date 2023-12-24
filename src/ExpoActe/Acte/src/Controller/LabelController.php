@@ -3,9 +3,10 @@
 namespace ExpoActe\Acte\Controller;
 
 use ExpoActe\Acte\Certificate\CertificateTypeEnum;
+use ExpoActe\Acte\Entity\MetaGroupLabel;
 use ExpoActe\Acte\Label\Form\LabelType;
+use ExpoActe\Acte\Label\Form\MetaGroupLabelType;
 use ExpoActe\Acte\Label\Handler\LabelHandler;
-use ExpoActe\Acte\Label\LabelDocumentEnum;
 use ExpoActe\Acte\Label\LabelDto;
 use ExpoActe\Acte\Label\Utils\LabelUtils;
 use ExpoActe\Acte\Repository\MetaDbRepository;
@@ -61,15 +62,7 @@ class LabelController extends AbstractController
     {
         $metas = $this->metaDbRepository->findByCertificateType($type->value);
 
-        $metasLabel = [];
-        foreach ($metas as $meta) {
-            if (trim($meta->affich) == "") {
-                $meta->affich = LabelDocumentEnum::NOT_EMPTY->value;
-            }
-            $meta->metaLabel->labelDocumentEnum = LabelDocumentEnum::from($meta->affich);
-            $meta->metaLabel->metaDb = $meta;
-            $metasLabel[] = $meta->metaLabel;
-        }
+        $metasLabel = LabelUtils::extractMetasLabel($metas);
 
         $labelDto = new LabelDto($type, $metasLabel);
         $labelGroups = $this->metaGroupLabelRepository->findByCertificateType($type->value);
@@ -98,6 +91,29 @@ class LabelController extends AbstractController
             [
                 'typeSelected' => $type,
                 'labelGroups' => $labelGroups,
+                'form' => $form,
+            ]
+        );
+    }
+
+    #[Route(path: '/{id}/group/edit', name: 'expoacte_label_group_edit')]
+    public function editGroup(Request $request, MetaGroupLabel $metaGroupLabel): Response
+    {
+        $form = $this->createForm(MetaGroupLabelType::class, $metaGroupLabel);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->metaGroupLabelRepository->flush();
+            $this->addFlash('success', 'Les étiquettes ont bien été modifiées');
+
+            return $this->redirectToRoute('expoacte_label_edit', ['type' => $metaGroupLabel->dtable]);
+        }
+
+        return $this->render(
+            '@ExpoActe/label/edit_group.html.twig',
+            [
+                'metaGroupLabel' => $metaGroupLabel,
                 'form' => $form,
             ]
         );

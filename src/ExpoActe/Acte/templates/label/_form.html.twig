@@ -1,8 +1,14 @@
 {{ form_start(form) }}
+{{ form_errors(form) }}
     {% for labelGroup in labelGroups %}
-        {% if labelGroup.fields|length >0 %}
-            <h4 class="text-info">{{ labelGroup.getiq }}</h4>
-            <span class="text-muted">Nom original: {{ labelGroup.labelGroupEnum.label }} </span>
+        {% if labelGroup.fields|length > 0 %}
+            <div class="d-flex flex-row gap-4">
+                <h4 class="text-info">{{ labelGroup.getiq }}</h4>
+                <a href="{{ path('expoacte_label_group_edit', {'id': labelGroup.id}) }}" title="Renommer">
+                    <i class="ti ti-pencil"></i>
+                </a>
+                <span class="text-muted">Groupe: {{ labelGroup.labelGroupEnum.label }} </span>
+            </div>
             <hr>
             <table class="table table-bordered">
                 <thead>
