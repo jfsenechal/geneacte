@@ -1,32 +1,33 @@
 {{ form_start(form) }}
     {% for labelGroup in labelGroups %}
-        <h4 class="text-info">{{ labelGroup.getiq }}</h4>
-        <span class="text-muted">Nom original: {{ labelGroup.labelGroupEnum.label }} </span>
-        <hr>
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>Zone</th>
-                <th>Document</th>
-                <th>Etiquette</th>
-            </tr>
-            </thead>
-            {% for metaLabelFormView in form.metasLabel %}
+        {% if labelGroup.fields|length >0 %}
+            <h4 class="text-info">{{ labelGroup.getiq }}</h4>
+            <span class="text-muted">Nom original: {{ labelGroup.labelGroupEnum.label }} </span>
+            <hr>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Zone</th>
+                    <th>Document</th>
+                    <th>Etiquette</th>
+                </tr>
+                </thead>
+                {% for metaLabelFormView in form.metasLabel %}
+                    {% set metaLabel = metaLabelFormView.vars.value %}
+                    {% set group = metaLabel.metaDb.groupe %}
 
-                {% set metaLabel = metaLabelFormView.vars.value %}
-                {% set group = metaLabel.metaDb.groupe %}
-
-                {% if labelGroup.grp == group %}
-                    <tr>
-                        <td>
-                            {{ metaLabel.metaDb.zone }}
-                        </td>
-                        <td>{{ form_row(metaLabelFormView.documentEnum) }}</td>
-                        <td>{{ form_row(metaLabelFormView.etiq) }}</td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
-        </table>
+                    {% if labelGroup.grp == group %}
+                        <tr>
+                            <td>
+                                {{ metaLabel.metaDb.zone }}
+                            </td>
+                            <td>{{ form_row(metaLabelFormView.labelDocumentEnum) }}</td>
+                            <td>{{ form_row(metaLabelFormView.etiq) }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        {% endif %}
     {% endfor %}
 <button class="btn btn-primary" type="submit"><i class="ti ti-device-floppy"></i> Sauvegarder</button>
 {{ form_end(form) }}

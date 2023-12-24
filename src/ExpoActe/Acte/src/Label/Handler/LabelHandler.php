@@ -14,7 +14,7 @@ class LabelHandler
     public function treatmentEdit(LabelDto $labelDto)
     {
         foreach ($labelDto->metasLabel as $metaLabel) {
-            $metaLabel->metaDb->affich = $metaLabel->documentEnum->value;
+            $metaLabel->metaDb->affich = $metaLabel->labelDocumentEnum->value;
         }
         $this->metaDbRepository->flush();
     }

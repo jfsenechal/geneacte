@@ -29,7 +29,7 @@ class MetaLabel
     public ?string $aide = null;
 
     //for edit form
-    public ?LabelDocumentEnum $documentEnum = null;
+    public ?LabelDocumentEnum $labelDocumentEnum = null;
     public ?Metadb $metaDb = null;
     public ?string $zone = null;
     public ?MetaGroupLabel $metaGroupLabel = null;

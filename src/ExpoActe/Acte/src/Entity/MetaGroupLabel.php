@@ -4,7 +4,8 @@ namespace ExpoActe\Acte\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Form\Form;
+use ExpoActe\Acte\Label\LabelGroupEnum;
+use Symfony\Component\Form\FormView;
 
 #[ORM\Table(name: 'act_mgrplg')]
 #[ORM\Entity]
@@ -31,11 +32,12 @@ class MetaGroupLabel
     public string $getiq;
 
     /**
-     * @var Metadb[]
+     * To get original name
      */
-    public array $metas = [];
+    public ?LabelGroupEnum $labelGroupEnum = null;
+
     /**
-     * @var Form[] $fields
+     * @var FormView[] $fields
      */
     public array $fields = [];
 

@@ -66,16 +66,13 @@ class LabelController extends AbstractController
             if (trim($meta->affich) == "") {
                 $meta->affich = LabelDocumentEnum::NOT_EMPTY->value;
             }
-            $meta->metaLabel->documentEnum = LabelDocumentEnum::from($meta->affich);
+            $meta->metaLabel->labelDocumentEnum = LabelDocumentEnum::from($meta->affich);
             $meta->metaLabel->metaDb = $meta;
-            $meta->metaLabel->metaGroupLabel = $this->metaGroupLabelRepository->findByCertificateTypeAndGrp(
-                $type->value,
-                $meta->groupe
-            );
             $metasLabel[] = $meta->metaLabel;
         }
 
         $labelDto = new LabelDto($type, $metasLabel);
+        $labelGroups = $this->metaGroupLabelRepository->findByCertificateType($type->value);
 
         $form = $this->createForm(LabelType::class, $labelDto);
         $form->handleRequest($request);
@@ -88,10 +85,19 @@ class LabelController extends AbstractController
             return $this->redirectToRoute('expoacte_label_edit', ['type' => $type->value]);
         }
 
+        foreach ($labelGroups as $labelGroup) {
+            foreach ($form->get('metasLabel') as $field) {
+                if ($labelGroup->grp == $field->getData()->metaDb->groupe) {
+                    $labelGroup->fields[] = $field;
+                }
+            }
+        }
+
         return $this->render(
             '@ExpoActe/label/edit.html.twig',
             [
                 'typeSelected' => $type,
+                'labelGroups' => $labelGroups,
                 'form' => $form,
             ]
         );

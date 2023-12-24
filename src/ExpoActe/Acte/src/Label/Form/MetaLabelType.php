@@ -20,17 +20,17 @@ class MetaLabelType extends AbstractType
             ->add('etiq', TextType::class, [
                 'label' => false,
             ])
-            ->add('documentEnum', EnumType::class, [
+            ->add('labelDocumentEnum', EnumType::class, [
                 'class' => LabelDocumentEnum::class,
                 'label' => false,
                 'choice_label' => fn(LabelDocumentEnum $labelDocumentEnum) => $labelDocumentEnum->getLabel(),
                 'placeholder' => 'Sélectionnez',
             ]);
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
+      /*  $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
             /**
              * @var MetaLabel $data
-             */
+             *
             $data = $event->getData();
             $form = $event->getForm();
 
@@ -44,7 +44,7 @@ class MetaLabelType extends AbstractType
                     'placeholder' => 'Sélectionnez',
                 ]);
             }
-        });
+        });*/
     }
 
     public function configureOptions(OptionsResolver $resolver): void

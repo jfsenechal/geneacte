@@ -8,6 +8,7 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use ExpoActe\Acte\Doctrine\OrmCrudTrait;
 use ExpoActe\Acte\Entity\MetaGroupLabel;
+use ExpoActe\Acte\Label\LabelGroupEnum;
 
 /**
  * @method MetaGroupLabel|null find($id, $lockMode = null, $lockVersion = null)
@@ -40,10 +41,16 @@ class MetaGroupLabelRepository extends ServiceEntityRepository
      */
     public function findByCertificateType(string $certificateType): array
     {
-        return $this->createQb()
+        $labelGroups = $this->createQb()
             ->andWhere('mgrplg.dtable = :table')
             ->setParameter('table', $certificateType)
             ->getQuery()->getResult();
+
+        foreach ($labelGroups as $labelGroup) {
+            $labelGroup->labelGroupEnum = LabelGroupEnum::from($labelGroup->grp);
+        }
+
+        return $labelGroups;
     }
 
     /**
