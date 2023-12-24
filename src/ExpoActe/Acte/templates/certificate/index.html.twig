@@ -1,39 +1,20 @@
 {% extends '@ExpoActe/base.html.twig' %}
 
-{% block title %}ActParams index{% endblock %}
+{% block title %}Liste des actes{% endblock %}
 
 {% block body %}
     <div class="card">
-        <h3 class="card-header">Liste des actes de naissances</h3>
+        <h3 class="card-header">Consulter les actes</h3>
         <div class="card-body">
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>Param</th>
-                    <th>Groupe</th>
-                    <th>Ordre</th>
-                    <th>Type</th>
-                    <th>Valeur</th>
-                    <th>Libelle</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for certificate in certificates %}
-                    <tr>
-                        <td>
-                            <a href="{{ path('expoacte_certificate_birth_show', {'uuid': certificate.uuid}) }}">
-                                {{ certificate.uuid }}
-                            </a>
-                        </td>
-                        <td>{{ certificate.commune }}</td>
-                        <td>{{ certificate.t1Nom }}</td>
-                        <td>{{ certificate.t1Pre }}</td>
-                        <td>{{ certificate.datetxt }}</td>
-                        <td class="text-muted">{{ certificate.deposant }}</td>
-                    </tr>
+            <ul class="list-group list-group-horizontal mb-3">
+                {% for certificateType in certificateTypes %}
+                    <li class="list-group-item">
+                        <a href="{{ path('expoacte_label_edit', {'type':certificateType.value}) }}">
+                            {{ certificateType.label }}
+                        </a>
+                    </li>
                 {% endfor %}
-                </tbody>
-            </table>
+            </ul>
 
         </div>
     </div>

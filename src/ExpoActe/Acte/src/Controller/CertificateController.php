@@ -12,6 +12,7 @@ use ExpoActe\Acte\Certificate\Message\CertificateCreated;
 use ExpoActe\Acte\Certificate\Message\CertificateDeleted;
 use ExpoActe\Acte\Certificate\Message\CertificateUpdated;
 use ExpoActe\Acte\Repository\SummaryRepository;
+use ExpoActe\Acte\User\Form\UserSearchType;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
@@ -32,6 +33,28 @@ class CertificateController extends AbstractController
         private readonly MessageBusInterface $bus
     ) {
     }
+
+    #[Route('/', name: 'expoacte_certificate_index', methods: ['GET', 'POST'])]
+    public function index(Request $request): Response
+    {
+        $form = $this->createForm(UserSearchType::class);
+        $form->handleRequest($request);
+        $types = CertificateTypeEnum::cases();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $users = $this->userRepository->findByName($data['name']);
+        }
+
+        $response = new Response(null, $form->isSubmitted() ? Response::HTTP_ACCEPTED : 200);
+
+        return $this->render('@ExpoActe/certificate/index.html.twig', [
+            'certificateTypes' => $types,
+            'form' => $form,
+            'isSearch' => $form->isSubmitted(),
+        ], $response);
+    }
+
 
     #[Route('/select/type', name: 'expoacte_certificat_select_type', methods: ['GET', 'POST'])]
     public function selectType(): Response
