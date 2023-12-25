@@ -2,6 +2,7 @@
 
 namespace ExpoActe\Acte\Twig\Components;
 
+use ExpoActe\Acte\Entity\Summary;
 use ExpoActe\Acte\Repository\SummaryRepository;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
@@ -23,13 +24,17 @@ class SearchLiveMunicipality
     ) {
     }
 
+    /**
+     * @return array{commune:string, depart:string,id: int}
+     */
     public function getMunicipalities(): array
     {
-        if (null !== $this->query && null !== $this->certificateType) {
-            return $this->actSumRepository->findMunicipalitiesByTableAndName($this->certificateType, $this->query);
-        }
-        if (null !== $this->certificateType) {
+        if (null === $this->query) {
             return $this->actSumRepository->findMunicipalitiesByTable($this->certificateType);
+        }
+
+        if (null !== $this->certificateType) {
+            return $this->actSumRepository->findMunicipalitiesByTableAndName($this->certificateType, $this->query);
         }
 
         return [];

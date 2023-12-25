@@ -11,6 +11,7 @@ use ExpoActe\Acte\Certificate\Handler\CertificateHandler;
 use ExpoActe\Acte\Certificate\Message\CertificateCreated;
 use ExpoActe\Acte\Certificate\Message\CertificateDeleted;
 use ExpoActe\Acte\Certificate\Message\CertificateUpdated;
+use ExpoActe\Acte\Entity\Summary;
 use ExpoActe\Acte\Repository\SummaryRepository;
 use ExpoActe\Acte\User\Form\UserSearchType;
 use Psr\Container\ContainerExceptionInterface;
@@ -69,18 +70,17 @@ class CertificateController extends AbstractController
     ])]
     public function selectMunicipality(string $type): Response
     {
-        $municipalities = $this->summaryRepository->findMunicipalitiesByTable($type);
         $form = $this->createForm(CertificateNewType::class, null);
 
         return $this->render('@ExpoActe/certificate/select_municipality.html.twig', [
-            'municipalities' => $municipalities,
+
             'certificateType' => CertificateTypeEnum::from($type),
             'form' => $form,
         ]);
     }
 
-    #[Route('/new/{type}', name: 'expoacte_certificate_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, string $type): Response
+    #[Route('/new/{type}/{id}', name: 'expoacte_certificate_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, string $type, Summary $summary): Response
     {
         try {
             $factory = $this->certificateFactory->getFactory($type);
@@ -91,6 +91,8 @@ class CertificateController extends AbstractController
         }
 
         $certificate = $factory->newInstance();
+        $certificate->commune = $summary->commune;
+        $certificate->depart = $summary->depart;
 
         $form = $this->createForm(CertificateType::class, $certificate);
 
@@ -153,7 +155,7 @@ class CertificateController extends AbstractController
             ]);
         }
 
-        $labelGroups = $this->certificateHandler->groupFieldsForForm($form, $type);
+        $labelGroups = $this->certificateHandler->groupFieldsForForm($form, $certificate->type);
 
         return $this->render('@ExpoActe/certificate/edit.html.twig', [
             'certificate' => $certificate,
@@ -166,7 +168,7 @@ class CertificateController extends AbstractController
     #[Route('/{uuid}', name: 'expoacte_certificate_delete', methods: ['POST'])]
     public function delete(Request $request, object $certificate): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $certificate->uuid, $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$certificate->uuid, $request->request->get('_token'))) {
             $this->entityManager->remove($certificate);
             $this->entityManager->flush();
 
