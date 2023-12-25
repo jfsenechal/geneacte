@@ -20,6 +20,7 @@ class GeolocationType extends AbstractType
                 TextType::class,
                 [
                     'label' => 'Commune',
+                    'required' => true,
                     'attr' => [
                         'autocomplete' => 'off',
                     ],
@@ -36,9 +37,10 @@ class GeolocationType extends AbstractType
                 ]
             )
             ->add(
-                'noteD',
+                'note_d',
                 TextType::class,
                 [
+                    'required' => false,
                     'label' => 'Commentaire actes de décès',
                     'attr' => [
                         'autocomplete' => 'off',
@@ -46,9 +48,10 @@ class GeolocationType extends AbstractType
                 ]
             )
             ->add(
-                'noteM',
+                'note_m',
                 TextType::class,
                 [
+                    'required' => false,
                     'label' => 'Commentaire actes de mariage',
                     'attr' => [
                         'autocomplete' => 'off',
@@ -56,9 +59,10 @@ class GeolocationType extends AbstractType
                 ]
             )
             ->add(
-                'noteN',
+                'note_n',
                 TextType::class,
                 [
+                    'required' => false,
                     'label' => 'Commentaire actes de naissances',
                     'attr' => [
                         'autocomplete' => 'off',
@@ -66,9 +70,10 @@ class GeolocationType extends AbstractType
                 ]
             )
             ->add(
-                'noteV',
+                'note_v',
                 TextType::class,
                 [
+                    'required' => false,
                     'label' => 'Commentaire actes divers',
                     'attr' => [
                         'autocomplete' => 'off',
@@ -100,7 +105,7 @@ class GeolocationType extends AbstractType
                 EnumType::class,
                 [
                     'class' => GeolocationEnum::class,
-                    'choice_label' => fn (GeolocationEnum $geolocationEnum): string => $geolocationEnum->getLabel(),
+                    'choice_label' => fn(GeolocationEnum $geolocationEnum): string => $geolocationEnum->getLabel(),
                 ]
             );
     }

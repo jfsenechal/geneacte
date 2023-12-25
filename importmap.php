@@ -44,7 +44,14 @@ return [
         'version' => '2.3.1',
         'type' => 'css',
     ],
-    '@tabler/icons-webfont/tabler-icons.min.css'=> [
+    '@tabler/icons-webfont/tabler-icons.min.css' => [
         'version' => '2.44.0',
+    ],
+    'leaflet' => [
+        'version' => '1.9.4',
+    ],
+    'leaflet/dist/leaflet.min.css' => [
+        'version' => '1.9.4',
+        'type' => 'css',
     ],
 ];

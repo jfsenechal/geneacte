@@ -6,7 +6,12 @@
         <h3 class="card-header">{{ geolocation }}</h3>
 
         <div class="card-body">
-           {% include '@ExpoActe/geolocation/_form.html.twig' %}
+            <div class="alert alert-info">
+                Déplacer le curseur à l'endroit voulu pour obtenir la longitude et latitude.
+                <br/>Ensuite sauvegarder les nouvelles coordonnées.
+            </div>
+            {% include '@ExpoActe/geolocation/_form.html.twig' %}
+            {% include '@ExpoActe/geolocation/_openstreet_map.html.twig' %}
         </div>
         <div class="card-footer text-end">
             <a href="{{ path('expoacte_geolocation_index') }}" class="btn btn-secondary">

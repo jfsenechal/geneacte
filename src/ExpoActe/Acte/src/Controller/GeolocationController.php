@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class GeolocationController extends AbstractController
 {
     public function __construct(
-        private readonly GeolocationRepository $geolocationRepository
+        private readonly GeolocationRepository $geolocationRepository,
     ) {
     }
 
@@ -71,7 +71,7 @@ class GeolocationController extends AbstractController
     #[Route('/{id}', name: 'expoacte_geolocation_delete', methods: ['POST'])]
     public function delete(Request $request, Geolocation $geolocation): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $geolocation->id, $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$geolocation->id, $request->request->get('_token'))) {
             $this->geolocationRepository->remove($geolocation);
             $this->geolocationRepository->flush();
             $this->addFlash('success', 'La commune a été supprimée');

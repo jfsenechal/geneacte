@@ -45,7 +45,6 @@ readonly class AddCertificateFieldsSubscriber implements EventSubscriberInterfac
                 'attr' => [
                     'groupLabel' => $meta->groupe,
                 ],
-                //   'data_class' => Metadb::class,
             ];
             if ($meta->taille > 0) {
                 $constraints[] = new Length(min: $meta->taille);
@@ -54,7 +53,10 @@ readonly class AddCertificateFieldsSubscriber implements EventSubscriberInterfac
 
             if ('1' === $meta->bloc) {
                 $type = TextareaType::class;
-                $default['attr']['rows'] = 6;
+                $default['attr']['rows'] = 2;
+                if ($meta->taille === 999) {
+                    $default['attr']['rows'] = 5;
+                }
             }
 
             if ($meta->type === TypeFieldEnum::DAT->value) {
