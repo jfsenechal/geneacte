@@ -32,7 +32,7 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $users = $this->userRepository->findByName($data['name']);
+            $users = $this->userRepository->search($data['name'],$data['statut'],$data['role'],$data['scoring']);
         }
 
         $response = new Response(null, $form->isSubmitted() ? Response::HTTP_ACCEPTED : 200);

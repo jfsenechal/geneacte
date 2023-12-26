@@ -30,11 +30,11 @@ class SearchLiveMunicipality
     public function getMunicipalities(): array
     {
         if (null === $this->query) {
-            return $this->actSumRepository->findMunicipalitiesByTable($this->certificateType);
+            return $this->actSumRepository->findMunicipalitiesByCertificateType($this->certificateType);
         }
 
         if (null !== $this->certificateType) {
-            return $this->actSumRepository->findMunicipalitiesByTableAndName($this->certificateType, $this->query);
+            return $this->actSumRepository->findMunicipalitiesByCertificateTypeAndName($this->certificateType, $this->query);
         }
 
         return [];

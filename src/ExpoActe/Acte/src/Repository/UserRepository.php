@@ -7,6 +7,7 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use ExpoActe\Acte\Doctrine\OrmCrudTrait;
 use ExpoActe\Acte\Entity\User;
+use ExpoActe\Acte\Security\RoleEnum;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -50,7 +51,7 @@ class UserRepository extends ServiceEntityRepository
     /**
      * @return User[]
      */
-    public function search(?string $name, ?string $statut, ?int $role, ?string $scoring): array
+    public function search(?string $name, ?string $statut, ?RoleEnum $roleEnum, ?string $scoring): array
     {
         $qb = $this->createQb();
         if ($name) {
@@ -63,9 +64,9 @@ class UserRepository extends ServiceEntityRepository
             $qb->andWhere('user.statut = :statut')
                 ->setParameter('statut', $statut);
         }
-        if ($role) {
+        if ($roleEnum) {
             $qb->andWhere('user.level = :role')
-                ->setParameter('role', $role);
+                ->setParameter('role', $roleEnum->value);
         }
         if ($scoring) {
             $qb->andWhere('user.regime = :scoring')
