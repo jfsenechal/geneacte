@@ -21,6 +21,7 @@ use ExpoActe\Acte\Entity\Traits\TypeTrait;
 use ExpoActe\Acte\Entity\Traits\UuidTrait;
 use ExpoActe\Acte\Entity\Traits\Witnesses2Trait;
 use ExpoActe\Acte\Entity\Traits\WitnessesTrait;
+use ExpoActe\Acte\Repository\OtherCertificateRepository;
 
 #[ORM\Table(name: 'act_div3')]
 #[ORM\Index(name: 'NOM', columns: ['NOM'])]
@@ -35,7 +36,7 @@ use ExpoActe\Acte\Entity\Traits\WitnessesTrait;
 #[ORM\Index(name: 'IDNIM', columns: ['IDNIM'])]
 #[ORM\Index(name: 'ORI', columns: ['ORI'])]
 #[ORM\Index(name: 'M_NOM', columns: ['M_NOM'])]
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: OtherCertificateRepository::class)]
 class OtherCertificate implements CertificateInterface
 {
     use IdTrait;

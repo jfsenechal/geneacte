@@ -16,6 +16,7 @@ use ExpoActe\Acte\Entity\Traits\TimestampTrait;
 use ExpoActe\Acte\Entity\Traits\TypeTrait;
 use ExpoActe\Acte\Entity\Traits\UuidTrait;
 use ExpoActe\Acte\Entity\Traits\WitnessesTrait;
+use ExpoActe\Acte\Repository\BirthRepository;
 
 #[ORM\Table(name: 'act_nai3')]
 #[ORM\Index(name: 'LADATE', columns: ['LADATE'])]
@@ -24,7 +25,7 @@ use ExpoActe\Acte\Entity\Traits\WitnessesTrait;
 #[ORM\Index(name: 'COM_DEP', columns: ['COMMUNE', 'DEPART'])]
 #[ORM\Index(name: 'NOM', columns: ['NOM'])]
 #[ORM\Index(name: 'P_NOM', columns: ['P_NOM'])]
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: BirthRepository::class)]
 class BirthCertificate implements CertificateInterface
 {
     use IdTrait;

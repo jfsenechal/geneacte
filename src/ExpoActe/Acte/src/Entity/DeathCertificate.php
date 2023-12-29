@@ -18,6 +18,7 @@ use ExpoActe\Acte\Entity\Traits\TimestampTrait;
 use ExpoActe\Acte\Entity\Traits\TypeTrait;
 use ExpoActe\Acte\Entity\Traits\UuidTrait;
 use ExpoActe\Acte\Entity\Traits\WitnessesTrait;
+use ExpoActe\Acte\Repository\DeathRepository;
 
 #[ORM\Table(name: 'act_dec3')]
 #[ORM\Index(name: 'NOM', columns: ['NOM'])]
@@ -28,7 +29,7 @@ use ExpoActe\Acte\Entity\Traits\WitnessesTrait;
 #[ORM\Index(name: 'P_NOM', columns: ['P_NOM'])]
 #[ORM\Index(name: 'LADATE', columns: ['LADATE'])]
 #[ORM\Index(name: 'M_NOM', columns: ['M_NOM'])]
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: DeathRepository::class)]
 class DeathCertificate implements CertificateInterface
 {
     use IdTrait;

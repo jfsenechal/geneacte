@@ -20,6 +20,7 @@ use ExpoActe\Acte\Entity\Traits\TypeTrait;
 use ExpoActe\Acte\Entity\Traits\UuidTrait;
 use ExpoActe\Acte\Entity\Traits\Witnesses2Trait;
 use ExpoActe\Acte\Entity\Traits\WitnessesTrait;
+use ExpoActe\Acte\Repository\MarriageRepository;
 
 #[ORM\Table(name: 'act_mar3')]
 #[ORM\Index(name: 'COM_DEP', columns: ['COMMUNE', 'DEPART'])]
@@ -33,7 +34,7 @@ use ExpoActe\Acte\Entity\Traits\WitnessesTrait;
 #[ORM\Index(name: 'C_ORI', columns: ['C_ORI'])]
 #[ORM\Index(name: 'CP_NOM', columns: ['CP_NOM'])]
 #[ORM\Index(name: 'C_NOM', columns: ['C_NOM'])]
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: MarriageRepository::class)]
 class MarriageCertificate implements CertificateInterface
 {
     use IdTrait;
