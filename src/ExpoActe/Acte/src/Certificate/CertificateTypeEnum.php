@@ -2,6 +2,11 @@
 
 namespace ExpoActe\Acte\Certificate;
 
+use ExpoActe\Acte\Entity\BirthCertificate;
+use ExpoActe\Acte\Entity\DeathCertificate;
+use ExpoActe\Acte\Entity\MarriageCertificate;
+use ExpoActe\Acte\Entity\OtherCertificate;
+
 enum CertificateTypeEnum: string
 {
     case BIRTH = 'N';
@@ -18,6 +23,16 @@ enum CertificateTypeEnum: string
             CertificateTypeEnum::DEATH => 'Décès',
             CertificateTypeEnum::OTHER => 'Divers',
             CertificateTypeEnum::OTHER_SPECIAL => 'Divers spéciales',
+        };
+    }
+
+    public function getClassName(): string
+    {
+        return match ($this) {
+            CertificateTypeEnum::BIRTH => BirthCertificate::class,
+            CertificateTypeEnum::MARRIAGE => MarriageCertificate::class,
+            CertificateTypeEnum::DEATH => DeathCertificate::class,
+            CertificateTypeEnum::OTHER, CertificateTypeEnum::OTHER_SPECIAL => OtherCertificate::class,
         };
     }
 
