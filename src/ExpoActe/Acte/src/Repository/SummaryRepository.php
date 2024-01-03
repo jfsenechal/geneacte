@@ -51,6 +51,20 @@ class SummaryRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return Summary[]
+     */
+    public function findMunicipalityAndCertificateType(string $municipality, string $certificateType): array
+    {
+        return $this->createQb()
+            ->andWhere('act_sum.commune = :commune')
+            ->setParameter('commune', $municipality)
+            ->andWhere('act_sum.typact = :table')
+            ->setParameter('table', $certificateType)
+            ->addOrderBy('act_sum.depart')
+            ->getQuery()->getResult();
+    }
+
+    /**
      * @return array{commune:string, depart:string,id: int}
      */
     public function findMunicipalitiesByCertificateTypeAndName(string $certificateType, string $name): array

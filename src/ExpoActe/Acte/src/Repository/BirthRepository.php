@@ -16,7 +16,7 @@ use ExpoActe\Acte\Entity\BirthCertificate;
  */
 class BirthRepository extends ServiceEntityRepository
 {
-    use OrmCrudTrait;
+    use OrmCrudTrait, StatisticsTrait;
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -30,6 +30,19 @@ class BirthRepository extends ServiceEntityRepository
     {
         return $this->createQb()
             ->orderBy('birth.t1Nom', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return array{commune:string, depart:string}
+     */
+    public function findMunicipalities(): array
+    {
+        return $this->createQb()
+            ->select('birth.commune', 'birth.depart')
+            ->distinct()
+            ->orderBy('birth.commune', 'ASC')
             ->getQuery()
             ->getResult();
     }

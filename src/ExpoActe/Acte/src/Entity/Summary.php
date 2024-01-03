@@ -4,16 +4,14 @@ namespace ExpoActe\Acte\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ExpoActe\Acte\Entity\Traits\IdTrait;
 
 #[ORM\Table(name: 'act_sums')]
 #[ORM\Index(name: 'typ_lib_com_dep', columns: ['TYPACT', 'LIBELLE', 'COMMUNE', 'DEPART'])]
 #[ORM\Entity]
 class Summary
 {
-    #[ORM\Column(name: 'id', type: Types::INTEGER, nullable: false)]
-    #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    public int $id;
+    use IdTrait;
 
     #[ORM\Column(name: 'COMMUNE', type: Types::STRING, length: 40, nullable: false)]
     public string $commune = '';
