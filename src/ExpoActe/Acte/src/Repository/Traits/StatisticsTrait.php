@@ -1,8 +1,9 @@
 <?php
 
-namespace ExpoActe\Acte\Repository;
+namespace ExpoActe\Acte\Repository\Traits;
 
 use Doctrine\DBAL\Exception;
+use ExpoActe\Acte\Certificate\CertificateTypeEnum;
 
 /**
  * Explication des éléments de la requête:
@@ -29,14 +30,20 @@ trait StatisticsTrait
 {
 
     /**
-     * @param string $municipalityName
+     * @return array
      * @throws Exception
      */
-    public function statistics(string $municipalityName): array
+    public function statistics(string $type, string $municipalityName): array
     {
         $municipalityName = addslashes($municipalityName);
+        $libel = match ($type) {
+            CertificateTypeEnum::BIRTH->value, CertificateTypeEnum::DEATH->value, CertificateTypeEnum::MARRIAGE->value => ",'' as LIBELLE",
+            CertificateTypeEnum::OTHER->value,CertificateTypeEnum::OTHER_SPECIAL->value => ",LIBELLE",
+            default => '',
+        };
+
         $tableName = $this->getClassMetadata()->table['name'];
-        $sql = "SELECT certificate.commune, certificate.depart, certificate.deposant, COUNT(*) AS ctot, 
+        $sql = "SELECT certificate.commune, certificate.depart, certificate.deposant $libel, COUNT(*) AS ctot, 
         MAX(certificate.dtdepot) AS ddepot,
         MIN(CASE WHEN YEAR(certificate.ladate) > 0 THEN YEAR(certificate.ladate) ELSE NULL END) AS dmin, 
         MAX(YEAR(certificate.ladate)) AS dmax, 
@@ -44,6 +51,7 @@ trait StatisticsTrait
         SUM(CASE WHEN YEAR(certificate.ladate) > 0 THEN 1 ELSE 0 END) AS cnnul 
         FROM $tableName certificate                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
         WHERE certificate.commune = '$municipalityName' GROUP BY certificate.commune, certificate.depart, certificate.deposant;";
+
         $conn = $this->getEntityManager()->getConnection();
         $resultSet = $conn->executeQuery($sql);
 

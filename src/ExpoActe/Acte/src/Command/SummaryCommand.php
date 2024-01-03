@@ -61,7 +61,7 @@ class SummaryCommand extends Command
         foreach ($repository->findMunicipalities() as $item) {
             $io->section($item['commune']);
             $this->removeOld($item['commune'], $certificateType->value);
-            $results = $repository->statistics($item['commune']);
+            $results = $repository->statistics($certificateType->value, $item['commune']);
             foreach ($results as $result) {
                 if ($result['dmax'] == 0) {
                     $io->error('Les dates de '.$item['COMMUNE'].' sont mal encodées');

@@ -7,6 +7,7 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use ExpoActe\Acte\Doctrine\OrmCrudTrait;
 use ExpoActe\Acte\Entity\MarriageCertificate;
+use ExpoActe\Acte\Repository\Traits\StatisticsTrait;
 
 /**
  * @method MarriageCertificate|null find($id, $lockMode = null, $lockVersion = null)
@@ -16,7 +17,7 @@ use ExpoActe\Acte\Entity\MarriageCertificate;
  */
 class MarriageRepository extends ServiceEntityRepository
 {
-    use OrmCrudTrait;
+    use OrmCrudTrait, StatisticsTrait;
 
     public function __construct(ManagerRegistry $registry)
     {

@@ -7,6 +7,7 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use ExpoActe\Acte\Doctrine\OrmCrudTrait;
 use ExpoActe\Acte\Entity\BirthCertificate;
+use ExpoActe\Acte\Repository\Traits\StatisticsTrait;
 
 /**
  * @method BirthCertificate|null find($id, $lockMode = null, $lockVersion = null)
