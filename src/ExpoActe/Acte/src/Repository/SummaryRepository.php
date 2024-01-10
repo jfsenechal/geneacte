@@ -3,6 +3,7 @@
 namespace ExpoActe\Acte\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use ExpoActe\Acte\Doctrine\OrmCrudTrait;
@@ -105,6 +106,9 @@ class SummaryRepository extends ServiceEntityRepository
             ->getQuery()->getResult();
     }
 
+    /**
+     * @throws Exception
+     */
     public function alphabetCertificateType(): array
     {
         $tableName = $this->getClassMetadata()->table['name'];
@@ -116,14 +120,17 @@ class SummaryRepository extends ServiceEntityRepository
 
     }
 
-    public function findCertificatesByType(string $type): array
+    /**
+     * @throws Exception
+     */
+    public function findCertificatesByType(string $type, string $letter = null): array
     {
         /**
          * select typact, libelle,commune,depart, min(AN_MIN) R_AN_MIN, max(AN_MAX) R_AN_MAX, sum(NB_FIL) S_NB_FIL, sum(NB_TOT) S_NB_TOT, sum(NB_N_NUL) S_NB_N_NUL
          * from act_sums where typact = 'M' group by typact,libelle,commune,depart order by libelle,commune,depart;
          */
         $tableName = $this->getClassMetadata()->table['name'];
-        $sql = "select typact, libelle,commune,depart, min(an_min) r_an_min, max(an_max) r_an_max, sum(nb_fil) s_nb_fil, sum(nb_tot) s_nb_tot, sum(nb_n_nul) s_nb_nul from $tableName where typact = '$type' group by typact,libelle,commune,depart order by libelle,commune,depart;";
+        $sql = "select id, typact, libelle,commune,depart, min(an_min) r_an_min, max(an_max) r_an_max, sum(nb_fil) s_nb_fil, sum(nb_tot) s_nb_tot, sum(nb_n_nul) s_nb_nul from $tableName where typact = '$type' group by typact,libelle,commune,depart order by libelle,commune,depart;";
         $conn = $this->getEntityManager()->getConnection();
         $resultSet = $conn->executeQuery($sql);
 

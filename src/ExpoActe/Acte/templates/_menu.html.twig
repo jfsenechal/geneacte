@@ -1,17 +1,17 @@
 {% set action = app.request.attributes.get("_route") %}
 <li>
-    <a href="{{ path('expoacte_certificat_select_type') }}" class="nav-link px-2 link-dark">
+    <a href="{{ path('expoacte_certificat_admin_select_type') }}" class="nav-link px-2 link-dark">
         <i class="ti ti-plus"></i> Ajouter un acte
     </a>
 </li>
 <li>
     <a href="{{ path('expoacte_certificate_index') }}" class="nav-link px-2 link-dark">
-        <i class="ti ti-search"></i> Actes
+        <i class="ti ti-search"></i> Consulter les actes
     </a>
 </li>
 <li>
-    <a href="{{ path('expoacte_article_index') }}" class="nav-link px-2 link-dark">
-        <i class="ti ti-list"></i> Articles
+    <a href="{{ path('expoacte_certificate_admin_index') }}" class="nav-link px-2 link-dark">
+        <i class="ti ti-database-edit"></i> Gestion des actes
     </a>
 </li>
 <li>
@@ -26,6 +26,11 @@
         <li>
             <a href="{{ path('expoacte_user_index') }}" class="dropdown-item">
                 <i class="ti ti-users"></i> Utilisateurs
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('expoacte_article_index') }}" class="dropdown-item">
+                <i class="ti ti-list"></i> Articles
             </a>
         </li>
         <li>

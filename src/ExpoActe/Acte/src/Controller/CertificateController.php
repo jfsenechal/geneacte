@@ -6,13 +6,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use ExpoActe\Acte\Certificate\CertificateTypeEnum;
 use ExpoActe\Acte\Certificate\Factory\CertificateFactory;
 use ExpoActe\Acte\Certificate\Form\CertificateNewType;
+use ExpoActe\Acte\Certificate\Form\CertificateSearchType;
 use ExpoActe\Acte\Certificate\Form\CertificateType;
 use ExpoActe\Acte\Certificate\Handler\CertificateHandler;
 use ExpoActe\Acte\Certificate\Message\CertificateCreated;
 use ExpoActe\Acte\Certificate\Message\CertificateDeleted;
 use ExpoActe\Acte\Certificate\Message\CertificateUpdated;
 use ExpoActe\Acte\Entity\Summary;
-use ExpoActe\Acte\Repository\SummaryRepository;
 use ExpoActe\Acte\User\Form\UserSearchType;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -23,11 +23,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route(path: '/certificate')]
+#[Route(path: '/admin/certificate')]
 class CertificateController extends AbstractController
 {
     public function __construct(
-        private readonly SummaryRepository $summaryRepository,
         private readonly CertificateFactory $certificateFactory,
         private readonly CertificateHandler $certificateHandler,
         private readonly EntityManagerInterface $entityManager,
@@ -35,10 +34,10 @@ class CertificateController extends AbstractController
     ) {
     }
 
-    #[Route('/', name: 'expoacte_certificate_index', methods: ['GET', 'POST'])]
+    #[Route('/', name: 'expoacte_certificate_admin_index', methods: ['GET', 'POST'])]
     public function index(Request $request): Response
     {
-        $form = $this->createForm(UserSearchType::class);
+        $form = $this->createForm(CertificateSearchType::class);
         $form->handleRequest($request);
         $types = CertificateTypeEnum::cases();
 
@@ -48,21 +47,15 @@ class CertificateController extends AbstractController
 
         $response = new Response(null, $form->isSubmitted() ? Response::HTTP_ACCEPTED : 200);
 
-        $menu = $this->summaryRepository->certificateMenu();
-        $letters = $this->summaryRepository->alphabetCertificateType();
-        $data = $this->summaryRepository->findCertificatesByType(CertificateTypeEnum::MARRIAGE->value);
 
         return $this->render('@ExpoActe/certificate/index.html.twig', [
             'certificateTypes' => $types,
-            'menu' => $menu,
-            'letters' => $letters,
-            'data' => $data,
             'form' => $form,
             'isSearch' => $form->isSubmitted(),
         ], $response);
     }
 
-    #[Route('/select/type', name: 'expoacte_certificat_select_type', methods: ['GET', 'POST'])]
+    #[Route('/select/type', name: 'expoacte_certificat_admin_select_type', methods: ['GET', 'POST'])]
     public function selectType(): Response
     {
         return $this->render('@ExpoActe/certificate/select_type.html.twig', [
@@ -70,7 +63,7 @@ class CertificateController extends AbstractController
         ]);
     }
 
-    #[Route('/select/municipality/{type}', name: 'expoacte_certificate_select_municipality', methods: [
+    #[Route('/select/municipality/{type}', name: 'expoacte_certificate_admin_select_municipality', methods: [
         'GET',
         'POST',
     ])]
@@ -85,7 +78,7 @@ class CertificateController extends AbstractController
         ]);
     }
 
-    #[Route('/new/{type}/{id}', name: 'expoacte_certificate_new', methods: ['GET', 'POST'])]
+    #[Route('/new/{type}/{id}', name: 'expoacte_certificate_admin_new', methods: ['GET', 'POST'])]
     public function new(Request $request, string $type, Summary $summary): Response
     {
         try {
@@ -127,7 +120,7 @@ class CertificateController extends AbstractController
         ], $response);
     }
 
-    #[Route('/{uuid}/show', name: 'expoacte_certificate_show', methods: ['GET', 'POST'])]
+    #[Route('/{uuid}/show', name: 'expoacte_certificate_admin_show', methods: ['GET', 'POST'])]
     public function show(
         #[MapEntity(objectManager: 'foo')]
         object $certificate
@@ -137,7 +130,7 @@ class CertificateController extends AbstractController
         ]);
     }
 
-    #[Route('/{uuid}/edit', name: 'expoacte_certificate_edit', methods: ['GET', 'POST'])]
+    #[Route('/{uuid}/edit', name: 'expoacte_certificate_admin_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, object $certificate): Response
     {
         try {
@@ -171,7 +164,7 @@ class CertificateController extends AbstractController
         ]);
     }
 
-    #[Route('/{uuid}', name: 'expoacte_certificate_delete', methods: ['POST'])]
+    #[Route('/{uuid}', name: 'expoacte_certificate_admin_delete', methods: ['POST'])]
     public function delete(Request $request, object $certificate): Response
     {
         if ($this->isCsrfTokenValid('delete'.$certificate->uuid, $request->request->get('_token'))) {

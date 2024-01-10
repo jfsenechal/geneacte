@@ -1,0 +1,62 @@
+{% extends '@ExpoActe/base.html.twig' %}
+
+{% block title %}Liste des actes{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <h3 class="card-header">Consulter les actes</h3>
+        <div class="card-body">
+            <ul class="list-group list-group-horizontal mb-3">
+                {% for item in menu %}
+                    <li class="list-group-item">
+                        <a href="{{ path('expoacte_certificate_index', {'type': item.typact}) }}">
+                            {{ item.typact }} ({{ item.total }})
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            {% if certificateType %}
+                <ul class="list-group list-group-horizontal mb-3">
+                    {% for letter in letters %}
+                        <li class="list-group-item">
+                            <a href="{{ path('expoacte_certificate_index', {'type': certificateType.value, 'letter': letter.init}) }}">{{ letter.init }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <h4 class="text-success">{{ certificateType.label }}</h4>
+                <hr>
+
+                {% if data|length > 0 %}
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Localité</th>
+                            <th>Commune</th>
+                            <th>Période</th>
+                            <th>Actes</th>
+                            <th>Filiatifs</th>
+                        </tr>
+                        {% for row in data %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('expoacte_certificate_browse', {'id':row.id}) }}">
+                                        {{ row.commune }}
+                                    </a>
+                                </td>
+                                <td>{{ row.depart }}</td>
+                                <td>{{ row.r_an_min }}-{{ row.r_an_max }}</td>
+                                <td>{{ row.s_nb_tot }}</td>
+                                <td>{{ row.s_nb_fil }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <p>Aucune donnée trouvée</p>
+                {% endif %}
+            {% else %}
+                <p>Sélectionnez un type d'acte</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

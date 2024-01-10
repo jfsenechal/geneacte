@@ -9,7 +9,7 @@
             <ul class="list-group">
                 {% for type,name in types %}
                     <li class="list-group-item">
-                       <a href="{{ path('expoacte_certificate_select_municipality', {'type':type}) }}">{{ name }}</a>
+                       <a href="{{ path('expoacte_certificate_admin_select_municipality', {'type':type}) }}">{{ name }}</a>
                     </li>
                 {% endfor %}
             </ul>

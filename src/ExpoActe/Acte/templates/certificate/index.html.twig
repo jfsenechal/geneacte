@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="card">
-        <h3 class="card-header">Consulter les actes</h3>
+        <h3 class="card-header">Gestion des actes</h3>
         <div class="card-body">
             <ul class="list-group list-group-horizontal mb-3">
                 {% for certificateType in certificateTypes %}
@@ -16,45 +16,7 @@
                 {% endfor %}
             </ul>
 
-            <ul class="list-group list-group-horizontal mb-3">
-                {% for item in menu %}
-                    <li class="list-group-item">
-                        {{ item.typact }} ({{ item.total }})
-                    </li>
-                {% endfor %}
-            </ul>
-
-            <ul class="list-group list-group-horizontal mb-3">
-                {% for letter in letters %}
-                    <li class="list-group-item">
-                        {{ letter.init }})
-                    </li>
-                {% endfor %}
-            </ul>
-
-            <h4 class="text-success">Mariage</h4>
-            <hr>
-            <table class="table table-bordered">
-                <tr>
-                    <th>Localité</th>
-                    <th>Commune</th>
-                    <th>Période</th>
-                    <th>Actes</th>
-                    <th>Filiatifs</th>
-                </tr>
-                {% for row in data %}
-                    <tr>
-                        <td>
-                            <a href="">{{ row.commune }}</a>
-                        </td>
-                        <td>{{ row.depart }}</td>
-                        <td>{{ row.r_an_min }}-{{ row.r_an_max }}</td>
-                        <td>{{ row.s_nb_tot }}</td>
-                        <td>{{ row.s_nb_fil }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-
+            {% include '@ExpoActe/certificate/_form_search.html.twig' %}
         </div>
     </div>
 {% endblock %}
