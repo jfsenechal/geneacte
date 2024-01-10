@@ -123,7 +123,7 @@ class SummaryRepository extends ServiceEntityRepository
     /**
      * @throws Exception
      */
-    public function findCertificatesByType(string $type, string $letter = null): array
+    public function findCertificatesByType(string $type): array
     {
         /**
          * select typact, libelle,commune,depart, min(AN_MIN) R_AN_MIN, max(AN_MAX) R_AN_MAX, sum(NB_FIL) S_NB_FIL, sum(NB_TOT) S_NB_TOT, sum(NB_N_NUL) S_NB_N_NUL
@@ -135,7 +135,6 @@ class SummaryRepository extends ServiceEntityRepository
         $resultSet = $conn->executeQuery($sql);
 
         return $resultSet->fetchAllAssociative();
-
     }
 
     private function createQb(): QueryBuilder

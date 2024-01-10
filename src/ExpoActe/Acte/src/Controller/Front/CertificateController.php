@@ -21,8 +21,8 @@ class CertificateController extends AbstractController
     ) {
     }
 
-    #[Route('/index/{type}/{letter}', name: 'expoacte_certificate_index', methods: ['GET'])]
-    public function index(string $type = null, string $letter = null): Response
+    #[Route('/index/{type}', name: 'expoacte_certificate_index', methods: ['GET'])]
+    public function index(string $type = null): Response
     {
         $data = [];
         $certificateType = CertificateTypeEnum::tryFrom($type);
@@ -30,7 +30,7 @@ class CertificateController extends AbstractController
         $menu = $this->summaryRepository->certificateMenu();
         $letters = $this->summaryRepository->alphabetCertificateType();
         if ($certificateType) {
-            $data = $this->summaryRepository->findCertificatesByType($certificateType->value, $letter);
+            $data = $this->summaryRepository->findCertificatesByType($certificateType->value);
         }
 
         return $this->render('@ExpoActe/front/certificate/index.html.twig', [
@@ -54,6 +54,30 @@ class CertificateController extends AbstractController
         $data = $repository->findSurnameByDepartmentAndMunicipality($summary->depart, $summary->commune);
 
         return $this->render('@ExpoActe/front/certificate/browse.html.twig', [
+            'certificateType' => $certificateType,
+            'summary' => $summary,
+            'geolocation' => $geolocation,
+            'data' => $data,
+        ]);
+    }
+
+    #[Route('/letter/{id}/{letter}', name: 'expoacte_certificate_browse_letter', methods: ['GET'])]
+    public function letter(Summary $summary, string $letter = null): Response
+    {
+        $certificateType = CertificateTypeEnum::tryFrom($summary->typact);
+        $geolocation = $this->geolocationRepository->findOneByDepartmentAndMunicipality(
+            $summary->depart,
+            $summary->commune
+        );
+
+        $repository = $this->entityManager->getRepository($certificateType->getClassName());
+        $data = $repository->findSurnameByDepartmentAndMunicipalityAndLetter(
+            $summary->depart,
+            $summary->commune,
+            $letter
+        );
+
+        return $this->render('@ExpoActe/front/certificate/letter.html.twig', [
             'certificateType' => $certificateType,
             'summary' => $summary,
             'geolocation' => $geolocation,

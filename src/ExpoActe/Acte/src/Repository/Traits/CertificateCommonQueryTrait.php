@@ -80,4 +80,38 @@ trait CertificateCommonQueryTrait
             ->getResult();
     }
 
+    public function findSurnameByDepartmentAndMunicipalityAndLetter(
+        string $department,
+        string $municipality,
+        string $letter
+    ): array {
+        /**
+         * 'select distinct NOM, count(*), min(year(LADATE)),max(year(LADATE)) from act_mar3
+         * where COMMUNE = 'Achet' and DEPART = 'Namur' and  left(NOM,(2-1))= 'E' group by NOM  order by NOM'
+         *
+         * 'select distinct C_NOM, count(*), min(year(LADATE)),max(year(LADATE))  from act_mar3
+         * where COMMUNE = 'Achet' and DEPART = 'Namur' and  left(C_NOM,(2-1))= 'E' and C_NOM<>'' group by C_NOM  order by C_NOM'
+         */
+        $queryBuilder = $this->createQb();
+
+        return $queryBuilder
+            ->select(
+                'certificate.nom, count(certificate.nom) as count, min(year(certificate.ladate))as minYear,max(year(certificate.ladate))as maxYear'
+            )
+            ->andWhere('certificate.depart = :depart')
+            ->setParameter('depart', $department)
+            ->andWhere('certificate.commune = :municipality')
+            ->setParameter('municipality', $municipality)
+            ->andWhere(
+                $queryBuilder->expr()->eq($queryBuilder->expr()->substring('certificate.nom', 1, 1), ':firstLetter')
+            )
+            ->setParameter('firstLetter', $letter)
+            ->groupBy('certificate.nom')
+            ->getQuery()
+            ->getResult();
+
+        //'select count(*) from act_mar3  where COMMUNE = 'Achet' and DEPART = 'Namur' and ( left(NOM,(2-1))= 'E' or  left(C_NOM,(2-1))= 'E')'
+
+    }
+
 }

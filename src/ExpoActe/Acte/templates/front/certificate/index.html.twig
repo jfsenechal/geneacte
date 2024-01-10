@@ -20,7 +20,7 @@
                 <ul class="list-group list-group-horizontal mb-3">
                     {% for letter in letters %}
                         <li class="list-group-item">
-                            <a href="{{ path('expoacte_certificate_index', {'type': certificateType.value, 'letter': letter.init}) }}">{{ letter.init }}</a>
+                            <a href="{{ path('expoacte_certificate_index', {'type': certificateType.value}) }}">{{ letter.init }}</a>
                         </li>
                     {% endfor %}
                 </ul>
@@ -40,7 +40,7 @@
                         {% for row in data %}
                             <tr>
                                 <td>
-                                    <a href="{{ path('expoacte_certificate_browse', {'id':row.id}) }}">
+                                    <a href="{{ path('expoacte_certificate_browse', {'id':row.id, 'letter': 'L'}) }}">
                                         {{ row.commune }}
                                     </a>
                                 </td>

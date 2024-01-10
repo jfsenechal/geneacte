@@ -13,21 +13,23 @@
 
             <table class="table table-bordered">
                 <tr>
-                    <th>Initiales</th>
                     <th>Patronymes</th>
+                    <th>Période</th>
+                    <th>Intervenant 1</th>
+                    <th>Intervenant 2</th>
                     <th>Nb actes</th>
                 </tr>
                 {% for row in data %}
                     <tr>
                         <td>
-                            {{ row.firstLetter }}
+                            <a href="{{ path('expoacte_certificate_browse', {'id':0}) }}">{{ row.nom }}</a>
                         </td>
                         <td>
-                            <a href="{{ path('expoacte_certificate_browse_letter', {'id':summary.id, 'letter':row.firstLetter}) }}">
-                                {{ row.firstName }} à {{ row.lastName }}
-                            </a>
+                            {{ row.minYear }} {% if row.minYear != row.maxYear %} à {{ row.maxYear }}{% endif %}
                         </td>
-                        <td>{{ row.distinctCount }}</td>
+                        <td>?</td>
+                        <td>?</td>
+                        <td>{{ row.count }}</td>
                     </tr>
                 {% endfor %}
             </table>
