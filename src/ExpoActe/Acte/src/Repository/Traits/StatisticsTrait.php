@@ -28,8 +28,9 @@ use ExpoActe\Acte\Certificate\CertificateTypeEnum;
  */
 trait StatisticsTrait
 {
-
     /**
+     * @param string $type
+     * @param string $municipalityName
      * @return array
      * @throws Exception
      */

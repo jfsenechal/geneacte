@@ -5,7 +5,6 @@ namespace ExpoActe\Acte\Controller;
 use ExpoActe\Acte\Form\SearchHeaderNameType;
 use ExpoActe\Acte\Repository\ParameterRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HtmlSanitizer\HtmlSanitizerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -13,7 +12,6 @@ class DefaultController extends AbstractController
 {
     public function __construct(
         private readonly ParameterRepository $parameterRepository,
-        private readonly HtmlSanitizerInterface $htmlSanitizer
     ) {
     }
 

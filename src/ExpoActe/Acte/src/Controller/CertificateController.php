@@ -43,14 +43,20 @@ class CertificateController extends AbstractController
         $types = CertificateTypeEnum::cases();
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $users = $this->userRepository->findByName($data['name']);
+
         }
 
         $response = new Response(null, $form->isSubmitted() ? Response::HTTP_ACCEPTED : 200);
 
+        $menu = $this->summaryRepository->certificateMenu();
+        $letters = $this->summaryRepository->alphabetCertificateType();
+        $data = $this->summaryRepository->findCertificatesByType(CertificateTypeEnum::MARRIAGE->value);
+
         return $this->render('@ExpoActe/certificate/index.html.twig', [
             'certificateTypes' => $types,
+            'menu' => $menu,
+            'letters' => $letters,
+            'data' => $data,
             'form' => $form,
             'isSearch' => $form->isSubmitted(),
         ], $response);

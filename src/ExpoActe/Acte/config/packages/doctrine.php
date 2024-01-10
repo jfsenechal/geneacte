@@ -1,5 +1,6 @@
 <?php
 
+use ExpoActe\Acte\Doctrine\Extension\InstrFunction;
 use ExpoActe\Acte\Doctrine\Extension\YearFunction;
 use Symfony\Config\DoctrineConfig;
 
@@ -20,4 +21,5 @@ return static function (DoctrineConfig $doctrine) {
      ]*/
 
     $dql->datetimeFunction('YEAR', YearFunction::class);
+    $dql->stringFunction('INSTR', InstrFunction::class);
 };
