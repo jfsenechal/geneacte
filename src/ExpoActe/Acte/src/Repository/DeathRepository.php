@@ -7,7 +7,7 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use ExpoActe\Acte\Doctrine\OrmCrudTrait;
 use ExpoActe\Acte\Entity\DeathCertificate;
-use ExpoActe\Acte\Repository\Traits\StatisticsTrait;
+use ExpoActe\Acte\Repository\Traits\CertificateCommonQueryTrait;
 
 /**
  * @method DeathCertificate|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,7 +17,7 @@ use ExpoActe\Acte\Repository\Traits\StatisticsTrait;
  */
 class DeathRepository extends ServiceEntityRepository
 {
-    use OrmCrudTrait, StatisticsTrait;
+    use OrmCrudTrait, CertificateCommonQueryTrait;
 
     public function __construct(ManagerRegistry $registry)
     {

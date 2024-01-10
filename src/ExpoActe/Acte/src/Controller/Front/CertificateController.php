@@ -2,11 +2,12 @@
 
 namespace ExpoActe\Acte\Controller\Front;
 
+use Doctrine\ORM\EntityManagerInterface;
 use ExpoActe\Acte\Certificate\CertificateTypeEnum;
 use ExpoActe\Acte\Entity\Summary;
+use ExpoActe\Acte\Repository\GeolocationRepository;
 use ExpoActe\Acte\Repository\SummaryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -15,23 +16,16 @@ class CertificateController extends AbstractController
 {
     public function __construct(
         private readonly SummaryRepository $summaryRepository,
+        private readonly GeolocationRepository $geolocationRepository,
+        private readonly EntityManagerInterface $entityManager
     ) {
     }
 
-    #[Route('/{type}/{letter}', name: 'expoacte_certificate_index', methods: ['GET'])]
-    public function index( string $type = null, string $letter = null): Response
+    #[Route('/index/{type}/{letter}', name: 'expoacte_certificate_index', methods: ['GET'])]
+    public function index(string $type = null, string $letter = null): Response
     {
         $data = [];
-        $certificateType = null;
-        if ($type) {
-            try {
-                $certificateType = CertificateTypeEnum::from($type);
-            } catch (\Exception $exception) {
-                $this->addFlash('danger', 'Type inconnu');
-
-                return $this->redirectToRoute('expoacte_certificate_index');
-            }
-        }
+        $certificateType = CertificateTypeEnum::tryFrom($type);
 
         $menu = $this->summaryRepository->certificateMenu();
         $letters = $this->summaryRepository->alphabetCertificateType();
@@ -48,22 +42,21 @@ class CertificateController extends AbstractController
     }
 
     #[Route('/browse/{id}', name: 'expoacte_certificate_browse', methods: ['GET'])]
-    public function show(Summary $summary): Response
+    public function browse(Summary $summary): Response
     {
-        $data = [];
-        $certificateType = null;
+        $certificateType = CertificateTypeEnum::tryFrom($summary->typact);
+        $geolocation = $this->geolocationRepository->findOneByDepartmentAndMunicipality(
+            $summary->depart,
+            $summary->commune
+        );
 
+        $repository = $this->entityManager->getRepository($certificateType->getClassName());
+        $data = $repository->findSurnameByDepartmentAndMunicipality($summary->depart, $summary->commune);
 
-        $menu = $this->summaryRepository->certificateMenu();
-        $letters = $this->summaryRepository->alphabetCertificateType();
-        if ($certificateType) {
-            $data = $this->summaryRepository->findCertificatesByType($certificateType->value, $letter);
-        }
-
-        return $this->render('@ExpoActe/front/certificate/index.html.twig', [
+        return $this->render('@ExpoActe/front/certificate/browse.html.twig', [
             'certificateType' => $certificateType,
-            'menu' => $menu,
-            'letters' => $letters,
+            'summary' => $summary,
+            'geolocation' => $geolocation,
             'data' => $data,
         ]);
     }

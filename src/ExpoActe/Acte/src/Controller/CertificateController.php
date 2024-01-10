@@ -73,7 +73,7 @@ class CertificateController extends AbstractController
 
         return $this->render('@ExpoActe/certificate/select_municipality.html.twig', [
 
-            'certificateType' => CertificateTypeEnum::from($type),
+            'certificateType' => CertificateTypeEnum::tryFrom($type),
             'form' => $form,
         ]);
     }
@@ -116,7 +116,7 @@ class CertificateController extends AbstractController
         return $this->render('@ExpoActe/certificate/new.html.twig', [
             'form' => $form,
             'labelGroups' => $labelGroups,
-            'certificateType' => CertificateTypeEnum::from($type),
+            'certificateType' => CertificateTypeEnum::tryFrom($type),
         ], $response);
     }
 
@@ -160,7 +160,7 @@ class CertificateController extends AbstractController
             'certificate' => $certificate,
             'form' => $form,
             'labelGroups' => $labelGroups,
-            'certificateType' => CertificateTypeEnum::from($certificate->type)->getLabel(),
+            'certificateType' => CertificateTypeEnum::tryFrom($certificate->type)->getLabel(),
         ]);
     }
 

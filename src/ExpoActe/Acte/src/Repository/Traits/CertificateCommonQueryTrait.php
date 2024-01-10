@@ -26,7 +26,7 @@ use ExpoActe\Acte\Certificate\CertificateTypeEnum;
  * Cela signifie que les agrégations (comme COUNT, MAX, MIN, SUM) seront calculées pour chaque groupe distinct défini par ces colonnes.
  *
  */
-trait StatisticsTrait
+trait CertificateCommonQueryTrait
 {
     /**
      * @param string $type
@@ -39,7 +39,7 @@ trait StatisticsTrait
         $municipalityName = addslashes($municipalityName);
         $libel = match ($type) {
             CertificateTypeEnum::BIRTH->value, CertificateTypeEnum::DEATH->value, CertificateTypeEnum::MARRIAGE->value => ",'' as LIBELLE",
-            CertificateTypeEnum::OTHER->value,CertificateTypeEnum::OTHER_SPECIAL->value => ",LIBELLE",
+            CertificateTypeEnum::OTHER->value, CertificateTypeEnum::OTHER_SPECIAL->value => ",LIBELLE",
             default => '',
         };
 
@@ -57,6 +57,27 @@ trait StatisticsTrait
         $resultSet = $conn->executeQuery($sql);
 
         return $resultSet->fetchAllAssociative();
+    }
+
+    public function findSurnameByDepartmentAndMunicipality(string $department, string $municipality): array
+    {
+        $queryBuilder = $this->createQb();
+
+        return $queryBuilder
+            ->select(
+                $queryBuilder->expr()->substring(
+                    'certificate.nom',
+                    1,
+                    1
+                ).' as firstLetter, COUNT(distinct certificate.nom) as distinctCount, MIN(certificate.nom) as firstName, MAX(certificate.nom) as lastName'
+            )
+            ->andWhere('certificate.depart = :depart')
+            ->setParameter('depart', $department)
+            ->andWhere('certificate.commune = :municipality')
+            ->setParameter('municipality', $municipality)
+            ->groupBy('firstLetter')
+            ->getQuery()
+            ->getResult();
     }
 
 }

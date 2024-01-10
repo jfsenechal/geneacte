@@ -4,6 +4,7 @@ namespace ExpoActe\Acte\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ExpoActe\Acte\Certificate\CertificateTypeEnum;
 use ExpoActe\Acte\Geolocation\GeolocationEnum;
 
 #[ORM\Table(name: 'act_geoloc')]
@@ -47,6 +48,17 @@ class Geolocation
 
     public function __toString(): string
     {
-        return $this->commune . ' [' . $this->depart . ']';
+        return $this->commune.' ['.$this->depart.']';
+    }
+
+    public function noteByCertificateType(string $certificateType): string
+    {
+        return match ($certificateType) {
+            CertificateTypeEnum::BIRTH->value => $this->note_n,
+            CertificateTypeEnum::MARRIAGE->value => $this->note_m,
+            CertificateTypeEnum::DEATH->value => $this->note_d,
+            CertificateTypeEnum::OTHER->value => $this->note_v,
+            default => ''
+        };
     }
 }

@@ -54,7 +54,7 @@ class GeolocationRepository extends ServiceEntityRepository
     {
         return $this->createQb()
             ->andWhere('geolocation.commune LIKE :letter')
-            ->setParameter('letter', $letter . '%')
+            ->setParameter('letter', $letter.'%')
             ->getQuery()
             ->getResult();
     }
@@ -67,6 +67,17 @@ class GeolocationRepository extends ServiceEntityRepository
         return $this->createQb()
             ->getQuery()
             ->getResult();
+    }
+
+    public function findOneByDepartmentAndMunicipality(string $department, string $municipality): ?Geolocation
+    {
+        return $this->createQb()
+            ->andWhere('geolocation.depart = :department')
+            ->setParameter('department', $department)
+            ->andWhere('geolocation.commune = :municipality')
+            ->setParameter('municipality', $municipality)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     private function createQb(): QueryBuilder

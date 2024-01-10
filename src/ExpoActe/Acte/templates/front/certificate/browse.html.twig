@@ -1,0 +1,37 @@
+{% extends '@ExpoActe/base.html.twig' %}
+
+{% block title %}Parcourir les actes{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <h3 class="card-header">Parcourir les actes de {{ certificateType.label }}</h3>
+        <div class="card-body">
+
+            <h4 class="text-success">Commune/Paroisse : {{ summary.commune }} {{ summary.depart }}</h4>
+
+            <p class="text-muted">{{ geolocation.noteByCertificateType(certificateType.value) }}</p>
+
+            <table class="table table-bordered">
+                <tr>
+                    <th>Initiales</th>
+                    <th>Patronymes</th>
+                    <th>Nb actes</th>
+                </tr>
+                {% for row in data %}
+                    <tr>
+                        <td>
+                            {{ row.firstLetter }}
+                        </td>
+                        <td>
+                            <a href="{{ path('expoacte_certificate_browse', {'id':0}) }}">
+                                {{ row.firstName }} à {{ row.lastName }}
+                            </a>
+                        </td>
+                        <td>{{ row.distinctCount }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+        </div>
+    </div>
+{% endblock %}

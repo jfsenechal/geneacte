@@ -14,12 +14,6 @@ return static function (DoctrineConfig $doctrine) {
         ->alias('ExpoActe');
     $dql = $em->dql();
 
-    /* [
-         'string_functions' => [
-             'any_value' => YearFunction::class,
-         ],
-     ]*/
-
     $dql->datetimeFunction('YEAR', YearFunction::class);
     $dql->stringFunction('INSTR', InstrFunction::class);
 };
